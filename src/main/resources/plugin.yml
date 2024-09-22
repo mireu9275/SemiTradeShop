@@ -1,0 +1,10 @@
+name: SemiTradeShop
+main: kr.eme.semiTradeShop.SemiTradeShop
+version: 1.0
+api-version: 1.20
+depend:
+  - SemiMoney
+commands:
+  shop:
+    usage: /shop or /상점
+    aliases: 상점
