@@ -34,7 +34,7 @@ object ShopGUIListener : Listener {
             return
         }
 
-        // 수량 선택 GUI 처리
+        // 수량 선택 guis 처리
         if (title == "구매 수량 선택" || title == "판매 수량 선택") {
             handleQuantitySelectionClick(player, itemStack, title == "구매 수량 선택")
             event.isCancelled = true
@@ -80,13 +80,13 @@ object ShopGUIListener : Listener {
 
         when (event.click) {
             ClickType.LEFT -> {
-                // 구매 수량 선택 GUI 열기
+                // 구매 수량 선택 guis 열기
                 ShopItemManager.selectedItems[player.uniqueId] = Pair(shopName, itemName)
                 val purchaseInventory = ShopGUIManager.createQuantitySelectionInventory(player, true)
                 player.openInventory(purchaseInventory)
             }
             ClickType.RIGHT -> {
-                // 판매 수량 선택 GUI 열기
+                // 판매 수량 선택 guis 열기
                 ShopItemManager.selectedItems[player.uniqueId] = Pair(shopName, itemName)
                 val sellInventory = ShopGUIManager.createQuantitySelectionInventory(player, false)
                 player.openInventory(sellInventory)

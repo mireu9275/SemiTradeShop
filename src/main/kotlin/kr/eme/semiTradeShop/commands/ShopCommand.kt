@@ -1,7 +1,9 @@
 package kr.eme.semiTradeShop.commands
 
+import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.managers.ShopGUIManager
 import kr.eme.semiTradeShop.managers.ShopManager
+import kr.eme.semiTradeShop.objects.guis.InitShopGUI
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -21,8 +23,15 @@ object ShopCommand : CommandExecutor {
             }
             val player: Player = sender as Player
 
-            if (args.isEmpty()) {
-                usage(player)
+            if (args.isEmpty()) { //shop 만 쳤을 경우
+                val initShopGUI = InitShopGUI(player)
+                initShopGUI.setFirstGUI()
+                GUIManager.setGUI(player.uniqueId, initShopGUI)
+                initShopGUI.open()
+                true
+            }
+
+            if (!player.isOp) {
                 true
             }
 
