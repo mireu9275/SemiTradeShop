@@ -1,6 +1,7 @@
 package kr.eme.semiTradeShop.objects.guis
 
 import kr.eme.semiTradeShop.managers.GUIManager
+import kr.eme.semiTradeShop.objects.ShopItems
 import kr.eme.semiTradeShop.utils.ItemStackUtil
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -9,13 +10,14 @@ import org.bukkit.event.inventory.InventoryDragEvent
 
 class FarmingShopPage2GUI(player: Player) : GUI(player, "§f\\u340F\\u3416" ,6){
     override fun setFirstGUI() {
-        for (row in 0 until 6) {
-            // 왼쪽 (클릭 시 SHOP 화면 이동)
-            //val rowStart = row * 9
-            ItemStackUtil.createLeftButton(this)
-            ItemStackUtil.createRightButton(this)
-            ItemStackUtil.createMainButton(this)
+        val items = ShopItems.getShopItems("FarmingShop", 2)
+        for (item in items) {
+            ItemStackUtil.createSlotItem(this, item)
         }
+        ItemStackUtil.createLeftButton(this)
+        ItemStackUtil.createRightButton(this)
+        ItemStackUtil.createMainButton(this)
+        ItemStackUtil.createEpButton(this, player.uniqueId)
     }
 
     override fun InventoryClickEvent.clickEvent() {
