@@ -36,14 +36,51 @@ object ItemStackUtil {
             shopItem.customModelData?.let { meta.setCustomModelData(it) }
         })
     }
+    fun createSlotItemBuyOrSell(gui: GUI, shopItem: ShopItem) {
+        gui.setItem(shopItem.slot, build(shopItem.material) { meta ->
+            meta.setDisplayName(shopItem.name)
+            shopItem.customModelData?.let { meta.setCustomModelData(it) }
+        })
+    }
+
+    fun createQtyIcon(gui: GUI, qty: Int) {
+        gui.setItem(36, build(Material.BROWN_DYE) { meta ->
+            meta.setDisplayName("§f현재 선택 수량: $qty 개")
+            meta.setCustomModelData(10)
+        })
+        gui.setItem(37, build(Material.BROWN_DYE) { meta ->
+            meta.setDisplayName("§f현재 선택 수량: $qty 개")
+            meta.setCustomModelData(11)
+        })
+    }
+
+    fun createPriceIcon(gui: GUI, price: Int, type: String) {
+        gui.setItem(38, build(Material.BROWN_DYE) { meta ->
+            if (type == "BUY") {
+                meta.setDisplayName("§f총 구매가: $price EP")
+            } else if (type == "SELL") {
+                meta.setDisplayName("§f총 판매가: $price EP")
+            }
+            meta.setCustomModelData(12)
+        })
+        gui.setItem(39, build(Material.BROWN_DYE) { meta ->
+            if (type == "BUY") {
+                meta.setDisplayName("§f총 구매가: $price EP")
+            } else if (type == "SELL") {
+                meta.setDisplayName("§f총 판매가: $price EP")
+            }
+            meta.setCustomModelData(13)
+        })
+    }
+
     fun createLeftButton(gui: GUI) {
-        gui.setItem(36, build(Material.MUSIC_DISC_BLOCKS) { meta ->
+        gui.setItem(36, build(Material.BROWN_DYE) { meta ->
             meta.setDisplayName("§f왼쪽으로 이동")
             meta.setCustomModelData(1)
         })
     }
     fun createRightButton(gui: GUI) {
-        gui.setItem(44, build(Material.MUSIC_DISC_BLOCKS) { meta ->
+        gui.setItem(44, build(Material.BROWN_DYE) { meta ->
             meta.setDisplayName("§f오른쪽으로 이동")
             meta.setCustomModelData(2)
         })
@@ -58,19 +95,32 @@ object ItemStackUtil {
         var text: String
         var playerMoney: Int? = null
         val moneyManager = semiMoney.getMoneyManager()
-        if (moneyManager != null) {
-            playerMoney = moneyManager.getMoney(uuid) ?: null
-        }
-        if (playerMoney == null) {
-            text = "§c시스템 오류(버그)"
-        } else {
-            text = "§f보유 EP : §a$playerMoney"
-        }
+        if (moneyManager != null) playerMoney = moneyManager.getMoney(uuid)
+        if (playerMoney == null) text = "§c시스템 오류(버그)"
+        else text = "§f보유 EP : §a$playerMoney"
         gui.setItem(8, build(Material.LIME_DYE) { meta ->
             meta.setDisplayName(text)
             meta.lore = listOf(
                 "§f설명란"
             )
         })
+    }
+    fun cleanItemLore(originalItem: ItemStack): ItemStack {
+        val newItem = originalItem.clone()
+        val meta = newItem.itemMeta ?: return newItem
+        val originalLore = meta.lore
+
+        if (originalLore.isNullOrEmpty()) {
+            meta.lore = null
+        }
+        else {
+            val filteredLore = originalLore.drop(2).ifEmpty { null }
+            meta.lore = filteredLore
+        }
+        newItem.itemMeta = meta
+        return newItem
+    }
+    fun cutColorCodes(text: String): String {
+        return text.replace(Regex("§."),"")
     }
 }

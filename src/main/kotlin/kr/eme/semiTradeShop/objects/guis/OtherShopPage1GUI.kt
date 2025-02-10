@@ -8,14 +8,14 @@ import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryDragEvent
 
-class FarmingShopPage4GUI(player: Player) : GUI(player, "§f\\u340F\\u3418" ,6){
+class OtherShopPage1GUI(player: Player) : GUI(player, "§f\\u340F\\u3419", 6) {
     override fun setFirstGUI() {
-        val items = ShopItems.getShopItems("FarmingShop", 4)
+        val items = ShopItems.getShopItems("OtherShop", 1)
         for (item in items) {
             ItemStackUtil.createSlotItem(this, item)
         }
-        ItemStackUtil.createLeftButton(this)
         ItemStackUtil.createMainButton(this)
+        ItemStackUtil.createRightButton(this)
         ItemStackUtil.createEpButton(this, player.uniqueId)
     }
 
@@ -29,17 +29,18 @@ class FarmingShopPage4GUI(player: Player) : GUI(player, "§f\\u340F\\u3418" ,6){
         val itemDisplayName = clickedItem.itemMeta?.displayName ?: return // 아이템 이름이 없는 경우 무시
 
         when (itemDisplayName) {
-            "§f왼쪽으로 이동" -> {
-                val farmingShopPage3GUI = FarmingShopPage3GUI(player)
-                farmingShopPage3GUI.setFirstGUI()
-                GUIManager.setGUI(player.uniqueId, farmingShopPage3GUI)
-                farmingShopPage3GUI.open()
-            }
             "§f메인으로 이동" -> {
                 val shopGUI = ShopGUI(player)
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)
                 shopGUI.open()
+            }
+            "§f오른쪽으로 이동" -> {
+                val otherShopPage2GUI = OtherShopPage2GUI(player)
+                otherShopPage2GUI.setFirstGUI()
+                GUIManager.setGUI(player.uniqueId, otherShopPage2GUI)
+                otherShopPage2GUI.open()
+                return
             }
         }
 
@@ -53,7 +54,7 @@ class FarmingShopPage4GUI(player: Player) : GUI(player, "§f\\u340F\\u3418" ,6){
                 player.sendMessage("§c이 아이템은 구매할 수 없습니다!")
                 return
             }
-            val buyGUI = BillBuyGUI(player, clickedItem.clone(), this@FarmingShopPage4GUI)
+            val buyGUI = BillBuyGUI(player, clickedItem.clone(), this@OtherShopPage1GUI)
             buyGUI.setFirstGUI()
             GUIManager.setGUI(player.uniqueId, buyGUI)
             buyGUI.open()
@@ -64,7 +65,7 @@ class FarmingShopPage4GUI(player: Player) : GUI(player, "§f\\u340F\\u3418" ,6){
                 player.sendMessage("§c이 아이템은 판매할 수 없습니다!")
                 return
             }
-            val sellGUI = BillSellGUI(player, clickedItem.clone(), this@FarmingShopPage4GUI)
+            val sellGUI = BillSellGUI(player, clickedItem.clone(), this@OtherShopPage1GUI)
             sellGUI.setFirstGUI()
             GUIManager.setGUI(player.uniqueId, sellGUI)
             sellGUI.open()

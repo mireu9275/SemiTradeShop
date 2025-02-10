@@ -62,10 +62,10 @@ class ShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3411", 6) {
             }
 
             "§6Others 이동" -> {
-                val otherShopGUI = OtherShopGUI(player)
-                otherShopGUI.setFirstGUI()
-                GUIManager.setGUI(player.uniqueId, otherShopGUI)
-                otherShopGUI.open()
+                val otherShopPage1GUI = OtherShopPage1GUI(player)
+                otherShopPage1GUI.setFirstGUI()
+                GUIManager.setGUI(player.uniqueId, otherShopPage1GUI)
+                otherShopPage1GUI.open()
             }
 
             "§f메인으로 이동" -> {
