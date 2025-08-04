@@ -6,7 +6,7 @@ import kr.eme.semiTradeShop.semiMoney
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
-import java.util.UUID
+import java.util.*
 
 object ItemStackUtil {
     fun build(material: Material, block: (ItemMeta) -> Unit): ItemStack {
@@ -26,16 +26,27 @@ object ItemStackUtil {
     fun createSlotItem(gui: GUI, shopItem: ShopItem) {
         gui.setItem(shopItem.slot, build(shopItem.material) { meta ->
             meta.setDisplayName(shopItem.name)
+
             meta.lore = buildList {
-                add(if(shopItem.buyPrice > 0) "§6구매가: ${shopItem.buyPrice} EP" else "§c구매 불가")
-                add(if(shopItem.sellPrice > 0) "§3판매가: ${shopItem.sellPrice} EP" else "§c판매 불가")
+                if (shopItem.tradeRequirements.isNotEmpty()) {
+                    add("§7[교환]")
+                    for (req in shopItem.tradeRequirements) {
+                        add("${req.itemName} x${req.amount}")
+                    }
+                } else {
+                    add(if (shopItem.buyPrice > 0) "§6구매가: ${shopItem.buyPrice} EP" else "§c구매 불가")
+                    add(if (shopItem.sellPrice > 0) "§3판매가: ${shopItem.sellPrice} EP" else "§c판매 불가")
+                }
+
                 if (shopItem.description.isNotBlank()) {
                     shopItem.description.split(",").forEach { add(it.trim()) }
                 }
             }
+
             shopItem.customModelData?.let { meta.setCustomModelData(it) }
         })
     }
+
     fun createSlotItemBuyOrSell(gui: GUI, shopItem: ShopItem) {
         gui.setItem(shopItem.slot, build(shopItem.material) { meta ->
             meta.setDisplayName(shopItem.name)

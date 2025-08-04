@@ -2,6 +2,7 @@ package kr.eme.semiTradeShop.objects.guis
 
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.objects.ShopItems
+import kr.eme.semiTradeShop.utils.ExchangeUtil
 import kr.eme.semiTradeShop.utils.ItemStackUtil
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -55,6 +56,15 @@ class OtherShopPage2GUI(player : Player) : GUI(player, "§f\\u340F\\u3420", 6) {
         if (lore.isNullOrEmpty()) return
 
         if (isLeftClick) {
+            val shopItem = ShopItems.getShopItems("OtherShop", 2)
+                .find { ItemStackUtil.cutColorCodes(it.name) == ItemStackUtil.cutColorCodes(itemDisplayName) }
+                ?: return
+
+            if (shopItem.tradeRequirements.isNotEmpty()) {
+                ExchangeUtil.attemptExchange(player, shopItem)
+                return
+            }
+
             // 구매가 처리
             val buyPrice = lore.firstOrNull { it.startsWith("§6구매가:") }
             if (buyPrice == null || buyPrice.contains("§c구매 불가")) {

@@ -42,11 +42,71 @@ object ShopGUIListener : Listener {
         }
 
         // 상점 아이템 클릭 시 구매/판매 수량 선택으로 이동
-        if (title.startsWith("MineralShop") || title.startsWith("CropShop")) {
-            handleShopItemClick(player, event)
+        if (title.startsWith("MineralShop") || title.startsWith("CropShop") || title.startsWith("OtherShop")) {
+            handleCustomTradeOrMoneyClick(player, event)
             return
         }
     }
+
+    private fun handleCustomTradeOrMoneyClick(player: Player, event: InventoryClickEvent) {
+        val itemStack = event.currentItem ?: return
+        val shopName = event.view.title.split(" - ")[0]
+        val itemName = itemStack.itemMeta?.displayName ?: return
+
+        val shop = kr.eme.semiTradeShop.managers.ShopManager.getShop(shopName) ?: return
+        val clickedItem = shop.items.find { it.name == itemName } ?: return
+
+        if (clickedItem.tradeRequirements.isNotEmpty()) {
+            val playerInventory = player.inventory
+            val missingRequirement = clickedItem.tradeRequirements.firstOrNull { req ->
+                val matchCount = playerInventory.contents.filterNotNull().count {
+                    it.type == req.material &&
+                            it.itemMeta?.customModelData == req.customModelData
+                }
+                matchCount < req.amount
+            }
+
+            if (missingRequirement != null) {
+                player.sendMessage("§c[교환 실패] 필요한 아이템이 부족합니다.")
+                event.isCancelled = true
+                return
+            }
+
+            // 아이템 제거
+            clickedItem.tradeRequirements.forEach { req ->
+                var toRemove = req.amount
+                val contents = playerInventory.contents
+                for (i in contents.indices) {
+                    val item = contents[i] ?: continue
+                    if (item.type == req.material && item.itemMeta?.customModelData == req.customModelData) {
+                        val removeAmount = minOf(item.amount, toRemove)
+                        item.amount -= removeAmount
+                        toRemove -= removeAmount
+                        if (item.amount <= 0) contents[i] = null
+                        if (toRemove <= 0) break
+                    }
+                }
+            }
+
+            // 결과 아이템 지급
+            val result = ItemStack(clickedItem.material).apply {
+                amount = 1
+                itemMeta = itemMeta?.apply {
+                    setDisplayName(clickedItem.name)
+                    if (clickedItem.customModelData != null)
+                        setCustomModelData(clickedItem.customModelData)
+                }
+            }
+            player.inventory.addItem(result)
+            player.sendMessage("§a[교환 성공] ${clickedItem.name} 을 획득했습니다.")
+            event.isCancelled = true
+            return
+        }
+
+        // 돈 기반인 경우 기존 로직 수행
+        handleShopItemClick(player, event)
+    }
+
 
     private fun handleShopNavigationClick(player: Player, event: InventoryClickEvent) {
         val itemStack = event.currentItem ?: return
