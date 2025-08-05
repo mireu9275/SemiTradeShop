@@ -115,9 +115,9 @@ object ShopItems {
 
 
         // 기타 상점 (Page 1)
-        addItem("OtherShop", ShopItem("§f영양 캡슐", 10, 5, "§f더 높은 등급의 작물이 나올 확률이 증가합니다.", Material.SADDLE, 1, 9, 38))
-        addItem("OtherShop", ShopItem("§f성장 캡슐", 7, 5, "§f작물의 수확일을 줄여줍니다.", Material.SADDLE, 1, 10, 39))
-        addItem("OtherShop", ShopItem("§f제초 캡슐", 50, 25, "§f잡초를 제거합니다.", Material.SADDLE, 1, 11, 40))
+        addItem("OtherShop", ShopItem("§f영양 캡슐", 10, 5, "§f더 높은 등급의 작물이 나올 확률이 증가합니다.", Material.ORANGE_DYE, 1, 9, 2))
+        addItem("OtherShop", ShopItem("§f성장 캡슐", 7, 5, "§f작물의 수확일을 줄여줍니다.", Material.ORANGE_DYE, 1, 10, 3))
+        addItem("OtherShop", ShopItem("§f제초 캡슐", 50, 25, "§f잡초를 제거합니다.", Material.ORANGE_DYE, 1, 11, 4))
         addItem("OtherShop", ShopItem("§f머그잔", 5, -1, "§fJava", Material.BOWL, 1, 12, 1))
 
         // 기타 상점 (Page 2)
@@ -153,7 +153,7 @@ object ShopItems {
             )))
 
         addItem("OtherShop", ShopItem("§f농사 모듈 [대]", -1, -1,
-            "§f", Material.SADDLE, 2, 19, 8,
+            "§f", Material.SADDLE, 2, 20, 8,
             listOf(
                 TradeRequirement(Material.RED_DYE, 30, 21, "§f철 주괴"),
                 TradeRequirement(Material.RED_DYE, 10, 23, "§f리튬 주괴"),
@@ -161,13 +161,13 @@ object ShopItems {
             )))
 
         addItem("OtherShop", ShopItem("§f출입 모듈", -1, -1,
-            "§f", Material.SADDLE, 2, 20, 9,
+            "§f", Material.SADDLE, 2, 21, 9,
             listOf(TradeRequirement(Material.RED_DYE, 50, 21, "§f철 주괴"))))
 
         // 기타 상점 (Page 3)
-        addItem("OtherShop", ShopItem("§f통신 모듈", 500, -1,
-            "§f", Material.IRON_HORSE_ARMOR, 3, 9, 1))
-
+        addItem("OtherShop", ShopItem("§f스패너", 130, -1,
+            "§f", Material.WOODEN_SHOVEL, 3, 9, 13))
+        
         addItem("OtherShop", ShopItem("§f분쇄기 모듈", 500, -1,
             "§f", Material.IRON_HORSE_ARMOR, 3, 10, 2))
 
@@ -177,38 +177,51 @@ object ShopItems {
         addItem("OtherShop", ShopItem("§f커피머신 모듈", 2000, -1,
             "§f", Material.IRON_HORSE_ARMOR, 3, 12, 4))
 
-        addItem("OtherShop", ShopItem("§f전압기 모듈", 2000, -1,
-            "§f", Material.IRON_HORSE_ARMOR, 3, 13, 5))
-
         addItem("OtherShop", ShopItem("§f용광로 모듈", 2000, -1,
-            "§f", Material.IRON_HORSE_ARMOR, 3, 18, 6))
+            "§f", Material.IRON_HORSE_ARMOR, 3, 13, 6))
 
-        addItem("OtherShop", ShopItem("§fLi 배터리", 10, 5,
-            "§f", Material.SADDLE, 3, 19, 14))
+        addItem("OtherShop", ShopItem("§f분쇄기 용량 확장", -1, -1,
+            "§f", Material.SADDLE, 3, 18, 20,
+            listOf(
+                TradeRequirement(Material.RED_DYE,30,21,"§f철 주괴"),
+                TradeRequirement(Material.RED_DYE,20,22,"§f구리 주괴")
+            )))
 
-        addItem("OtherShop", ShopItem("§fLi-Al 배터리", 10, 5,
-            "§f", Material.SADDLE, 3, 20, 15))
+        addItem("OtherShop", ShopItem("§f합금 기어", -1, -1,
+            "§fAl-Cu", Material.SADDLE, 3, 19, 21,
+            listOf(
+                TradeRequirement(Material.RED_DYE,25, 28, "§f합금 주괴"),
+                TradeRequirement(Material.RED_DYE,10,23,"§f리튬 주괴")
+            )))
 
-        addItem("OtherShop", ShopItem("§f출력 전선", 10, 5,
-            "§f", Material.SADDLE, 3, 21, 16))
+        addItem("OtherShop", ShopItem("§f합금 드릴", -1, -1,
+            "§fTi-Pt-Au", Material.SADDLE, 3, 20, 22,
+            listOf(
+                TradeRequirement(Material.RED_DYE, 15, 33, "§f합금 주괴"),
+                TradeRequirement(Material.RED_DYE, 10, 3, "§f철"),
+                TradeRequirement(Material.RED_DYE, 10, 4, "§f구리")
+            )))
 
-        addItem("OtherShop", ShopItem("§f용광로 용해 슬롯 확장", 10, 5,
-            "§f", Material.SADDLE, 3, 22, 17))
+        addItem("OtherShop", ShopItem("§f용광로 용해 슬롯 확장", -1, -1,
+            "§f", Material.SADDLE, 3, 21, 17,
+            listOf(
+                TradeRequirement(Material.RED_DYE, 10, 21, "§f철 주괴"),
+                TradeRequirement(Material.RED_DYE, 10, 22, "§f구리 주괴")
+            )))
 
-        addItem("OtherShop", ShopItem("§f합금 냉각 몰드", 10, 5,
-            "§fCu-Au", Material.SADDLE, 3, 27, 18))
+        addItem("OtherShop", ShopItem("§f합금 냉각 몰드", -1, -1,
+            "§fCu-Au", Material.SADDLE, 3, 22, 18,
+            listOf(
+                TradeRequirement(Material.RED_DYE, 20, 31, "§f합금 주괴")
+            )))
 
-        addItem("OtherShop", ShopItem("§f합금 토치", 10, 5,
-            "§fNi-Fe", Material.SADDLE, 3, 28, 19))
-
-        addItem("OtherShop", ShopItem("§f분쇄기 용량 확장", 10, 5,
-            "§f", Material.SADDLE, 3, 29, 20))
-
-        addItem("OtherShop", ShopItem("§f합금 기어", 10, 5,
-            "§fAl-Cu", Material.SADDLE, 3, 30, 21))
-
-        addItem("OtherShop", ShopItem("§f합금 드릴", 10, 5,
-            "§fTi-Pt-Au", Material.SADDLE, 3, 31, 22))
+        addItem("OtherShop", ShopItem("§f합금 토치", -1, -1,
+            "§fNi-Fe", Material.SADDLE, 3, 27, 19,
+            listOf(
+                TradeRequirement(Material.RED_DYE, 10, 32, "§f합금 주괴"),
+                TradeRequirement(Material.RED_DYE, 10, 26, "§f니켈 주괴"),
+                TradeRequirement(Material.RED_DYE, 10, 27, "§f티타늄 주괴")
+            )))
 
         // 기타 상점 (Page 4)
         addItem("OtherShop", ShopItem("§f마그네슘 주괴 레시피", 100, -1, "§f", Material.SADDLE, 4, 9, 23))

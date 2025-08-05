@@ -56,25 +56,22 @@ class OtherShopPage2GUI(player : Player) : GUI(player, "§f\\u340F\\u3420", 6) {
         if (lore.isNullOrEmpty()) return
 
         if (isLeftClick) {
-            val shopItem = ShopItems.getShopItems("OtherShop", 2)
-                .find { ItemStackUtil.cutColorCodes(it.name) == ItemStackUtil.cutColorCodes(itemDisplayName) }
-                ?: return
-
-            if (shopItem.tradeRequirements.isNotEmpty()) {
-                ExchangeUtil.attemptExchange(player, shopItem)
-                return
+            when (ExchangeUtil.tryTrade(player, "OtherShop", 2, itemDisplayName)) {
+                is ExchangeUtil.TradeResult.Success -> return
+                is ExchangeUtil.TradeResult.MissingItems -> return  // 메시지는 내부에서 출력됨
+                is ExchangeUtil.TradeResult.NotTradeItem -> {
+                    // 구매가 처리
+                    val buyPrice = lore.firstOrNull { it.startsWith("§6구매가:") }
+                    if (buyPrice == null || buyPrice.contains("§c구매 불가")) {
+                        player.sendMessage("§c이 아이템은 구매할 수 없습니다!")
+                        return
+                    }
+                    val buyGUI = BillBuyGUI(player, clickedItem.clone(), this@OtherShopPage2GUI)
+                    buyGUI.setFirstGUI()
+                    GUIManager.setGUI(player.uniqueId, buyGUI)
+                    buyGUI.open()
+                }
             }
-
-            // 구매가 처리
-            val buyPrice = lore.firstOrNull { it.startsWith("§6구매가:") }
-            if (buyPrice == null || buyPrice.contains("§c구매 불가")) {
-                player.sendMessage("§c이 아이템은 구매할 수 없습니다!")
-                return
-            }
-            val buyGUI = BillBuyGUI(player, clickedItem.clone(), this@OtherShopPage2GUI)
-            buyGUI.setFirstGUI()
-            GUIManager.setGUI(player.uniqueId, buyGUI)
-            buyGUI.open()
         } else if (isRightClick) {
             // 판매가 처리
             val sellPrice = lore.firstOrNull { it.startsWith("§3판매가:") }
@@ -94,6 +91,6 @@ class OtherShopPage2GUI(player : Player) : GUI(player, "§f\\u340F\\u3420", 6) {
     }
 
     override fun InventoryCloseEvent.closeEvent() {
-        TODO("Not yet implemented")
+
     }
 }

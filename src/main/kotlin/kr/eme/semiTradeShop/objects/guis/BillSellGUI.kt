@@ -66,7 +66,7 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
     }
 
     override fun InventoryCloseEvent.closeEvent() {
-        TODO("Not yet implemented")
+
     }
 
     private fun extractSellPrice(item: ItemStack): Int {

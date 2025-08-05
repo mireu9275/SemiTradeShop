@@ -7,8 +7,6 @@ import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryDragEvent
-import kotlin.text.contains
-import kotlin.text.startsWith
 
 class FarmingShopPage2GUI(player: Player) : GUI(player, "§f\\u340F\\u3416" ,6){
     override fun setFirstGUI() {
@@ -85,6 +83,6 @@ class FarmingShopPage2GUI(player: Player) : GUI(player, "§f\\u340F\\u3416" ,6){
     }
 
     override fun InventoryCloseEvent.closeEvent() {
-        TODO("Not yet implemented")
+
     }
 }

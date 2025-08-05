@@ -33,6 +33,7 @@ object ItemStackUtil {
                     for (req in shopItem.tradeRequirements) {
                         add("${req.itemName} x${req.amount}")
                     }
+                    add("§8────────────────────") // ← 요게 구분선
                 } else {
                     add(if (shopItem.buyPrice > 0) "§6구매가: ${shopItem.buyPrice} EP" else "§c구매 불가")
                     add(if (shopItem.sellPrice > 0) "§3판매가: ${shopItem.sellPrice} EP" else "§c판매 불가")

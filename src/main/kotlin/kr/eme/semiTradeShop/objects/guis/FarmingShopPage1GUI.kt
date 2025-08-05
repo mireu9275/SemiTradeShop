@@ -86,6 +86,6 @@ class FarmingShopPage1GUI(player: Player) : GUI(player, "§f\\u340F\\u3415" ,6){
     }
 
     override fun InventoryCloseEvent.closeEvent() {
-        TODO("Not yet implemented")
+
     }
 }

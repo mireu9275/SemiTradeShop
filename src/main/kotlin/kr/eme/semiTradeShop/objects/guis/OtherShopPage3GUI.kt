@@ -2,6 +2,7 @@ package kr.eme.semiTradeShop.objects.guis
 
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.objects.ShopItems
+import kr.eme.semiTradeShop.utils.ExchangeUtil
 import kr.eme.semiTradeShop.utils.ItemStackUtil
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -55,16 +56,22 @@ class OtherShopPage3GUI(player: Player) : GUI(player, "§f\\u340F\\u3421", 6) {
         if (lore.isNullOrEmpty()) return
 
         if (isLeftClick) {
-            // 구매가 처리
-            val buyPrice = lore.firstOrNull { it.startsWith("§6구매가:") }
-            if (buyPrice == null || buyPrice.contains("§c구매 불가")) {
-                player.sendMessage("§c이 아이템은 구매할 수 없습니다!")
-                return
+            when (ExchangeUtil.tryTrade(player, "OtherShop", 3, itemDisplayName)) {
+                is ExchangeUtil.TradeResult.Success -> return
+                is ExchangeUtil.TradeResult.MissingItems -> return  // 메시지는 내부에서 출력됨
+                is ExchangeUtil.TradeResult.NotTradeItem -> {
+                    // 구매가 처리
+                    val buyPrice = lore.firstOrNull { it.startsWith("§6구매가:") }
+                    if (buyPrice == null || buyPrice.contains("§c구매 불가")) {
+                        player.sendMessage("§c이 아이템은 구매할 수 없습니다!")
+                        return
+                    }
+                    val buyGUI = BillBuyGUI(player, clickedItem.clone(), this@OtherShopPage3GUI)
+                    buyGUI.setFirstGUI()
+                    GUIManager.setGUI(player.uniqueId, buyGUI)
+                    buyGUI.open()
+                }
             }
-            val buyGUI = BillBuyGUI(player, clickedItem.clone(), this@OtherShopPage3GUI)
-            buyGUI.setFirstGUI()
-            GUIManager.setGUI(player.uniqueId, buyGUI)
-            buyGUI.open()
         } else if (isRightClick) {
             // 판매가 처리
             val sellPrice = lore.firstOrNull { it.startsWith("§3판매가:") }
@@ -84,6 +91,6 @@ class OtherShopPage3GUI(player: Player) : GUI(player, "§f\\u340F\\u3421", 6) {
     }
 
     override fun InventoryCloseEvent.closeEvent() {
-        TODO("Not yet implemented")
+
     }
 }

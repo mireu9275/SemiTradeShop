@@ -1,6 +1,7 @@
 package kr.eme.semiTradeShop.utils
 
 import kr.eme.semiTradeShop.objects.ShopItem
+import kr.eme.semiTradeShop.objects.ShopItems
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
@@ -19,11 +20,11 @@ object ExchangeUtil {
                 val matched = typeMatch && cmdMatch
 
                 // 디버그 로그
-                println("== 인벤토리 아이템 검사 ==")
-                println("아이템: ${it.type}, CMD: ${if (hasCMD) meta.customModelData else "없음"}, 이름: ${meta?.displayName}")
-                println("필요한 것: ${req.material}, CMD: ${req.customModelData}, 이름: ${req.itemName}")
-                println("결과: ${if (matched) "✅ 일치" else "❌ 불일치"}")
-                println("-------------------------")
+//                println("== 인벤토리 아이템 검사 ==")
+//                println("아이템: ${it.type}, CMD: ${if (hasCMD) meta.customModelData else "없음"}, 이름: ${meta?.displayName}")
+//                println("필요한 것: ${req.material}, CMD: ${req.customModelData}, 이름: ${req.itemName}")
+//                println("결과: ${if (matched) "일치" else "불일치"}")
+//                println("-------------------------")
 
                 if (matched) it.amount else 0
             }
@@ -64,5 +65,22 @@ object ExchangeUtil {
         player.inventory.addItem(result)
         player.sendMessage("§a[교환 성공] ${shopItem.name} 을 획득했습니다.")
         return true
+    }
+
+    fun tryTrade(player: Player, shopName: String, page: Int, itemDisplayName: String): TradeResult {
+        val shopItem = ShopItems.getShopItems(shopName, page)
+            .find { ItemStackUtil.cutColorCodes(it.name) == ItemStackUtil.cutColorCodes(itemDisplayName) }
+            ?: return TradeResult.NotTradeItem
+
+        if (shopItem.tradeRequirements.isEmpty()) return TradeResult.NotTradeItem
+
+        val success = attemptExchange(player, shopItem)
+        return if (success) TradeResult.Success else TradeResult.MissingItems
+    }
+
+    sealed class TradeResult {
+        object NotTradeItem : TradeResult()
+        object Success : TradeResult()
+        object MissingItems : TradeResult()
     }
 }

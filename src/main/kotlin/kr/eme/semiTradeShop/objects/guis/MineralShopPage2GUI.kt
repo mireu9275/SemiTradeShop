@@ -84,6 +84,6 @@ class MineralShopPage2GUI(player: Player) : GUI(player, "§f\\u340F\\u3413", 6) 
     }
 
     override fun InventoryCloseEvent.closeEvent() {
-        TODO("Not yet implemented")
+
     }
 }
