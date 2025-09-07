@@ -2,6 +2,7 @@ package kr.eme.semiTradeShop.objects.guis
 
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.utils.ItemStackUtil
+import kr.eme.semiTradeShop.utils.SoundUtil
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -31,8 +32,16 @@ class InitShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3410", 6) {
 
     override fun InventoryClickEvent.clickEvent() {
         isCancelled = true
-        val clickedItem = currentItem ?: return // 클릭된 아이템이 없는 경우 무시
-        val itemDisplayName = clickedItem.itemMeta?.displayName ?: return // 아이템 이름이 없는 경우 무시
+        val clickedItem = currentItem ?: run {
+            // 클릭된 아이템이 없는 경우 무시
+            SoundUtil.error(player)
+            return
+        }
+        val itemDisplayName = clickedItem.itemMeta?.displayName ?: run {
+            // 아이템 이름이 없는 경우 무시
+            SoundUtil.error(player)
+            return
+        }
 
         when (itemDisplayName) {
             "§aSHOP 이동" -> {
@@ -40,6 +49,7 @@ class InitShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3410", 6) {
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)
                 shopGUI.open()
+                SoundUtil.click(player)
             }
             "§6MISSION 이동" -> {
                 TODO() // 미구현

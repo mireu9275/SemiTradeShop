@@ -1,9 +1,10 @@
 package kr.eme.semiTradeShop.objects.guis
 
+import kr.eme.semiMoneyGlobal.managers.MoneyManager
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.objects.ShopItems
-import kr.eme.semiTradeShop.semiMoney
 import kr.eme.semiTradeShop.utils.ItemStackUtil
+import kr.eme.semiTradeShop.utils.SoundUtil
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
@@ -32,9 +33,18 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
 
     override fun InventoryClickEvent.clickEvent() {
         isCancelled = true
-        val clickedItem = currentItem ?: return
-        val itemMeta = clickedItem.itemMeta ?: return
-        val itemDisplayName = itemMeta.displayName ?: return
+        val clickedItem = currentItem ?: run {
+            SoundUtil.error(player)
+            return
+        }
+        val itemMeta = clickedItem.itemMeta ?: run {
+            SoundUtil.error(player)
+            return
+        }
+        val itemDisplayName = itemMeta.displayName ?: run {
+            SoundUtil.error(player)
+            return
+        }
         val totalPrice = totalBuyQty * itemPrice
 
         when (itemDisplayName) {
@@ -43,6 +53,7 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)
                 shopGUI.open()
+                SoundUtil.click(player)
                 return
             }
             "§f구매하기" -> {
@@ -50,14 +61,33 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
                 GUIManager.setGUI(player.uniqueId, returnPage)
                 returnPage.setFirstGUI()
                 returnPage.open()
+                SoundUtil.click(player)
                 return
             }
-            "§f1개 빼기" -> totalBuyQty = maxOf(1, totalBuyQty - 1)
-            "§f32개 빼기" -> totalBuyQty = maxOf(1, totalBuyQty - 32)
-            "§f64개 빼기" -> totalBuyQty = maxOf(1, totalBuyQty - 64)
-            "§f1개 추가" -> totalBuyQty += 1
-            "§f32개 추가" -> totalBuyQty += 32
-            "§f64개 추가" -> totalBuyQty += 64
+            "§f1개 빼기" -> {
+                totalBuyQty = maxOf(1, totalBuyQty - 1)
+                SoundUtil.click(player)
+            }
+            "§f32개 빼기" -> {
+                totalBuyQty = maxOf(1, totalBuyQty - 32)
+                SoundUtil.click(player)
+            }
+            "§f64개 빼기" -> {
+                totalBuyQty = maxOf(1, totalBuyQty - 64)
+                SoundUtil.click(player)
+            }
+            "§f1개 추가" -> {
+                totalBuyQty += 1
+                SoundUtil.click(player)
+            }
+            "§f32개 추가" -> {
+                totalBuyQty += 32
+                SoundUtil.click(player)
+            }
+            "§f64개 추가" -> {
+                totalBuyQty += 64
+                SoundUtil.click(player)
+            }
         }
         updateQtyAndPrice()
     }
@@ -84,35 +114,38 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
 
     private fun buyProcess(player: Player, buyPrice: Int): Boolean {
         val uuid = player.uniqueId
-        var playerMoney: Int? = null
-        val moneyManager = semiMoney.getMoneyManager()
-        if (moneyManager != null) playerMoney = moneyManager.getMoney(uuid)
-        if (playerMoney == null) {
-            player.sendMessage("§cEP를 불러오는데 실패하였습니다. (시스템 오류)")
+        val current = MoneyManager.getMoney()
+        if (current < buyPrice) {
+            player.sendMessage("§cEP가 부족하여 구매에 실패했습니다. (필요: $buyPrice EP)")
+            SoundUtil.error(player)
             return false
         }
-        if (playerMoney < buyPrice) {
-            player.sendMessage("§cEP가 부족하여 구매에 실패하였습니다.")
+        // ✅ 전역 EP 차감 (uuid 없음)
+        if (!MoneyManager.subtractMoney(buyPrice)) {
+            player.sendMessage("§c시스템 오류로 인해 결제에 실패했습니다.")
+            SoundUtil.error(player)
             return false
         }
-        moneyManager.subtractMoney(uuid, buyPrice)
 
         val itemToGive = ItemStackUtil.cleanItemLore(clickedItem)
         itemToGive.amount = totalBuyQty
         val leftover = player.inventory.addItem(itemToGive)
         val failedQty = leftover.values.sumOf { it.amount }
         if (failedQty > 0) {
-            val refunAmount = (buyPrice / totalBuyQty) * failedQty
-            moneyManager.addMoney(uuid, refunAmount)
-            player.sendMessage("§c인벤토리 공간이 부족하여 $failedQty 개를 지급하지 못했습니다. EP가 복구되었습니다. (복구 EP: $refunAmount EP)")
+            val refundAmount = (buyPrice / totalBuyQty) * failedQty
+            MoneyManager.addMoney(refundAmount, "SHOP_BUY_ROLLBACK", player.name)
+            player.sendMessage("§c인벤토리 공간이 부족하여 $failedQty 개를 지급하지 못했습니다. EP가 복구되었습니다. (복구 EP: $refundAmount EP)")
+            SoundUtil.error(player)
         }
         val successQty = totalBuyQty - failedQty
         if (successQty < 0) {
             player.sendMessage("§c알수없는 오류가 발생하였습니다.")
+            SoundUtil.error(player)
             return false
         }
         val itemName = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")
         player.sendMessage("§a${itemName}을(를) $successQty 개 구매했습니다. (총 비용: ${buyPrice - (failedQty * (buyPrice / totalBuyQty))} EP)")
+        SoundUtil.click(player)
         return true
     }
 }

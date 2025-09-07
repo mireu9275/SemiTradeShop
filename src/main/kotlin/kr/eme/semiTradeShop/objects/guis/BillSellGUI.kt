@@ -1,9 +1,10 @@
 package kr.eme.semiTradeShop.objects.guis
 
+import kr.eme.semiMoneyGlobal.managers.MoneyManager
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.objects.ShopItems
-import kr.eme.semiTradeShop.semiMoney
 import kr.eme.semiTradeShop.utils.ItemStackUtil
+import kr.eme.semiTradeShop.utils.SoundUtil
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
@@ -32,9 +33,18 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
 
     override fun InventoryClickEvent.clickEvent() {
         isCancelled = true
-        val clickedSlotItem = currentItem ?: return
-        val itemMeta = clickedSlotItem.itemMeta ?: return
-        val itemDisplayName = itemMeta.displayName ?: return
+        val clickedSlotItem = currentItem ?: run {
+            SoundUtil.error(player)
+            return
+        }
+        val itemMeta = clickedSlotItem.itemMeta ?: run {
+            SoundUtil.error(player)
+            return
+        }
+        val itemDisplayName = itemMeta.displayName ?: run {
+            SoundUtil.error(player)
+            return
+        }
 
         when (itemDisplayName) {
             "§f메인으로 이동" -> {
@@ -42,6 +52,7 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)
                 shopGUI.open()
+                SoundUtil.click(player)
                 return
             }
             "§f판매하기" -> {
@@ -49,14 +60,33 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
                 GUIManager.setGUI(player.uniqueId, returnPage)
                 returnPage.setFirstGUI()
                 returnPage.open()
+                SoundUtil.click(player)
                 return
             }
-            "§f1개 빼기" -> totalSellQty = maxOf(1, totalSellQty - 1)
-            "§f32개 빼기" -> totalSellQty = maxOf(1, totalSellQty - 32)
-            "§f64개 빼기" -> totalSellQty = maxOf(1, totalSellQty - 64)
-            "§f1개 추가" -> totalSellQty += 1
-            "§f32개 추가" -> totalSellQty += 32
-            "§f64개 추가" -> totalSellQty += 64
+            "§f1개 빼기" -> {
+                totalSellQty = maxOf(1, totalSellQty - 1)
+                SoundUtil.click(player)
+            }
+            "§f32개 빼기" -> {
+                totalSellQty = maxOf(1, totalSellQty - 32)
+                SoundUtil.click(player)
+            }
+            "§f64개 빼기" -> {
+                totalSellQty = maxOf(1, totalSellQty - 64)
+                SoundUtil.click(player)
+            }
+            "§f1개 추가" -> {
+                totalSellQty += 1
+                SoundUtil.click(player)
+            }
+            "§f32개 추가" -> {
+                totalSellQty += 32
+                SoundUtil.click(player)
+            }
+            "§f64개 추가" -> {
+                totalSellQty += 64
+                SoundUtil.click(player)
+            }
         }
         updateQtyAndPrice()
     }
@@ -83,7 +113,6 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
 
     private fun sellProcess(player: Player, totalSellQty: Int, sellPrice: Int, clickedItem: ItemStack): Boolean {
         val uuid = player.uniqueId
-        val moneyManager = semiMoney.getMoneyManager()
         val playerInventory = player.inventory
 
         // 플레이어 인벤토리에서 아이템 확인
@@ -108,6 +137,7 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
         // 보유량이 판매량보다 많거나 같은지 확인
         if (totalOwnedQty < totalSellQty) {
             player.sendMessage("§c판매할 아이템의 수량이 부족합니다. (보유 수량: $totalOwnedQty 개)")
+            SoundUtil.error(player)
             return false
         }
 
@@ -126,9 +156,10 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
 
         // 돈 지급
         val totalEarnings = sellPrice * totalSellQty
-        moneyManager?.addMoney(uuid, totalEarnings)
+        MoneyManager.addMoney(totalEarnings, "SHOP_SELL:${ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")}", player.name)
         val itemName = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")
         player.sendMessage("§a${itemName}을(를) $totalSellQty 개 판매하여 $totalEarnings EP를 획득하였습니다.")
+        SoundUtil.click(player)
         return true
     }
 }

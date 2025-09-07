@@ -35,6 +35,7 @@ object ExchangeUtil {
 
         if (missing != null) {
             player.sendMessage("§c[교환 실패] 필요한 아이템이 부족합니다.")
+            SoundUtil.error(player)
             return false
         }
 
@@ -64,6 +65,7 @@ object ExchangeUtil {
         }
         player.inventory.addItem(result)
         player.sendMessage("§a[교환 성공] ${shopItem.name} 을 획득했습니다.")
+        SoundUtil.click(player)
         return true
     }
 

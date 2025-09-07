@@ -2,6 +2,7 @@ package kr.eme.semiTradeShop.objects.guis
 
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.utils.ItemStackUtil
+import kr.eme.semiTradeShop.utils.SoundUtil
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -43,8 +44,16 @@ class ShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3411", 6) {
 
     override fun InventoryClickEvent.clickEvent() {
         isCancelled = true
-        val clickedItem = currentItem ?: return // 클릭된 아이템이 없는 경우 무시
-        val itemDisplayName = clickedItem.itemMeta?.displayName ?: return // 아이템 이름이 없는 경우 무시
+        val clickedItem = currentItem ?: run {
+            // 클릭된 아이템이 없는 경우 무시
+            SoundUtil.error(player)
+            return
+        }
+        val itemDisplayName = clickedItem.itemMeta?.displayName ?: run {
+            // 아이템 이름이 없는 경우 무시
+            SoundUtil.error(player)
+            return
+        }
 
         when (itemDisplayName) {
             "§aMineral 이동" -> {
@@ -52,6 +61,8 @@ class ShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3411", 6) {
                 mineralShopPage1GUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, mineralShopPage1GUI) // GUIManager 에 등록
                 mineralShopPage1GUI.open()
+                SoundUtil.click(player)
+                return
             }
 
             "§cFarming 이동" -> {
@@ -59,6 +70,8 @@ class ShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3411", 6) {
                 farmingShopPage1GUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, farmingShopPage1GUI)
                 farmingShopPage1GUI.open()
+                SoundUtil.click(player)
+                return
             }
 
             "§6Others 이동" -> {
@@ -66,6 +79,8 @@ class ShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3411", 6) {
                 otherShopPage1GUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, otherShopPage1GUI)
                 otherShopPage1GUI.open()
+                SoundUtil.click(player)
+                return
             }
 
             "§f메인으로 이동" -> {
@@ -73,6 +88,8 @@ class ShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3411", 6) {
                 initShopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, initShopGUI)
                 initShopGUI.open()
+                SoundUtil.click(player)
+                return
             }
         }
     }

@@ -1,8 +1,8 @@
 package kr.eme.semiTradeShop.utils
 
+import kr.eme.semiMoneyGlobal.managers.MoneyManager
 import kr.eme.semiTradeShop.objects.ShopItem
 import kr.eme.semiTradeShop.objects.guis.GUI
-import kr.eme.semiTradeShop.semiMoney
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
@@ -104,19 +104,15 @@ object ItemStackUtil {
         })
     }
     fun createEpButton(gui: GUI, uuid: UUID) {
-        var text: String
-        var playerMoney: Int? = null
-        val moneyManager = semiMoney.getMoneyManager()
-        if (moneyManager != null) playerMoney = moneyManager.getMoney(uuid)
-        if (playerMoney == null) text = "§c시스템 오류(버그)"
-        else text = "§f보유 EP : §a$playerMoney"
+        // uuid는 더 이상 사용하지 않지만, 기존 호출부 호환을 위해 파라미터는 유지
+        val current = MoneyManager.getMoney()
+        val text = "§f보유 EP : §a$current"
         gui.setItem(8, build(Material.LIME_DYE) { meta ->
             meta.setDisplayName(text)
-            meta.lore = listOf(
-                "§f설명란"
-            )
+            meta.lore = listOf("§7EP")
         })
     }
+
     fun cleanItemLore(originalItem: ItemStack): ItemStack {
         val newItem = originalItem.clone()
         val meta = newItem.itemMeta ?: return newItem
