@@ -33,12 +33,22 @@ object ShopCommand : CommandExecutor {
                 return true
             }
 
-            // ✅ 테스트 명령어: /shop hometest
-            if (args[0].equals("hometest", ignoreCase = true)) {
+            // ✅ 테스트 명령어: /shop debug <type> <target> [need]
+            if (args[0].equals("debug", ignoreCase = true)) {
+                if (args.size < 3) {
+                    player.sendMessage("§c사용법: /shop debug <type> <target> [need]")
+                    return true
+                }
+
+                val type = args[1]
+                val target = args[2]
+                val need = if (args.size >= 4) args[3].toIntOrNull() ?: 1 else 1
+
                 Bukkit.getPluginManager().callEvent(
-                    MissionEvent(player, "DEVICE_INTERACTION", "home_module", 1)
+                    MissionEvent(player, type, target, need)
                 )
-                player.sendMessage("§a[테스트] 홈 모듈 상호작용 이벤트를 보냈습니다.")
+
+                player.sendMessage("§a[디버그] MissionEvent(type=$type, target=$target, need=$need) 이벤트를 보냈습니다.")
                 return true
             }
 
