@@ -1,5 +1,6 @@
 package kr.eme.semiTradeShop.objects.guis
 
+import kr.eme.semiMission.objects.guis.MissionInitGUI
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.utils.ItemStackUtil
 import kr.eme.semiTradeShop.utils.SoundUtil
@@ -52,7 +53,11 @@ class InitShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3410", 6) {
                 SoundUtil.click(player)
             }
             "§6MISSION 이동" -> {
-                TODO() // 미구현
+                MissionInitGUI(player).apply {
+                    setFirstGUI()
+                    open()
+                }
+                SoundUtil.click(player)
             }
         }
     }

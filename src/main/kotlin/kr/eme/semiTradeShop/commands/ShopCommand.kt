@@ -1,81 +1,128 @@
 package kr.eme.semiTradeShop.commands
 
-import kr.eme.semiMission.objects.events.MissionEvent
+import kr.eme.semiMission.api.events.MissionEvent
+import kr.eme.semiMission.enums.MissionVersion
+import kr.eme.semiMission.objects.const.MissionTargets
+import kr.eme.semiMission.objects.const.MissionTypes
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.managers.ShopGUIManager
 import kr.eme.semiTradeShop.managers.ShopManager
 import kr.eme.semiTradeShop.objects.guis.InitShopGUI
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.TabExecutor
 import org.bukkit.entity.Player
 
-object ShopCommand : CommandExecutor {
+object ShopCommand : TabExecutor {
+
+    // 🔹 const val 전용 리플렉션
+    private fun getConstList(obj: Any): List<String> {
+        return obj::class.java.declaredFields.mapNotNull { field ->
+            try {
+                if (java.lang.reflect.Modifier.isStatic(field.modifiers)) {
+                    field.isAccessible = true
+                    field.get(null) as? String
+                } else null
+            } catch (_: Exception) {
+                null
+            }
+        }
+    }
+
+    private val TYPE_CANDIDATES by lazy { getConstList(MissionTypes) }
+    private val TARGET_CANDIDATES by lazy { getConstList(MissionTargets) }
+
     override fun onCommand(
         sender: CommandSender,
         command: Command,
         label: String,
         args: Array<out String>
     ): Boolean {
-        return try {
-            if (sender !is Player) {
-                sender.sendMessage("이 명령어는 플레이어만 사용할 수 있습니다.")
+        if (sender !is Player) {
+            sender.sendMessage("이 명령어는 플레이어만 사용할 수 있습니다.")
+            return true
+        }
+        val player: Player = sender
+
+        if (args.isEmpty()) {
+            val initShopGUI = InitShopGUI(player)
+            initShopGUI.setFirstGUI()
+            GUIManager.setGUI(player.uniqueId, initShopGUI)
+            initShopGUI.open()
+            return true
+        }
+
+        // ✅ 디버그 명령어
+        if (args[0].equals("debug", ignoreCase = true)) {
+            if (args.size < 4) {
+                player.sendMessage("§c사용법: /shop debug <version[1,2]> <type> <target> [value]")
                 return true
             }
-            val player: Player = sender
 
-            if (args.isEmpty()) { // /shop 만 입력
-                val initShopGUI = InitShopGUI(player)
-                initShopGUI.setFirstGUI()
-                GUIManager.setGUI(player.uniqueId, initShopGUI)
-                initShopGUI.open()
-                return true
-            }
-
-            // ✅ 테스트 명령어: /shop debug <type> <target> [need]
-            if (args[0].equals("debug", ignoreCase = true)) {
-                if (args.size < 3) {
-                    player.sendMessage("§c사용법: /shop debug <type> <target> [need]")
+            val version = args[1]
+            val type = args[2]
+            val target = args[3]
+            val value = if (args.size >= 5) args[4].toIntOrNull() ?: 1 else 1
+            val missionVersion = when (version) {
+                "1" -> MissionVersion.V1
+                "2" -> MissionVersion.V2
+                else -> {
+                    player.sendMessage("§c잘못된 버전: $version (1 또는 2만 가능)")
                     return true
                 }
-
-                val type = args[1]
-                val target = args[2]
-                val need = if (args.size >= 4) args[3].toIntOrNull() ?: 1 else 1
-
-                Bukkit.getPluginManager().callEvent(
-                    MissionEvent(player, type, target, need)
-                )
-
-                player.sendMessage("§a[디버그] MissionEvent(type=$type, target=$target, need=$need) 이벤트를 보냈습니다.")
-                return true
             }
 
-            if (!player.isOp) {
-                return true
-            }
-
-            val shopName = args[0]
-            val shop = ShopManager.getShop(shopName)
-            if (shop == null) {
-                player.sendMessage("존재하지 않는 상점입니다. !$shopName")
-                return true
-            }
-
-            val inventory = ShopGUIManager.createShopInventory(shopName, 1)
-            if (inventory == null) {
-                player.sendMessage("상점을 여는 데 실패하였습니다.")
-                return true
-            }
-            player.openInventory(inventory)
-            true
-        } catch (ex: Exception) {
-            true
+            Bukkit.getPluginManager().callEvent(
+                MissionEvent(player, missionVersion, type, target, value)
+            )
+            player.sendMessage("§a[디버그] MissionEvent(version=$version, type=$type, target=$target, value=$value) 이벤트를 보냈습니다.")
+            return true
         }
+
+        // 일반 상점 열기
+        if (!player.isOp) return true
+
+        val shopName = args[0]
+        val shop = ShopManager.getShop(shopName)
+        if (shop == null) {
+            player.sendMessage("존재하지 않는 상점입니다. !$shopName")
+            return true
+        }
+
+        val inventory = ShopGUIManager.createShopInventory(shopName, 1)
+        if (inventory == null) {
+            player.sendMessage("상점을 여는 데 실패하였습니다.")
+            return true
+        }
+        player.openInventory(inventory)
+        return true
     }
 
-    private fun usage(player: Player) {
-        player.sendMessage("사용법: /shop <상점이름>")
+    override fun onTabComplete(
+        sender: CommandSender,
+        command: Command,
+        alias: String,
+        args: Array<out String>
+    ): MutableList<String> {
+        if (sender !is Player || !sender.isOp) return mutableListOf()
+
+        if (args.size == 1) {
+            return listOf("debug").filter { it.startsWith(args[0], ignoreCase = true) }.toMutableList()
+        }
+
+        if (args[0].equals("debug", ignoreCase = true)) {
+            return when (args.size) {
+                2 -> listOf("1", "2").filter { it.startsWith(args[1]) }.toMutableList()
+                3 -> TYPE_CANDIDATES.filter { it.startsWith(args[2], ignoreCase = true) }.toMutableList()
+                4 -> TARGET_CANDIDATES.filter { it.startsWith(args[3], ignoreCase = true) }.toMutableList()
+                5 -> (1..64).map { it.toString() }
+                    .filter { it.startsWith(args[4]) }
+                    .toMutableList()
+                else -> mutableListOf()
+            }
+        }
+
+        return mutableListOf()
     }
 }
