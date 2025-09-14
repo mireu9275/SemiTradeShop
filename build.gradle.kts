@@ -1,10 +1,9 @@
 plugins {
     kotlin("jvm") version "2.2.0"
-    `maven-publish`
 }
 
 group = "kr.eme.semiTradeShop"
-version = "1.0.3"
+version = "1.0.4"
 
 repositories {
     mavenCentral()
@@ -37,19 +36,5 @@ tasks.jar {
     destinationDirectory = file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins")
     manifest {
         attributes["Main-Class" ] = "kr.eme.semiTradeShop.SemiTradeShop"
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-            groupId = project.group.toString()
-            artifactId = "SemiTradeShop"
-            version = project.version.toString()
-        }
-    }
-    repositories {
-        mavenLocal() // ✅ publishToMavenLocal 실행 시 ~/.m2/repository 로 배포
     }
 }
