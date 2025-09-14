@@ -31,10 +31,10 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
-tasks.jar {
-    archiveFileName = "${project.name}-${project.version}.jar"
-    destinationDirectory = file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins")
-    manifest {
-        attributes["Main-Class" ] = "kr.eme.semiTradeShop.SemiTradeShop"
-    }
-}
+//tasks.jar {
+//    archiveFileName = "${project.name}-${project.version}.jar"
+//    destinationDirectory = file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins")
+//    manifest {
+//        attributes["Main-Class" ] = "kr.eme.semiTradeShop.SemiTradeShop"
+//    }
+//}
