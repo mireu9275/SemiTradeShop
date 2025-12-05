@@ -1,9 +1,14 @@
 package kr.eme.semiTradeShop.managers
 
+import kr.eme.semiMission.api.events.MissionEvent
+import kr.eme.semiMission.enums.MissionVersion
+import kr.eme.semiMission.objects.const.MissionTargets
+import kr.eme.semiMission.objects.const.MissionTypes
 import kr.eme.semiMoneyGlobal.managers.MoneyManager
 import kr.eme.semiTradeShop.extensions.toBukkitItemWithoutPrice
 import kr.eme.semiTradeShop.objects.ShopItem
 import kr.eme.semiTradeShop.objects.ShopItems
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import java.util.*
 
@@ -56,6 +61,12 @@ object ShopItemManager {
         player.inventory.removeItem(itemStack)
         MoneyManager.addMoney(item.sellPrice * quantity)
         player.sendMessage("정상적으로 ${item.name}§f을/를 판매하였습니다. (판매금액: ${item.sellPrice * quantity} EP)")
+
+        if (shopName == "MineralShop") {
+            Bukkit.getPluginManager().callEvent(
+                MissionEvent(player, MissionVersion.V1, MissionTypes.TRADE, MissionTargets.TRADE_MODULE, 1)
+            )
+        }
     }
 
     fun findShopItem(shopName: String, itemName: String): ShopItem? {
