@@ -2,11 +2,8 @@ package kr.eme.semiTradeShop.objects.guis
 
 import kr.eme.semiMission.api.events.MissionEvent
 import kr.eme.semiMission.enums.MissionVersion
-import kr.eme.semiMission.objects.const.MissionTargets
-import kr.eme.semiMission.objects.const.MissionTypes
 import kr.eme.semiMoneyGlobal.managers.MoneyManager
 import kr.eme.semiTradeShop.managers.GUIManager
-import kr.eme.semiTradeShop.managers.ShopItemManager
 import kr.eme.semiTradeShop.objects.ShopItems
 import kr.eme.semiTradeShop.utils.ItemStackUtil
 import kr.eme.semiTradeShop.utils.SoundUtil
@@ -167,11 +164,21 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
         player.sendMessage("§a${itemName}을(를) $totalSellQty 개 판매하여 $totalEarnings EP를 획득하였습니다.")
         SoundUtil.click(player)
 
-        val targetName = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
+        val soldItemNameClean = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
 
-        if (ShopItemManager.findShopItem("MineralShop", targetName) != null) {
+        val isMineralItem = ShopItems.getShopItems("MineralShop").any { shopItem ->
+            val shopItemNameClean = ItemStackUtil.cutColorCodes(shopItem.name)
+            shopItemNameClean == soldItemNameClean
+        }
+
+        val isFarmingShop = ShopItems.getShopItems("FarmingShop").any { shopItem ->
+            val shopItemNameClean = ItemStackUtil.cutColorCodes(shopItem.name)
+            shopItemNameClean == soldItemNameClean
+        }
+
+        if (isMineralItem || isFarmingShop) {
             Bukkit.getPluginManager().callEvent(
-                MissionEvent(player, MissionVersion.V1, MissionTypes.TRADE, MissionTargets.TRADE_MODULE, 1)
+                MissionEvent(player, MissionVersion.V1, "TRADE", "trade_module", 1)
             )
         }
 

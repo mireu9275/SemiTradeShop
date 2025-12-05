@@ -2,8 +2,6 @@ package kr.eme.semiTradeShop.managers
 
 import kr.eme.semiMission.api.events.MissionEvent
 import kr.eme.semiMission.enums.MissionVersion
-import kr.eme.semiMission.objects.const.MissionTargets
-import kr.eme.semiMission.objects.const.MissionTypes
 import kr.eme.semiMoneyGlobal.managers.MoneyManager
 import kr.eme.semiTradeShop.extensions.toBukkitItemWithoutPrice
 import kr.eme.semiTradeShop.objects.ShopItem
@@ -62,11 +60,21 @@ object ShopItemManager {
         MoneyManager.addMoney(item.sellPrice * quantity)
         player.sendMessage("정상적으로 ${item.name}§f을/를 판매하였습니다. (판매금액: ${item.sellPrice * quantity} EP)")
 
+        // =========================================================================
+        // [DEBUG & 코드 시작]
+        // =========================================================================
+        player.sendMessage("§e[DEBUG] ShopItemManager - 상점 이름: $shopName")
+
         if (shopName == "MineralShop") {
+//            player.sendMessage("§e[DEBUG] MineralShop 조건 만족! 미션 이벤트 발생.")
             Bukkit.getPluginManager().callEvent(
-                MissionEvent(player, MissionVersion.V1, MissionTypes.TRADE, MissionTargets.TRADE_MODULE, 1)
+                MissionEvent(player, MissionVersion.V1, "TRADE", "trade_module", 1)
             )
+        } else {
+//            player.sendMessage("§e[DEBUG] MineralShop이 아님 ($shopName). 이벤트 패스.")
         }
+        // =========================================================================
+
     }
 
     fun findShopItem(shopName: String, itemName: String): ShopItem? {

@@ -1,10 +1,15 @@
 package kr.eme.semiTradeShop.objects.guis
 
+import kr.eme.semiMission.api.events.MissionEvent
+import kr.eme.semiMission.enums.MissionVersion
+import kr.eme.semiMission.objects.const.MissionTargets
+import kr.eme.semiMission.objects.const.MissionTypes
 import kr.eme.semiMoneyGlobal.managers.MoneyManager
 import kr.eme.semiTradeShop.managers.GUIManager
 import kr.eme.semiTradeShop.objects.ShopItems
 import kr.eme.semiTradeShop.utils.ItemStackUtil
 import kr.eme.semiTradeShop.utils.SoundUtil
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
@@ -146,6 +151,22 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
         val itemName = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")
         player.sendMessage("§a${itemName}을(를) $successQty 개 구매했습니다. (총 비용: ${buyPrice - (failedQty * (buyPrice / totalBuyQty))} EP)")
         SoundUtil.click(player)
+
+        val buyItemNameClean = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
+
+        when (buyItemNameClean) {
+            "커피머신 모듈" -> {
+                Bukkit.getPluginManager().callEvent(
+                    MissionEvent(player, MissionVersion.V1, MissionTypes.TRADE, MissionTargets.COFFEE_MODULE, 1)
+                )
+            }
+            "커피콩" -> {
+                Bukkit.getPluginManager().callEvent(
+                    MissionEvent(player, MissionVersion.V1, MissionTypes.TRADE, MissionTargets.COFFEE_MODULE, 2)
+                )
+            }
+        }
+
         return true
     }
 }
