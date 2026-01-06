@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.2.0"
 }
 
-group = "kr.eme.semiTradeShop"
+group = "kr.eme.prcShop"
 version = "1.0.5"
 
 repositories {
@@ -35,6 +35,6 @@ tasks.jar {
     archiveFileName = "${project.name}-${project.version}.jar"
     destinationDirectory = file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins")
     manifest {
-        attributes["Main-Class" ] = "kr.eme.semiTradeShop.SemiTradeShop"
+        attributes["Main-Class" ] = "kr.eme.prcShop.PRCShop"
     }
 }

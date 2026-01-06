@@ -1,5 +1,5 @@
-name: SemiTradeShop
-main: kr.eme.semiTradeShop.SemiTradeShop
+name: PRCShop
+main: kr.eme.prcShop.PRCShop
 version: 1.0
 api-version: 1.20
 depend:
