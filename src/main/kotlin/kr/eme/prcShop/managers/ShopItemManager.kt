@@ -1,8 +1,8 @@
 package kr.eme.prcShop.managers
 
-import kr.eme.semiMission.api.events.MissionEvent
-import kr.eme.semiMission.enums.MissionVersion
-import kr.eme.semiMoneyGlobal.managers.MoneyManager
+import kr.eme.prcMission.api.events.MissionEvent
+import kr.eme.prcMission.enums.MissionVersion
+import kr.eme.prcMoney.managers.MoneyManager
 import kr.eme.prcShop.extensions.toBukkitItemWithoutPrice
 import kr.eme.prcShop.objects.ShopItem
 import kr.eme.prcShop.objects.ShopItems

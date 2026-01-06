@@ -1,9 +1,9 @@
 package kr.eme.prcShop.commands
 
-import kr.eme.semiMission.api.events.MissionEvent
-import kr.eme.semiMission.enums.MissionVersion
-import kr.eme.semiMission.objects.const.MissionTargets
-import kr.eme.semiMission.objects.const.MissionTypes
+import kr.eme.prcMission.api.events.MissionEvent
+import kr.eme.prcMission.enums.MissionVersion
+import kr.eme.prcMission.objects.const.MissionTargets
+import kr.eme.prcMission.objects.const.MissionTypes
 import kr.eme.prcShop.managers.GUIManager
 import kr.eme.prcShop.managers.ShopGUIManager
 import kr.eme.prcShop.managers.ShopManager

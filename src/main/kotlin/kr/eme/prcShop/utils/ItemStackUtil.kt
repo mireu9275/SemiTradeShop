@@ -1,6 +1,6 @@
 package kr.eme.prcShop.utils
 
-import kr.eme.semiMoneyGlobal.managers.MoneyManager
+import kr.eme.prcMoney.managers.MoneyManager
 import kr.eme.prcShop.objects.ShopItem
 import kr.eme.prcShop.objects.guis.GUI
 import org.bukkit.Material

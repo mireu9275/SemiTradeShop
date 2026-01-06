@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "kr.eme.prcShop"
-version = "1.0.5"
+version = "1.0.6"
 
 repositories {
     mavenCentral()
@@ -13,8 +13,8 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
-    compileOnly("com.github.mireu9275:SemiMoneyGlobal:v1.0.1")
-    compileOnly("com.github.mireu9275:semiMission:v1.0.5")
+    compileOnly("com.github.mireu9275:PRCMoney:v1.0.2")
+    compileOnly("com.github.mireu9275:PRCMission:v1.0.6")
     compileOnly(kotlin("reflect"))
     compileOnly(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")

@@ -1,6 +1,6 @@
 package kr.eme.prcShop.objects.guis
 
-import kr.eme.semiMission.objects.guis.MissionInitGUI
+import kr.eme.prcMission.objects.guis.MissionInitGUI
 import kr.eme.prcShop.managers.GUIManager
 import kr.eme.prcShop.utils.ItemStackUtil
 import kr.eme.prcShop.utils.SoundUtil
