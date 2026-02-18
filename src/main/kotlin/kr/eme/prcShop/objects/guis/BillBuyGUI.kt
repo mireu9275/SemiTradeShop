@@ -95,6 +95,7 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
             }
         }
         updateQtyAndPrice()
+        open()
     }
 
     override fun InventoryDragEvent.dragEvent() {
@@ -126,7 +127,7 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
             return false
         }
         // ✅ 전역 EP 차감 (uuid 없음)
-        if (!MoneyManager.subtractMoney(buyPrice)) {
+        if (!MoneyManager.subtractMoney(buyPrice, player)) {
             player.sendMessage("§c시스템 오류로 인해 결제에 실패했습니다.")
             SoundUtil.error(player)
             return false

@@ -1,272 +1,274 @@
 package kr.eme.prcShop.objects
 
-import org.bukkit.Material
+import kr.eme.prcShop.api.PRCItems
 
+/**
+ * 상점별 아이템 등록 레지스트리.
+ * 각 상점은 nested object로 분리되어 있고, 아이템은 val로 선언됩니다.
+ */
 object ShopItems {
 
-    private val shopItemMap = HashMap<String, MutableList<ShopItem>>()
+    // ═════════════════════════════════════════════
+    //  광물 상점
+    // ═════════════════════════════════════════════
+    object Mineral {
+        private val _items = mutableListOf<ShopItem>()
+        private fun s(prcItem: kr.eme.prcShop.api.PRCItem, buy: Int, sell: Int, page: Int, slot: Int,
+                      trade: List<TradeRequirement> = emptyList()) =
+            ShopItem(prcItem, buy, sell, page, slot, trade).also { _items.add(it) }
 
-    fun addItem(shopName: String, item: ShopItem) {
-        val items = shopItemMap.getOrPut(shopName) { mutableListOf() }
-        items.add(item)
+        // Page 1 - 원석
+        val MAGNESIUM        = s(PRCItems.MAGNESIUM, buy = 100, sell = 20, page = 1, slot = 9)
+        val ALUMINUM         = s(PRCItems.ALUMINUM, buy = 110, sell = 30, page = 1, slot = 10)
+        val IRON             = s(PRCItems.IRON, buy = 150, sell = 60, page = 1, slot = 11)
+        val COPPER           = s(PRCItems.COPPER, buy = 200, sell = 70, page = 1, slot = 12)
+        val LITHIUM          = s(PRCItems.LITHIUM, buy = 250, sell = 150, page = 1, slot = 13)
+        val GOLD             = s(PRCItems.GOLD, buy = 600, sell = 250, page = 1, slot = 18)
+        val PLATINUM         = s(PRCItems.PLATINUM, buy = 1000, sell = 300, page = 1, slot = 19)
+        val NICKEL           = s(PRCItems.NICKEL, buy = 1000, sell = 300, page = 1, slot = 20)
+        val TITANIUM         = s(PRCItems.TITANIUM, buy = 1300, sell = 450, page = 1, slot = 21)
+
+        // Page 2 - 파우더
+        val MAGNESIUM_POWDER = s(PRCItems.MAGNESIUM_POWDER, buy = -1, sell = 22, page = 2, slot = 9)
+        val ALUMINUM_POWDER  = s(PRCItems.ALUMINUM_POWDER, buy = -1, sell = 33, page = 2, slot = 10)
+        val IRON_POWDER      = s(PRCItems.IRON_POWDER, buy = -1, sell = 66, page = 2, slot = 11)
+        val COPPER_POWDER    = s(PRCItems.COPPER_POWDER, buy = -1, sell = 77, page = 2, slot = 12)
+        val LITHIUM_POWDER   = s(PRCItems.LITHIUM_POWDER, buy = -1, sell = 165, page = 2, slot = 13)
+        val GOLD_POWDER      = s(PRCItems.GOLD_POWDER, buy = -1, sell = 275, page = 2, slot = 18)
+        val PLATINUM_POWDER  = s(PRCItems.PLATINUM_POWDER, buy = -1, sell = 330, page = 2, slot = 19)
+        val NICKEL_POWDER    = s(PRCItems.NICKEL_POWDER, buy = -1, sell = 330, page = 2, slot = 20)
+        val TITANIUM_POWDER  = s(PRCItems.TITANIUM_POWDER, buy = -1, sell = 495, page = 2, slot = 21)
+
+        // Page 3 - 주괴 & 합금
+        val MAGNESIUM_INGOT      = s(PRCItems.MAGNESIUM_INGOT, buy = 500, sell = 120, page = 3, slot = 9)
+        val ALUMINUM_INGOT       = s(PRCItems.ALUMINUM_INGOT, buy = 550, sell = 170, page = 3, slot = 10)
+        val IRON_INGOT           = s(PRCItems.IRON_INGOT, buy = 750, sell = 300, page = 3, slot = 11)
+        val COPPER_INGOT         = s(PRCItems.COPPER_INGOT, buy = 1000, sell = 350, page = 3, slot = 12)
+        val LITHIUM_INGOT        = s(PRCItems.LITHIUM_INGOT, buy = 1200, sell = 750, page = 3, slot = 13)
+        val GOLD_INGOT           = s(PRCItems.GOLD_INGOT, buy = -1, sell = 1250, page = 3, slot = 18)
+        val PLATINUM_INGOT       = s(PRCItems.PLATINUM_INGOT, buy = -1, sell = 1500, page = 3, slot = 19)
+        val NICKEL_INGOT         = s(PRCItems.NICKEL_INGOT, buy = -1, sell = 1500, page = 3, slot = 20)
+        val TITANIUM_INGOT       = s(PRCItems.TITANIUM_INGOT, buy = -1, sell = 2250, page = 3, slot = 21)
+        val AL_CU_ALLOY_INGOT    = s(PRCItems.AL_CU_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 22)
+        val AL_MG_ALLOY_INGOT    = s(PRCItems.AL_MG_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 27)
+        val AL_LI_ALLOY_INGOT    = s(PRCItems.AL_LI_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 28)
+        val CU_AU_ALLOY_INGOT    = s(PRCItems.CU_AU_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 29)
+        val NI_FE_ALLOY_INGOT    = s(PRCItems.NI_FE_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 30)
+        val TI_PT_AU_ALLOY_INGOT = s(PRCItems.TI_PT_AU_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 31)
+
+        val all: List<ShopItem> get() = _items.toList()
+    }
+
+    // ═════════════════════════════════════════════
+    //  작물 상점
+    // ═════════════════════════════════════════════
+    object Farming {
+        private val _items = mutableListOf<ShopItem>()
+        private fun s(prcItem: kr.eme.prcShop.api.PRCItem, buy: Int, sell: Int, page: Int, slot: Int) =
+            ShopItem(prcItem, buy, sell, page, slot).also { _items.add(it) }
+
+        // Page 1 - 씨앗
+        val POTATO_SEED    = s(PRCItems.POTATO_SEED, buy = 20, sell = 4, page = 1, slot = 9)
+        val CABBAGE_SEED   = s(PRCItems.CABBAGE_SEED, buy = 100, sell = 20, page = 1, slot = 10)
+        val CUCUMBER_SEED  = s(PRCItems.CUCUMBER_SEED, buy = 50, sell = 10, page = 1, slot = 11)
+        val COFFEE_BEAN_SEED = s(PRCItems.COFFEE_BEAN_SEED, buy = 100, sell = 20, page = 1, slot = 12)
+        val TOMATO_SEED    = s(PRCItems.TOMATO_SEED, buy = 30, sell = 6, page = 1, slot = 13)
+        val CORN_SEED      = s(PRCItems.CORN_SEED, buy = 60, sell = 12, page = 1, slot = 18)
+        val WHEAT_SEED     = s(PRCItems.WHEAT_SEED, buy = 120, sell = 24, page = 1, slot = 19)
+        val CRANBERRY_SEED = s(PRCItems.CRANBERRY_SEED, buy = 20, sell = 4, page = 1, slot = 20)
+        val BEET_SEED      = s(PRCItems.BEET_SEED, buy = 50, sell = 10, page = 1, slot = 21)
+        val PUMPKIN_SEED   = s(PRCItems.PUMPKIN_SEED, buy = 120, sell = 24, page = 1, slot = 22)
+
+        // Page 2 - 은 등급 ★
+        val POTATO_G1    = s(PRCItems.POTATO_G1, buy = 50, sell = 10, page = 2, slot = 9)
+        val CABBAGE_G1   = s(PRCItems.CABBAGE_G1, buy = 750, sell = 150, page = 2, slot = 10)
+        val CUCUMBER_G1  = s(PRCItems.CUCUMBER_G1, buy = 125, sell = 25, page = 2, slot = 11)
+        val COFFEE_BEAN_G1 = s(PRCItems.COFFEE_BEAN_G1, buy = 50, sell = 10, page = 2, slot = 12)
+        val TOMATO_G1    = s(PRCItems.TOMATO_G1, buy = 75, sell = 15, page = 2, slot = 13)
+        val CORN_G1      = s(PRCItems.CORN_G1, buy = 150, sell = 30, page = 2, slot = 18)
+        val WHEAT_G1     = s(PRCItems.WHEAT_G1, buy = 300, sell = 60, page = 2, slot = 19)
+        val CRANBERRY_G1 = s(PRCItems.CRANBERRY_G1, buy = 50, sell = 10, page = 2, slot = 20)
+        val BEET_G1      = s(PRCItems.BEET_G1, buy = 500, sell = 100, page = 2, slot = 21)
+        val PUMPKIN_G1   = s(PRCItems.PUMPKIN_G1, buy = 1000, sell = 200, page = 2, slot = 22)
+
+        // Page 3 - 금 등급 ★★
+        val POTATO_G2    = s(PRCItems.POTATO_G2, buy = 55, sell = 11, page = 3, slot = 9)
+        val CABBAGE_G2   = s(PRCItems.CABBAGE_G2, buy = 825, sell = 165, page = 3, slot = 10)
+        val CUCUMBER_G2  = s(PRCItems.CUCUMBER_G2, buy = 140, sell = 28, page = 3, slot = 11)
+        val COFFEE_BEAN_G2 = s(PRCItems.COFFEE_BEAN_G2, buy = 55, sell = 11, page = 3, slot = 12)
+        val TOMATO_G2    = s(PRCItems.TOMATO_G2, buy = 85, sell = 17, page = 3, slot = 13)
+        val CORN_G2      = s(PRCItems.CORN_G2, buy = 165, sell = 33, page = 3, slot = 18)
+        val WHEAT_G2     = s(PRCItems.WHEAT_G2, buy = 330, sell = 66, page = 3, slot = 19)
+        val CRANBERRY_G2 = s(PRCItems.CRANBERRY_G2, buy = 55, sell = 11, page = 3, slot = 20)
+        val BEET_G2      = s(PRCItems.BEET_G2, buy = 550, sell = 110, page = 3, slot = 21)
+        val PUMPKIN_G2   = s(PRCItems.PUMPKIN_G2, buy = 1100, sell = 220, page = 3, slot = 22)
+
+        // Page 4 - 다이아 등급 ★★★
+        val POTATO_G3    = s(PRCItems.POTATO_G3, buy = 65, sell = 13, page = 4, slot = 9)
+        val CABBAGE_G3   = s(PRCItems.CABBAGE_G3, buy = 975, sell = 195, page = 4, slot = 10)
+        val CUCUMBER_G3  = s(PRCItems.CUCUMBER_G3, buy = 150, sell = 30, page = 4, slot = 11)
+        val COFFEE_BEAN_G3 = s(PRCItems.COFFEE_BEAN_G3, buy = 65, sell = 13, page = 4, slot = 12)
+        val TOMATO_G3    = s(PRCItems.TOMATO_G3, buy = 90, sell = 18, page = 4, slot = 13)
+        val CORN_G3      = s(PRCItems.CORN_G3, buy = 195, sell = 39, page = 4, slot = 18)
+        val WHEAT_G3     = s(PRCItems.WHEAT_G3, buy = 390, sell = 78, page = 4, slot = 19)
+        val CRANBERRY_G3 = s(PRCItems.CRANBERRY_G3, buy = 65, sell = 13, page = 4, slot = 20)
+        val BEET_G3      = s(PRCItems.BEET_G3, buy = 650, sell = 130, page = 4, slot = 21)
+        val PUMPKIN_G3   = s(PRCItems.PUMPKIN_G3, buy = 1300, sell = 260, page = 4, slot = 22)
+
+        val all: List<ShopItem> get() = _items.toList()
+    }
+
+    // ═════════════════════════════════════════════
+    //  기타 상점
+    // ═════════════════════════════════════════════
+    object Other {
+        private val _items = mutableListOf<ShopItem>()
+        private fun s(prcItem: kr.eme.prcShop.api.PRCItem, buy: Int, sell: Int, page: Int, slot: Int,
+                      trade: List<TradeRequirement> = emptyList()) =
+            ShopItem(prcItem, buy, sell, page, slot, trade).also { _items.add(it) }
+
+        // Page 1 - 도구
+        val NUTRITION_CAPSULE  = s(PRCItems.NUTRITION_CAPSULE, buy = 10, sell = 5, page = 1, slot = 9)
+        val GROWTH_CAPSULE     = s(PRCItems.GROWTH_CAPSULE, buy = 7, sell = 5, page = 1, slot = 10)
+        val HERBICIDE_CAPSULE  = s(PRCItems.HERBICIDE_CAPSULE, buy = 50, sell = 25, page = 1, slot = 11)
+        val MUG                = s(PRCItems.MUG, buy = 5, sell = -1, page = 1, slot = 12)
+
+        // Page 2 - 빌드형 모듈
+        val BASIC_TOOL_MODULE     = s(PRCItems.BASIC_TOOL_MODULE, buy = -1, sell = -1, page = 2, slot = 9,
+            trade = listOf(TradeRequirement(PRCItems.IRON_INGOT, 5)))
+        val T_TOOL_MODULE         = s(PRCItems.T_TOOL_MODULE, buy = -1, sell = -1, page = 2, slot = 10,
+            trade = listOf(TradeRequirement(PRCItems.IRON_INGOT, 5)))
+        val CROSS_TOOL_MODULE     = s(PRCItems.CROSS_TOOL_MODULE, buy = -1, sell = -1, page = 2, slot = 11,
+            trade = listOf(TradeRequirement(PRCItems.IRON_INGOT, 5)))
+        val STORAGE_MODULE_MEDIUM = s(PRCItems.STORAGE_MODULE_MEDIUM, buy = -1, sell = -1, page = 2, slot = 12,
+            trade = listOf(TradeRequirement(PRCItems.IRON_INGOT, 35)))
+        val STORAGE_MODULE_LARGE  = s(PRCItems.STORAGE_MODULE_LARGE, buy = -1, sell = -1, page = 2, slot = 13,
+            trade = listOf(TradeRequirement(PRCItems.IRON_INGOT, 50)))
+        val MINE_MODULE           = s(PRCItems.MINE_MODULE, buy = -1, sell = -1, page = 2, slot = 18,
+            trade = listOf(TradeRequirement(PRCItems.IRON_INGOT, 10)))
+        val FARM_MODULE_MEDIUM    = s(PRCItems.FARM_MODULE_MEDIUM, buy = -1, sell = -1, page = 2, slot = 19,
+            trade = listOf(
+                TradeRequirement(PRCItems.IRON_INGOT, 20),
+                TradeRequirement(PRCItems.LITHIUM_INGOT, 10)))
+        val FARM_MODULE_LARGE     = s(PRCItems.FARM_MODULE_LARGE, buy = -1, sell = -1, page = 2, slot = 20,
+            trade = listOf(
+                TradeRequirement(PRCItems.IRON_INGOT, 30),
+                TradeRequirement(PRCItems.LITHIUM_INGOT, 10),
+                TradeRequirement(PRCItems.TITANIUM_INGOT, 5)))
+        val GATE_MODULE           = s(PRCItems.GATE_MODULE, buy = -1, sell = -1, page = 2, slot = 21,
+            trade = listOf(TradeRequirement(PRCItems.IRON_INGOT, 40)))
+
+        // Page 3 - 설치형 모듈 & 부품
+        val SPANNER              = s(PRCItems.SPANNER, buy = 130, sell = -1, page = 3, slot = 9)
+        val GRINDER_MODULE       = s(PRCItems.GRINDER_MODULE, buy = 500, sell = -1, page = 3, slot = 10)
+        val PRINTER_MODULE       = s(PRCItems.PRINTER_MODULE, buy = 500, sell = -1, page = 3, slot = 11)
+        val COFFEE_MACHINE_MODULE = s(PRCItems.COFFEE_MACHINE_MODULE, buy = 2000, sell = -1, page = 3, slot = 12)
+        val FURNACE_MODULE       = s(PRCItems.FURNACE_MODULE, buy = 1300, sell = -1, page = 3, slot = 13)
+        val GRINDER_CAPACITY     = s(PRCItems.GRINDER_CAPACITY_UPGRADE, buy = -1, sell = -1, page = 3, slot = 18,
+            trade = listOf(
+                TradeRequirement(PRCItems.IRON_INGOT, 30),
+                TradeRequirement(PRCItems.COPPER_INGOT, 20)))
+        val ALLOY_GEAR           = s(PRCItems.ALLOY_GEAR_AL_CU, buy = -1, sell = -1, page = 3, slot = 19,
+            trade = listOf(
+                TradeRequirement(PRCItems.AL_CU_ALLOY_INGOT, 25),
+                TradeRequirement(PRCItems.LITHIUM_INGOT, 10)))
+        val ALLOY_DRILL          = s(PRCItems.ALLOY_DRILL_TI_PT_AU, buy = -1, sell = -1, page = 3, slot = 20,
+            trade = listOf(
+                TradeRequirement(PRCItems.TI_PT_AU_ALLOY_INGOT, 15),
+                TradeRequirement(PRCItems.IRON, 10),
+                TradeRequirement(PRCItems.COPPER, 10)))
+        val FURNACE_SLOT         = s(PRCItems.FURNACE_SLOT_UPGRADE, buy = -1, sell = -1, page = 3, slot = 21,
+            trade = listOf(
+                TradeRequirement(PRCItems.IRON_INGOT, 10),
+                TradeRequirement(PRCItems.COPPER_INGOT, 10)))
+        val ALLOY_MOLD           = s(PRCItems.ALLOY_COOLING_MOLD_CU_AU, buy = -1, sell = -1, page = 3, slot = 22,
+            trade = listOf(TradeRequirement(PRCItems.CU_AU_ALLOY_INGOT, 20)))
+        val ALLOY_TORCH          = s(PRCItems.ALLOY_TORCH_NI_FE, buy = -1, sell = -1, page = 3, slot = 27,
+            trade = listOf(
+                TradeRequirement(PRCItems.NI_FE_ALLOY_INGOT, 10),
+                TradeRequirement(PRCItems.NICKEL_INGOT, 10),
+                TradeRequirement(PRCItems.TITANIUM_INGOT, 10)))
+
+        // Page 4 - 레시피
+        val RECIPE_MAGNESIUM = s(PRCItems.RECIPE_MAGNESIUM_INGOT, buy = 100, sell = -1, page = 4, slot = 9)
+        val RECIPE_ALUMINUM  = s(PRCItems.RECIPE_ALUMINUM_INGOT, buy = 100, sell = -1, page = 4, slot = 10)
+        val RECIPE_IRON      = s(PRCItems.RECIPE_IRON_INGOT, buy = 100, sell = -1, page = 4, slot = 11)
+        val RECIPE_COPPER    = s(PRCItems.RECIPE_COPPER_INGOT, buy = 300, sell = -1, page = 4, slot = 12)
+        val RECIPE_LITHIUM   = s(PRCItems.RECIPE_LITHIUM_INGOT, buy = 300, sell = -1, page = 4, slot = 13)
+        val RECIPE_GOLD      = s(PRCItems.RECIPE_GOLD_INGOT, buy = 300, sell = -1, page = 4, slot = 18)
+        val RECIPE_PLATINUM  = s(PRCItems.RECIPE_PLATINUM_INGOT, buy = 500, sell = -1, page = 4, slot = 19)
+        val RECIPE_NICKEL    = s(PRCItems.RECIPE_NICKEL_INGOT, buy = 500, sell = -1, page = 4, slot = 20)
+        val RECIPE_TITANIUM  = s(PRCItems.RECIPE_TITANIUM_INGOT, buy = 500, sell = -1, page = 4, slot = 21)
+        val RECIPE_AL_CU     = s(PRCItems.RECIPE_AL_CU_ALLOY, buy = 400, sell = -1, page = 4, slot = 22)
+        val RECIPE_AL_MG     = s(PRCItems.RECIPE_AL_MG_ALLOY, buy = 400, sell = -1, page = 4, slot = 27)
+        val RECIPE_AL_LI     = s(PRCItems.RECIPE_AL_LI_ALLOY, buy = 400, sell = -1, page = 4, slot = 28)
+        val RECIPE_CU_AU     = s(PRCItems.RECIPE_CU_AU_ALLOY, buy = 700, sell = -1, page = 4, slot = 29)
+        val RECIPE_NI_FE     = s(PRCItems.RECIPE_NI_FE_ALLOY, buy = 700, sell = -1, page = 4, slot = 30)
+        val RECIPE_TI_PT_AU  = s(PRCItems.RECIPE_TI_PT_AU_ALLOY, buy = 1500, sell = -1, page = 4, slot = 31)
+
+        val all: List<ShopItem> get() = _items.toList()
+    }
+
+    // ═════════════════════════════════════════════
+    //  구매/판매 GUI (내부 전용)
+    // ═════════════════════════════════════════════
+    private object BuyGUI {
+        private val _items = mutableListOf<ShopItem>()
+        private fun g(name: String, slot: Int, cmd: Int) =
+            ShopItem(name, 0, 0, "", org.bukkit.Material.BROWN_DYE, 1, slot, cmd).also { _items.add(it) }
+
+        val SUB_64   = g("§f64개 빼기", 19, 16)
+        val SUB_32   = g("§f32개 빼기", 20, 15)
+        val SUB_1    = g("§f1개 빼기", 21, 14)
+        val ADD_1    = g("§f1개 추가", 23, 17)
+        val ADD_32   = g("§f32개 추가", 24, 18)
+        val ADD_64   = g("§f64개 추가", 25, 19)
+        val QTY_1    = g("§f현재 선택 수량: 1 개", 36, 10)
+        val QTY_2    = g("§f현재 선택 수량: 1 개", 37, 11)
+        val PRICE_1  = g("§f총 구매가: 100 EP", 38, 12)
+        val PRICE_2  = g("§f총 구매가: 100 EP", 39, 13)
+        val BUY_1    = g("§f구매하기", 43, 22)
+        val BUY_2    = g("§f구매하기", 44, 23)
+
+        val all: List<ShopItem> get() = _items.toList()
+    }
+
+    private object SellGUI {
+        private val _items = mutableListOf<ShopItem>()
+        private fun g(name: String, slot: Int, cmd: Int) =
+            ShopItem(name, 0, 0, "", org.bukkit.Material.BROWN_DYE, 1, slot, cmd).also { _items.add(it) }
+
+        val SUB_64   = g("§f64개 빼기", 19, 16)
+        val SUB_32   = g("§f32개 빼기", 20, 15)
+        val SUB_1    = g("§f1개 빼기", 21, 14)
+        val ADD_1    = g("§f1개 추가", 23, 17)
+        val ADD_32   = g("§f32개 추가", 24, 18)
+        val ADD_64   = g("§f64개 추가", 25, 19)
+        val QTY_1    = g("§f현재 선택 수량: 1 개", 36, 10)
+        val QTY_2    = g("§f현재 선택 수량: 1 개", 37, 11)
+        val PRICE_1  = g("§f총 판매가: 100 EP", 38, 12)
+        val PRICE_2  = g("§f총 판매가: 100 EP", 39, 13)
+        val SELL_1   = g("§f판매하기", 43, 20)
+        val SELL_2   = g("§f판매하기", 44, 21)
+
+        val all: List<ShopItem> get() = _items.toList()
+    }
+
+    // ═════════════════════════════════════════════
+    //  기존 인터페이스 유지 (외부에서 getShopItems 호출)
+    // ═════════════════════════════════════════════
+    private val shopMap: Map<String, List<ShopItem>> by lazy {
+        mapOf(
+            "MineralShop" to Mineral.all,
+            "FarmingShop" to Farming.all,
+            "OtherShop"   to Other.all,
+            "BuyGUI"      to BuyGUI.all,
+            "SellGUI"     to SellGUI.all
+        )
     }
 
     fun getShopItems(shopName: String, page: Int? = null): List<ShopItem> {
-        val items = shopItemMap[shopName] ?: return emptyList()
-        return if (page != null) items.filter { it.page == page }.toList() else items.toList()
-    }
-
-    // 아이템 추가 로직을 init 블록으로 분리하여 순서대로 실행되도록 함
-    init {
-        // 광물 상점 (Page 1)
-        addItem("MineralShop", ShopItem("§f마그네슘", 100, 20, "", Material.RED_DYE, 1, 9, 1))
-        addItem("MineralShop", ShopItem("§f알루미늄", 110, 30, "", Material.RED_DYE, 1, 10, 2))
-        addItem("MineralShop", ShopItem("§f철", 150, 60, "", Material.RED_DYE, 1, 11, 3))
-        addItem("MineralShop", ShopItem("§f구리", 200, 70, "", Material.RED_DYE, 1, 12, 4))
-        addItem("MineralShop", ShopItem("§f리튬", 250, 150, "", Material.RED_DYE, 1, 13, 5))
-        addItem("MineralShop", ShopItem("§f금", 600, 250, "", Material.RED_DYE, 1, 18, 6))
-        addItem("MineralShop", ShopItem("§f백금", 1000, 300, "", Material.RED_DYE, 1, 19, 7))
-        addItem("MineralShop", ShopItem("§f니켈", 1000, 300, "", Material.RED_DYE, 1, 20, 8))
-        addItem("MineralShop", ShopItem("§f티타늄", 1300, 450, "", Material.RED_DYE, 1, 21, 9))
-
-        // 광물 상점 (Page 2)
-        // 광물 상점 (Page 2)
-        addItem("MineralShop", ShopItem("§f마그네슘 파우더", -1, 22, "", Material.RED_DYE, 2, 9, 10))
-        addItem("MineralShop", ShopItem("§f알루미늄 파우더", -1, 33, "", Material.RED_DYE, 2, 10, 11))
-        addItem("MineralShop", ShopItem("§f철 파우더", -1, 66, "", Material.RED_DYE, 2, 11, 12))
-        addItem("MineralShop", ShopItem("§f구리 파우더", -1, 77, "", Material.RED_DYE, 2, 12, 13))
-        addItem("MineralShop", ShopItem("§f리튬 파우더", -1, 165, "", Material.RED_DYE, 2, 13, 14))
-        addItem("MineralShop", ShopItem("§f금 파우더", -1, 275, "", Material.RED_DYE, 2, 18, 15))
-        addItem("MineralShop", ShopItem("§f백금 파우더", -1, 330, "", Material.RED_DYE, 2, 19, 16))
-        addItem("MineralShop", ShopItem("§f니켈 파우더", -1, 330, "", Material.RED_DYE, 2, 20, 17))
-        addItem("MineralShop", ShopItem("§f티타늄 파우더", -1, 495, "", Material.RED_DYE, 2, 21, 18))
-
-
-
-        // 광물 상점 (Page 3)
-        // 광물 상점 (Page 3)
-        addItem("MineralShop", ShopItem("§f마그네슘 주괴", 500, 120, "", Material.RED_DYE, 3, 9, 19))
-        addItem("MineralShop", ShopItem("§f알루미늄 주괴", 550, 170, "", Material.RED_DYE, 3, 10, 20))
-        addItem("MineralShop", ShopItem("§f철 주괴", 750, 300, "", Material.RED_DYE, 3, 11, 21))
-        addItem("MineralShop", ShopItem("§f구리 주괴", 1000, 350, "", Material.RED_DYE, 3, 12, 22))
-        addItem("MineralShop", ShopItem("§f리튬 주괴", 1200, 750, "", Material.RED_DYE, 3, 13, 23))
-        addItem("MineralShop", ShopItem("§f금 주괴", -1, 1250, "", Material.RED_DYE, 3, 18, 24))
-        addItem("MineralShop", ShopItem("§f백금 주괴", -1, 1500, "", Material.RED_DYE, 3, 19, 25))
-        addItem("MineralShop", ShopItem("§f니켈 주괴", -1, 1500, "", Material.RED_DYE, 3, 20, 26))
-        addItem("MineralShop", ShopItem("§f티타늄 주괴", -1, 2250, "", Material.RED_DYE, 3, 21, 27))
-        addItem("MineralShop", ShopItem("§f합금 주괴", -1, -1, "§fAl-Cu 합금 주괴", Material.RED_DYE, 3, 22, 28))
-        addItem("MineralShop", ShopItem("§f합금 주괴", -1, -1, "§fAl-Mg 합금 주괴", Material.RED_DYE, 3, 27, 29))
-        addItem("MineralShop", ShopItem("§f합금 주괴", -1, -1, "§fAl-Li 합금 주괴", Material.RED_DYE, 3, 28, 30))
-        addItem("MineralShop", ShopItem("§f합금 주괴", -1, -1, "§fCu-Au 합금 주괴", Material.RED_DYE, 3, 29, 31))
-        addItem("MineralShop", ShopItem("§f합금 주괴", -1, -1, "§fNi-Fe 합금 주괴", Material.RED_DYE, 3, 30, 32))
-        addItem("MineralShop", ShopItem("§f합금 주괴", -1, -1, "§fTi-Pt-Au 합금 주괴", Material.RED_DYE, 3, 31, 33))
-
-
-        // 작물 상점 (Page 1) - 씨앗 상점
-        addItem("FarmingShop", ShopItem("§f감자 씨앗", 20, 4, "§f봄 작물, §f수확일 3일", Material.BLACK_DYE, 1, 9, 31))
-        addItem("FarmingShop", ShopItem("§f양배추 씨앗", 100, 20, "§f봄 작물, §f수확일 7일", Material.BLACK_DYE, 1, 10, 32))
-        addItem("FarmingShop", ShopItem("§f오이 씨앗", 50, 10, "§f봄 작물, §f수확일 5일", Material.BLACK_DYE, 1, 11, 33))
-        addItem("FarmingShop", ShopItem("§f커피콩", 100, 20, "§f봄/여름 작물, §f수확일 10일", Material.BLACK_DYE, 1, 12, 34))
-        addItem("FarmingShop", ShopItem("§f토마토 씨앗", 30, 6, "§f여름 작물, §f수확일 3일", Material.BLACK_DYE, 1, 13, 35))
-        addItem("FarmingShop", ShopItem("§f옥수수 씨앗", 60, 12, "§f여름 작물, §f수확일 5일", Material.BLACK_DYE, 1, 18, 36))
-        addItem("FarmingShop", ShopItem("§f밀 씨앗", 120, 24, "§f여름/가을 작물, §f수확일 9일", Material.BLACK_DYE, 1, 19, 37))
-        addItem("FarmingShop", ShopItem("§f크랜베리 씨앗", 20, 4, "§f가을 작물, §f수확일 3일", Material.BLACK_DYE, 1, 20, 38))
-        addItem("FarmingShop", ShopItem("§f비트 씨앗", 50, 10, "§f가을 작물, §f수확일 3일", Material.BLACK_DYE, 1, 21, 39))
-        addItem("FarmingShop", ShopItem("§f호박 씨앗", 120, 24, "§f가을 작물, §f수확일 8일", Material.BLACK_DYE, 1, 22, 40))
-
-
-        // 작물 상점 (Page 2)
-        addItem("FarmingShop", ShopItem("§f감자", 50, 10, "§f봄 작물, §f수확일 3일", Material.BLACK_DYE, 2, 9, 1))
-        addItem("FarmingShop", ShopItem("§f양배추", 750, 150, "§f봄 작물, §f수확일 7일", Material.BLACK_DYE, 2, 10, 2))
-        addItem("FarmingShop", ShopItem("§f오이", 125, 25, "§f봄 작물, §f수확일 5일", Material.BLACK_DYE, 2, 11, 3))
-        addItem("FarmingShop", ShopItem("§f커피콩", 100, 10, "§f봄/여름 작물, §f수확일 10일", Material.BLACK_DYE, 2, 12, 4))
-        addItem("FarmingShop", ShopItem("§f토마토", 75, 15, "§f여름 작물, §f수확일 3일", Material.BLACK_DYE, 2, 13, 5))
-        addItem("FarmingShop", ShopItem("§f옥수수", 150, 30, "§f여름 작물, §f수확일 5일", Material.BLACK_DYE, 2, 18, 6))
-        addItem("FarmingShop", ShopItem("§f밀", 300, 60, "§f여름/가을 작물, §f수확일 9일", Material.BLACK_DYE, 2, 19, 7))
-        addItem("FarmingShop", ShopItem("§f크랜베리", 50, 10, "§f가을 작물, §f수확일 3일", Material.BLACK_DYE, 2, 20, 8))
-        addItem("FarmingShop", ShopItem("§f비트", 500, 100, "§f가을 작물, §f수확일 3일", Material.BLACK_DYE, 2, 21, 9))
-        addItem("FarmingShop", ShopItem("§f호박", 1000, 200, "§f가을 작물, §f수확일 8일", Material.BLACK_DYE, 2, 22, 10))
-
-
-        // 작물 상점 (Page 3)
-        addItem("FarmingShop", ShopItem("§f감자", 55, 11, "§f봄 작물, §f수확일 3일", Material.BLACK_DYE, 3, 9, 11))
-        addItem("FarmingShop", ShopItem("§f양배추", 825, 165, "§f봄 작물, §f수확일 7일", Material.BLACK_DYE, 3, 10, 12))
-        addItem("FarmingShop", ShopItem("§f오이", 140, 28, "§f봄 작물, §f수확일 5일", Material.BLACK_DYE, 3, 11, 13))
-        addItem("FarmingShop", ShopItem("§f커피콩", 55, 11, "§f봄/여름 작물, §f수확일 10일", Material.BLACK_DYE, 3, 12, 14))
-        addItem("FarmingShop", ShopItem("§f토마토", 85, 17, "§f여름 작물, §f수확일 3일", Material.BLACK_DYE, 3, 13, 15))
-        addItem("FarmingShop", ShopItem("§f옥수수", 165, 33, "§f여름 작물, §f수확일 5일", Material.BLACK_DYE, 3, 18, 16))
-        addItem("FarmingShop", ShopItem("§f밀", 330, 66, "§f여름/가을 작물, §f수확일 9일", Material.BLACK_DYE, 3, 19, 17))
-        addItem("FarmingShop", ShopItem("§f크랜베리", 55, 11, "§f가을 작물, §f수확일 3일", Material.BLACK_DYE, 3, 20, 18))
-        addItem("FarmingShop", ShopItem("§f비트", 550, 110, "§f가을 작물, §f수확일 3일", Material.BLACK_DYE, 3, 21, 19))
-        addItem("FarmingShop", ShopItem("§f호박", 1100, 220, "§f가을 작물, §f수확일 8일", Material.BLACK_DYE, 3, 22, 20))
-
-
-        // 작물 상점 (Page 4)
-        addItem("FarmingShop", ShopItem("§f감자", 65, 13, "§f봄 작물, §f수확일 3일", Material.BLACK_DYE, 4, 9, 21))
-        addItem("FarmingShop", ShopItem("§f양배추", 975, 195, "§f봄 작물, §f수확일 7일", Material.BLACK_DYE, 4, 10, 22))
-        addItem("FarmingShop", ShopItem("§f오이", 150, 30, "§f봄 작물, §f수확일 5일", Material.BLACK_DYE, 4, 11, 23))
-        addItem("FarmingShop", ShopItem("§f커피콩", 65, 13, "§f봄/여름 작물, §f수확일 10일", Material.BLACK_DYE, 4, 12, 24))
-        addItem("FarmingShop", ShopItem("§f토마토", 90, 18, "§f여름 작물, §f수확일 3일", Material.BLACK_DYE, 4, 13, 25))
-        addItem("FarmingShop", ShopItem("§f옥수수", 195, 39, "§f여름 작물, §f수확일 5일", Material.BLACK_DYE, 4, 18, 26))
-        addItem("FarmingShop", ShopItem("§f밀", 390, 78, "§f여름/가을 작물, §f수확일 9일", Material.BLACK_DYE, 4, 19, 27))
-        addItem("FarmingShop", ShopItem("§f크랜베리", 65, 13, "§f가을 작물, §f수확일 3일", Material.BLACK_DYE, 4, 20, 28))
-        addItem("FarmingShop", ShopItem("§f비트", 650, 130, "§f가을 작물, §f수확일 3일", Material.BLACK_DYE, 4, 21, 29))
-        addItem("FarmingShop", ShopItem("§f호박", 1300, 260, "§f가을 작물, §f수확일 8일", Material.BLACK_DYE, 4, 22, 30))
-
-
-        // 기타 상점 (Page 1)
-        addItem("OtherShop", ShopItem("§f영양 캡슐", 10, 5, "§f더 높은 등급의 작물이 나올 확률이 증가합니다.", Material.ORANGE_DYE, 1, 9, 2))
-        addItem("OtherShop", ShopItem("§f성장 캡슐", 7, 5, "§f작물의 수확일을 줄여줍니다.", Material.ORANGE_DYE, 1, 10, 3))
-        addItem("OtherShop", ShopItem("§f제초 캡슐", 50, 25, "§f잡초를 제거합니다.", Material.ORANGE_DYE, 1, 11, 4))
-        addItem("OtherShop", ShopItem("§f머그잔", 5, -1, "§fJava", Material.BOWL, 1, 12, 1))
-
-        // 기타 상점 (Page 2)
-        addItem("OtherShop", ShopItem("§f기본 연장 모듈", -1, -1,
-            "§f", Material.SADDLE, 2, 9, 1,
-            listOf(TradeRequirement(Material.RED_DYE, 5, 21, "§f철 주괴"))))
-
-        addItem("OtherShop", ShopItem("§fT 연장 모듈", -1, -1,
-            "§f", Material.SADDLE, 2, 10, 2,
-            listOf(TradeRequirement(Material.RED_DYE, 5, 21, "§f철 주괴"))))
-
-        addItem("OtherShop", ShopItem("§f십자 연장 모듈", -1, -1,
-            "§f", Material.SADDLE, 2, 11, 3,
-            listOf(TradeRequirement(Material.RED_DYE, 5, 21, "§f철 주괴"))))
-
-        addItem("OtherShop", ShopItem("§f스토리지 모듈 [중]", -1, -1,
-            "§f", Material.SADDLE, 2, 12, 4,
-            listOf(TradeRequirement(Material.RED_DYE, 35, 21, "§f철 주괴"))))
-
-        addItem("OtherShop", ShopItem("§f스토리지 모듈 [대]", -1, -1,
-            "§f", Material.SADDLE, 2, 13, 5,
-            listOf(TradeRequirement(Material.RED_DYE, 50, 21, "§f철 주괴"))))
-
-        addItem("OtherShop", ShopItem("§f광산 모듈", -1, -1,
-            "§f", Material.SADDLE, 2, 18, 6,
-            listOf(TradeRequirement(Material.RED_DYE, 5, 21, "§f철 주괴"))))
-
-        addItem("OtherShop", ShopItem("§f농사 모듈 [중]", -1, -1,
-            "§f", Material.SADDLE, 2, 19, 7,
-            listOf(
-                TradeRequirement(Material.RED_DYE, 20, 21, "§f철 주괴"),
-                TradeRequirement(Material.RED_DYE, 10, 23, "§f리튬 주괴")
-            )))
-
-        addItem("OtherShop", ShopItem("§f농사 모듈 [대]", -1, -1,
-            "§f", Material.SADDLE, 2, 20, 8,
-            listOf(
-                TradeRequirement(Material.RED_DYE, 30, 21, "§f철 주괴"),
-                TradeRequirement(Material.RED_DYE, 10, 23, "§f리튬 주괴"),
-                TradeRequirement(Material.RED_DYE, 5, 27, "§f티타늄 주괴")
-            )))
-
-        addItem("OtherShop", ShopItem("§f출입 모듈", -1, -1,
-            "§f", Material.SADDLE, 2, 21, 9,
-            listOf(TradeRequirement(Material.RED_DYE, 50, 21, "§f철 주괴"))))
-
-        // 기타 상점 (Page 3)
-        addItem("OtherShop", ShopItem("§f스패너", 130, -1,
-            "§f", Material.WOODEN_SHOVEL, 3, 9, 13))
-        
-        addItem("OtherShop", ShopItem("§f분쇄기 모듈", 500, -1,
-            "§f", Material.IRON_HORSE_ARMOR, 3, 10, 2))
-
-        addItem("OtherShop", ShopItem("§f프린트 모듈", 500, -1,
-            "§f", Material.IRON_HORSE_ARMOR, 3, 11, 3))
-
-        addItem("OtherShop", ShopItem("§f커피머신 모듈", 2000, -1,
-            "§f", Material.IRON_HORSE_ARMOR, 3, 12, 4))
-
-        addItem("OtherShop", ShopItem("§f용광로 모듈", 2000, -1,
-            "§f", Material.IRON_HORSE_ARMOR, 3, 13, 6))
-
-        addItem("OtherShop", ShopItem("§f분쇄기 용량 확장", -1, -1,
-            "§f", Material.SADDLE, 3, 18, 20,
-            listOf(
-                TradeRequirement(Material.RED_DYE,30,21,"§f철 주괴"),
-                TradeRequirement(Material.RED_DYE,20,22,"§f구리 주괴")
-            )))
-
-        addItem("OtherShop", ShopItem("§f합금 기어", -1, -1,
-            "§fAl-Cu", Material.SADDLE, 3, 19, 21,
-            listOf(
-                TradeRequirement(Material.RED_DYE,25, 28, "§f합금 주괴"),
-                TradeRequirement(Material.RED_DYE,10,23,"§f리튬 주괴")
-            )))
-
-        addItem("OtherShop", ShopItem("§f합금 드릴", -1, -1,
-            "§fTi-Pt-Au", Material.SADDLE, 3, 20, 22,
-            listOf(
-                TradeRequirement(Material.RED_DYE, 15, 33, "§f합금 주괴"),
-                TradeRequirement(Material.RED_DYE, 10, 3, "§f철"),
-                TradeRequirement(Material.RED_DYE, 10, 4, "§f구리")
-            )))
-
-        addItem("OtherShop", ShopItem("§f용광로 용해 슬롯 확장", -1, -1,
-            "§f", Material.SADDLE, 3, 21, 17,
-            listOf(
-                TradeRequirement(Material.RED_DYE, 10, 21, "§f철 주괴"),
-                TradeRequirement(Material.RED_DYE, 10, 22, "§f구리 주괴")
-            )))
-
-        addItem("OtherShop", ShopItem("§f합금 냉각 몰드", -1, -1,
-            "§fCu-Au", Material.SADDLE, 3, 22, 18,
-            listOf(
-                TradeRequirement(Material.RED_DYE, 20, 31, "§f합금 주괴")
-            )))
-
-        addItem("OtherShop", ShopItem("§f합금 토치", -1, -1,
-            "§fNi-Fe", Material.SADDLE, 3, 27, 19,
-            listOf(
-                TradeRequirement(Material.RED_DYE, 10, 32, "§f합금 주괴"),
-                TradeRequirement(Material.RED_DYE, 10, 26, "§f니켈 주괴"),
-                TradeRequirement(Material.RED_DYE, 10, 27, "§f티타늄 주괴")
-            )))
-
-        // 기타 상점 (Page 4)
-        addItem("OtherShop", ShopItem("§f마그네슘 주괴 레시피", 100, -1, "§f", Material.SADDLE, 4, 9, 23))
-        addItem("OtherShop", ShopItem("§f알루미늄 주괴 레시피", 100, -1, "§f", Material.SADDLE, 4, 10, 24))
-        addItem("OtherShop", ShopItem("§f철 주괴 레시피", 100, -1, "§f", Material.SADDLE, 4, 11, 25))
-        addItem("OtherShop", ShopItem("§f구리 주괴 레시피", 300, -1, "§f", Material.SADDLE, 4, 12, 26))
-        addItem("OtherShop", ShopItem("§f리튬 주괴 레시피", 300, -1, "§f", Material.SADDLE, 4, 13, 27))
-        addItem("OtherShop", ShopItem("§f금 주괴 레시피", 300, -1, "§f", Material.SADDLE, 4, 18, 28))
-        addItem("OtherShop", ShopItem("§f백금 주괴 레시피", 500, -1, "§f", Material.SADDLE, 4, 19, 29))
-        addItem("OtherShop", ShopItem("§f니켈 주괴 레시피", 500, -1, "§f", Material.SADDLE, 4, 20, 30))
-        addItem("OtherShop", ShopItem("§f티타늄 주괴 레시피", 500, -1, "§f", Material.SADDLE, 4, 21, 31))
-        addItem("OtherShop", ShopItem("§fAl-Cu 합금 레시피", 400, -1, "§f알루미늄 + 구리", Material.SADDLE, 4, 22, 32))
-        addItem("OtherShop", ShopItem("§fAl-Mg 합금 레시피", 400, -1, "§f알루미늄 + 마그네슘", Material.SADDLE, 4, 27, 33))
-        addItem("OtherShop", ShopItem("§fAl-Li 합금 레시피", 400, -1, "§f알루미늄 + 리튬", Material.SADDLE, 4, 28, 34))
-        addItem("OtherShop", ShopItem("§fCu-Au 합금 레시피", 700, -1, "§f구리 + 금", Material.SADDLE, 4, 29, 35))
-        addItem("OtherShop", ShopItem("§fNi-Fe 합금 레시피", 700, -1, "§f니켈 + 철", Material.SADDLE, 4, 30, 36))
-        addItem("OtherShop", ShopItem("§fTi-Pt-Au 합금 레시피", 1500, -1, "§f티타늄 + 백금 + 금", Material.SADDLE, 4, 31, 37))
-
-
-        // 구매 GUI
-        addItem("BuyGUI", ShopItem("§f64개 빼기", 0, 0, "", Material.BROWN_DYE, 1, 19, 16))
-        addItem("BuyGUI", ShopItem("§f32개 빼기", 0, 0, "", Material.BROWN_DYE, 1, 20, 15))
-        addItem("BuyGUI", ShopItem("§f1개 빼기", 0, 0, "", Material.BROWN_DYE, 1, 21, 14))
-        addItem("BuyGUI", ShopItem("§f1개 추가", 0, 0, "", Material.BROWN_DYE, 1, 23, 17))
-        addItem("BuyGUI", ShopItem("§f32개 추가", 0, 0, "", Material.BROWN_DYE, 1, 24, 18))
-        addItem("BuyGUI", ShopItem("§f64개 추가", 0, 0, "", Material.BROWN_DYE, 1, 25, 19))
-        addItem("BuyGUI", ShopItem("§f현재 선택 수량: 1 개", 0, 0, "", Material.BROWN_DYE, 1, 36, 10))
-        addItem("BuyGUI", ShopItem("§f현재 선택 수량: 1 개", 0, 0, "", Material.BROWN_DYE, 1, 37, 11))
-        addItem("BuyGUI", ShopItem("§f총 구매가: 100 EP", 0, 0, "", Material.BROWN_DYE, 1, 38, 12))
-        addItem("BuyGUI", ShopItem("§f총 구매가: 100 EP", 0, 0, "", Material.BROWN_DYE, 1, 39, 13))
-        addItem("BuyGUI", ShopItem("§f구매하기", 0, 0, "", Material.BROWN_DYE, 1, 43, 22))
-        addItem("BuyGUI", ShopItem("§f구매하기", 0, 0, "", Material.BROWN_DYE, 1, 44, 23))
-
-        // 판매 GUI
-        addItem("SellGUI", ShopItem("§f64개 빼기", 0, 0, "", Material.BROWN_DYE, 1, 19, 16))
-        addItem("SellGUI", ShopItem("§f32개 빼기", 0, 0, "", Material.BROWN_DYE, 1, 20, 15))
-        addItem("SellGUI", ShopItem("§f1개 빼기", 0, 0, "", Material.BROWN_DYE, 1, 21, 14))
-        addItem("SellGUI", ShopItem("§f1개 추가", 0, 0, "", Material.BROWN_DYE, 1, 23, 17))
-        addItem("SellGUI", ShopItem("§f32개 추가", 0, 0, "", Material.BROWN_DYE, 1, 24, 18))
-        addItem("SellGUI", ShopItem("§f64개 추가", 0, 0, "", Material.BROWN_DYE, 1, 25, 19))
-        addItem("SellGUI", ShopItem("§f현재 선택 수량: 1 개", 0, 0, "", Material.BROWN_DYE, 1, 36, 10))
-        addItem("SellGUI", ShopItem("§f현재 선택 수량: 1 개", 0, 0, "", Material.BROWN_DYE, 1, 37, 11))
-        addItem("SellGUI", ShopItem("§f총 판매가: 100 EP", 0, 0, "", Material.BROWN_DYE, 1, 38, 12))
-        addItem("SellGUI", ShopItem("§f총 판매가: 100 EP", 0, 0, "", Material.BROWN_DYE, 1, 39, 13))
-        addItem("SellGUI", ShopItem("§f판매하기", 0, 0, "", Material.BROWN_DYE, 1, 43, 20))
-        addItem("SellGUI", ShopItem("§f판매하기", 0, 0, "", Material.BROWN_DYE, 1, 44, 21))
+        val items = shopMap[shopName] ?: return emptyList()
+        return if (page != null) items.filter { it.page == page } else items
     }
 }

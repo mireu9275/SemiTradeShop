@@ -92,6 +92,7 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
             }
         }
         updateQtyAndPrice()
+        open()
     }
 
     override fun InventoryDragEvent.dragEvent() {
