@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "kr.eme.prcShop"
-version = "1.0.8"
+version = "1.0.9"
 
 repositories {
     mavenCentral()
@@ -31,10 +31,11 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
-//tasks.jar {
-//    archiveFileName = "${project.name}-${project.version}.jar"
-//    destinationDirectory = file("C:\\Users\\Home\\Desktop\\Develop\\minecraft\\Bukkit\\paper 1.21.4 (Semicolon Primary Colony)\\plugins")
-//    manifest {
-//        attributes["Main-Class" ] = "kr.eme.prcShop.PRCShop"
-//    }
-//}
+tasks.jar {
+    archiveFileName = "${project.name}-${project.version}.jar"
+    // 네트워크 경로 지정 시 백슬래시(\)를 두 번씩 쓰거나, Raw String(""")을 사용해야 합니다.
+    destinationDirectory = file("\\\\172.30.1.38\\공유폴더\\paper 1.21.4\\plugins")
+    manifest {
+        attributes["Main-Class" ] = "kr.eme.prcShop.PRCShop"
+    }
+}
