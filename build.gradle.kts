@@ -1,9 +1,10 @@
 plugins {
     kotlin("jvm") version "2.2.0"
+    `maven-publish`
 }
 
 group = "kr.eme.prcShop"
-version = "1.0.10"
+version = "1.0.11"
 
 repositories {
     mavenCentral()
@@ -37,5 +38,13 @@ tasks.jar {
     destinationDirectory = file("\\\\172.30.1.38\\공유폴더\\paper 1.21.4\\plugins")
     manifest {
         attributes["Main-Class" ] = "kr.eme.prcShop.PRCShop"
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
     }
 }
