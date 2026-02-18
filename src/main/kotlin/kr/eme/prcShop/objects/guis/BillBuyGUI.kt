@@ -6,6 +6,7 @@ import kr.eme.prcMission.objects.const.MissionTargets
 import kr.eme.prcMission.objects.const.MissionTypes
 import kr.eme.prcMoney.managers.MoneyManager
 import kr.eme.prcShop.managers.GUIManager
+import kr.eme.prcShop.objects.ShopItem
 import kr.eme.prcShop.objects.ShopItems
 import kr.eme.prcShop.utils.ItemStackUtil
 import kr.eme.prcShop.utils.SoundUtil
@@ -16,7 +17,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryDragEvent
 import org.bukkit.inventory.ItemStack
 
-class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val returnPage: GUI) : GUI(player, "§f\\u340F\\u3424", 6) {
+class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val returnPage: GUI, private val shopItem: ShopItem? = null) : GUI(player, "§f\\u340F\\u3424", 6) {
 
     private var totalBuyQty = 1 // 초기 구매 수량 1
     private var itemPrice = 0 // 아이템 개당 가격
@@ -133,7 +134,12 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
             return false
         }
 
-        val itemToGive = ItemStackUtil.cleanItemLore(clickedItem)
+        val itemToGive = if (shopItem != null) {
+            shopItem.toBukkitItemWithoutPrice()
+        } else {
+            ItemStackUtil.cleanItemLore(clickedItem)
+        }
+
         itemToGive.amount = totalBuyQty
         val leftover = player.inventory.addItem(itemToGive)
         val failedQty = leftover.values.sumOf { it.amount }

@@ -22,7 +22,7 @@ object ShopItemManager {
         }
         val uuid: UUID = player.uniqueId
         val totalPrice = item.buyPrice * quantity
-        if (!MoneyManager.subtractMoney(totalPrice)) {
+        if (!MoneyManager.subtractMoney(totalPrice, player)) {
             player.sendMessage("보유중인 EP가 부족합니다!")
             return
         }

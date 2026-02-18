@@ -1,18 +1,38 @@
 package kr.eme.prcShop.listeners
 
+import kr.eme.prcShop.managers.GUIManager
 import kr.eme.prcShop.managers.ShopGUIManager
 import kr.eme.prcShop.managers.ShopItemManager
 import kr.eme.prcShop.managers.ShopItemManager.getSelectedItemPrice
+import kr.eme.prcShop.objects.guis.InitShopGUI
 import org.bukkit.Material
+import org.bukkit.entity.Interaction
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 
 object ShopGUIListener : Listener {
+
+    @EventHandler
+    fun onInteractEntity(e: PlayerInteractEntityEvent) {
+        val interaction = e.rightClicked as? Interaction ?: return
+
+        val pdc = interaction.persistentDataContainer
+        val key = org.bukkit.NamespacedKey("module", "communication_interaction")
+
+        if (pdc.has(key, org.bukkit.persistence.PersistentDataType.BOOLEAN) &&
+            pdc.get(key, org.bukkit.persistence.PersistentDataType.BOOLEAN) == true) {
+            val initShopGUI = InitShopGUI(e.player)
+            initShopGUI.setFirstGUI()
+            GUIManager.setGUI(e.player.uniqueId, initShopGUI)
+            initShopGUI.open()
+        }
+    }
 
     @EventHandler
     fun onInventoryClick(event: InventoryClickEvent) {

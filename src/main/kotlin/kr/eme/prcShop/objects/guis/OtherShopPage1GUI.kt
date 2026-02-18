@@ -70,7 +70,8 @@ class OtherShopPage1GUI(player: Player) : GUI(player, "§f\\u340F\\u3419", 6) {
                 SoundUtil.error(player)
                 return
             }
-            val buyGUI = BillBuyGUI(player, clickedItem.clone(), this@OtherShopPage1GUI)
+            val shopItem = ShopItems.getShopItems("OtherShop", 1).find { it.slot == slot }
+            val buyGUI = BillBuyGUI(player, clickedItem.clone(), this@OtherShopPage1GUI, shopItem)
             buyGUI.setFirstGUI()
             GUIManager.setGUI(player.uniqueId, buyGUI)
             buyGUI.open()
