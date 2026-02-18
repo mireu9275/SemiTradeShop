@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "kr.eme.prcShop"
-version = "1.0.11"
+version = "1.0.12"
 
 repositories {
     mavenCentral()
@@ -30,6 +30,7 @@ kotlin {
 }
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    withSourcesJar() // KDoc(설명)을 보기 위함
 }
 
 tasks.jar {
