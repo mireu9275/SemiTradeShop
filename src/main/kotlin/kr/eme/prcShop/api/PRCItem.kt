@@ -2,6 +2,7 @@ package kr.eme.prcShop.api
 
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import net.kyori.adventure.text.Component
 
 /**
  * 커스텀 아이템 정의 클래스.
@@ -27,6 +28,7 @@ class PRCItem internal constructor(
         val item = ItemStack(material, amount)
         val meta = item.itemMeta ?: return item
         meta.setDisplayName(displayName)
+        meta.itemName(Component.text(displayName))
         meta.setCustomModelData(customModelData)
         if (description.isNotBlank()) {
             meta.lore = description.split(",").map { it.trim() }
