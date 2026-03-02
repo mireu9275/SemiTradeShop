@@ -5,6 +5,7 @@ import kr.eme.prcMission.enums.MissionVersion
 import kr.eme.prcMission.objects.const.MissionTargets
 import kr.eme.prcMission.objects.const.MissionTypes
 import kr.eme.prcMoney.managers.MoneyManager
+import kr.eme.prcShop.extensions.toBukkitItemWithoutPrice
 import kr.eme.prcShop.managers.GUIManager
 import kr.eme.prcShop.objects.ShopItem
 import kr.eme.prcShop.objects.ShopItems
