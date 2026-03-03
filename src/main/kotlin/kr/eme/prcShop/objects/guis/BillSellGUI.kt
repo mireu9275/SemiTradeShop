@@ -25,7 +25,6 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
             ItemStackUtil.createSlotItemBuyOrSell(this, item)
         }
 
-        setItem(13, clickedItem)
         itemPrice = extractSellPrice(clickedItem)
         
         ItemStackUtil.createMainButton(this)
@@ -79,15 +78,15 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
                 SoundUtil.click(player)
             }
             "§f1개 추가" -> {
-                totalSellQty += 1
+                totalSellQty = minOf(99, totalSellQty + 1)
                 SoundUtil.click(player)
             }
             "§f32개 추가" -> {
-                totalSellQty += 32
+                totalSellQty = minOf(99, totalSellQty + 32)
                 SoundUtil.click(player)
             }
             "§f64개 추가" -> {
-                totalSellQty += 64
+                totalSellQty = minOf(99, totalSellQty + 64)
                 SoundUtil.click(player)
             }
         }
@@ -113,6 +112,14 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
         val totalPrice = itemPrice * totalSellQty
         ItemStackUtil.createQtyIcon(this, totalSellQty)
         ItemStackUtil.createPriceIcon(this, totalPrice, "SELL")
+
+        // slot 13 미리보기 아이템에 수량 반영
+        val previewItem = clickedItem.clone()
+        val previewMeta = previewItem.itemMeta
+        previewMeta?.setMaxStackSize(99)
+        previewItem.itemMeta = previewMeta
+        previewItem.amount = totalSellQty
+        setItem(13, previewItem)
     }
 
     private fun sellProcess(player: Player, totalSellQty: Int, sellPrice: Int, clickedItem: ItemStack): Boolean {

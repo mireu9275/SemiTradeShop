@@ -29,7 +29,6 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
             ItemStackUtil.createSlotItemBuyOrSell(this, item)
         }
 
-        setItem(13, clickedItem)
         itemPrice = extractBuyPrice(clickedItem)
 
         ItemStackUtil.createMainButton(this)
@@ -84,15 +83,15 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
                 SoundUtil.click(player)
             }
             "§f1개 추가" -> {
-                totalBuyQty += 1
+                totalBuyQty = minOf(99, totalBuyQty + 1)
                 SoundUtil.click(player)
             }
             "§f32개 추가" -> {
-                totalBuyQty += 32
+                totalBuyQty = minOf(99, totalBuyQty + 32)
                 SoundUtil.click(player)
             }
             "§f64개 추가" -> {
-                totalBuyQty += 64
+                totalBuyQty = minOf(99, totalBuyQty + 64)
                 SoundUtil.click(player)
             }
         }
@@ -118,6 +117,14 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
         val totalPrice = itemPrice * totalBuyQty
         ItemStackUtil.createQtyIcon(this, totalBuyQty)
         ItemStackUtil.createPriceIcon(this, totalPrice, "BUY")
+
+        // slot 13 미리보기 아이템에 수량 반영
+        val previewItem = clickedItem.clone()
+        val previewMeta = previewItem.itemMeta
+        previewMeta?.setMaxStackSize(99)
+        previewItem.itemMeta = previewMeta
+        previewItem.amount = totalBuyQty
+        setItem(13, previewItem)
     }
 
     private fun buyProcess(player: Player, buyPrice: Int): Boolean {
@@ -141,6 +148,10 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
             ItemStackUtil.cleanItemLore(clickedItem)
         }
 
+        // maxStackSize를 99로 설정하여 64개 이상 한 스택에 보유 가능
+        val giveMeta = itemToGive.itemMeta
+        giveMeta?.setMaxStackSize(99)
+        itemToGive.itemMeta = giveMeta
         itemToGive.amount = totalBuyQty
         val leftover = player.inventory.addItem(itemToGive)
         val failedQty = leftover.values.sumOf { it.amount }
