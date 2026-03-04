@@ -26,7 +26,7 @@ tasks.test {
     useJUnitPlatform()
 }
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
@@ -36,7 +36,7 @@ java {
 tasks.jar {
     archiveFileName = "${project.name}-${project.version}.jar"
     // 네트워크 경로 지정 시 백슬래시(\)를 두 번씩 쓰거나, Raw String(""")을 사용해야 합니다.
-    destinationDirectory = file("\\\\172.30.1.38\\공유폴더\\paper 1.21.4\\plugins")
+    destinationDirectory = file("C:\\Users\\mireu\\Desktop")
     manifest {
         attributes["Main-Class" ] = "kr.eme.prcShop.PRCShop"
     }

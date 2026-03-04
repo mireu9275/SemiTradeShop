@@ -148,9 +148,9 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
             ItemStackUtil.cleanItemLore(clickedItem)
         }
 
-        // maxStackSize를 99로 설정하여 64개 이상 한 스택에 보유 가능
+        // 지급 아이템의 maxStackSize를 기본값으로 리셋 (다른 아이템과 정상 합쳐지도록)
         val giveMeta = itemToGive.itemMeta
-        giveMeta?.setMaxStackSize(99)
+        giveMeta?.setMaxStackSize(itemToGive.type.maxStackSize)
         itemToGive.itemMeta = giveMeta
         itemToGive.amount = totalBuyQty
         val leftover = player.inventory.addItem(itemToGive)
