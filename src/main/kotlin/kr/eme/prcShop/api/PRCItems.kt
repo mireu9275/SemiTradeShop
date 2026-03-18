@@ -8,6 +8,7 @@ import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.inventory.EquipmentSlotGroup
+import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.meta.ItemMeta
 
 /**
@@ -28,7 +29,7 @@ object PRCItems {
     private fun item(
         itemName: String? = null,
         material: Material,
-        customModelData: Int,
+        customModelData: Int? = null,
         description: String = "",
         eatable: Boolean = false,
         metaModifier: ((ItemMeta) -> Unit)? = null
@@ -230,6 +231,8 @@ object PRCItems {
 
     val FOOD_CAPSULE       = item("§f식량 캡슐" ,Material.GOLDEN_CARROT, 0)
 
+    val UNKNOWN_FLESH = item(material = Material.ROTTEN_FLESH, customModelData = null)
+
     val CHAINMAIL_HELMET     = item(material = Material.CHAINMAIL_HELMET, customModelData = 0)
     val CHAINMAIL_CHESTPLATE = item(material = Material.CHAINMAIL_CHESTPLATE, customModelData = 0)
     val CHAINMAIL_LEGGINGS   = item(material = Material.CHAINMAIL_LEGGINGS, customModelData = 0)
@@ -274,13 +277,13 @@ object PRCItems {
     //  기타 - 설치형 모듈
     // ═══════════════════════════════════════════
     /** 분쇄기 모듈 */
-    val GRINDER_MODULE         = item("§f분쇄기 모듈", Material.IRON_HORSE_ARMOR, 2)
+    val GRINDER_MODULE         = item("§f분쇄기 모듈", Material.IRON_HORSE_ARMOR, 2, metaModifier = ::hideAttribute)
     /** 프린트 모듈 */
-    val PRINTER_MODULE         = item("§f프린트 모듈", Material.IRON_HORSE_ARMOR, 3)
+    val PRINTER_MODULE         = item("§f프린트 모듈", Material.IRON_HORSE_ARMOR, 3, metaModifier = ::hideAttribute)
     /** 커피머신 모듈 */
-    val COFFEE_MACHINE_MODULE  = item("§f커피머신 모듈", Material.IRON_HORSE_ARMOR, 4)
+    val COFFEE_MACHINE_MODULE  = item("§f커피머신 모듈", Material.IRON_HORSE_ARMOR, 4, metaModifier = ::hideAttribute)
     /** 용광로 모듈 */
-    val FURNACE_MODULE         = item("§f용광로 모듈", Material.IRON_HORSE_ARMOR, 7)
+    val FURNACE_MODULE         = item("§f용광로 모듈", Material.IRON_HORSE_ARMOR, 7, metaModifier = ::hideAttribute)
 
     // ═══════════════════════════════════════════
     //  기타 - 업그레이드 / 부품
@@ -344,5 +347,14 @@ object PRCItems {
         val meta = item.itemMeta ?: return null
         if (!meta.hasCustomModelData()) return null
         return _registry.find { it.material == item.type && it.customModelData == meta.customModelData }
+    }
+
+    private fun hideAttribute(meta: ItemMeta) {
+        meta.addAttributeModifier(Attribute.ARMOR, AttributeModifier(
+            NamespacedKey(main, "hide_attribute"),
+            0.0,
+            AttributeModifier.Operation.ADD_NUMBER
+        ))
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
     }
 }

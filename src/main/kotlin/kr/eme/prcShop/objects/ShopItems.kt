@@ -139,6 +139,8 @@ object ShopItems {
         val CHAINMAIL_LEGGINGS   = s(PRCItems.CHAINMAIL_LEGGINGS, buy = 50, sell = -1, page = 1, slot = 20)
         val CHAINMAIL_BOOTS      = s(PRCItems.CHAINMAIL_BOOTS, buy = 50, sell = -1, page = 1, slot = 21)
 
+        val UNKNOWN_FLESH      = s(PRCItems.UNKNOWN_FLESH, buy = -1, sell = 1, page = 1, slot = 22)
+
         val IRON_HELMET     = s(PRCItems.IRON_HELMET, buy = 100, sell = -1, page = 1, slot = 27)
         val IRON_CHESTPLATE = s(PRCItems.IRON_CHESTPLATE, buy = 100, sell = -1, page = 1, slot = 28)
         val IRON_LEGGINGS   = s(PRCItems.IRON_LEGGINGS, buy = 100, sell = -1, page = 1, slot = 29)

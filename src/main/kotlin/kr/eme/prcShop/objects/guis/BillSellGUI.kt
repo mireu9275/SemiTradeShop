@@ -134,8 +134,8 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
                 val itemMeta = item.itemMeta
                 val clickedMeta = clickedItem.itemMeta
                 // CustomModelData 같은지 확인
-                val itemCMD = itemMeta?.customModelData ?: -1
-                val clickedCMD = clickedMeta?.customModelData ?: -1
+                val itemCMD = if (itemMeta != null && itemMeta.hasCustomModelData()) itemMeta.customModelData else null
+                val clickedCMD = if (clickedMeta != null && clickedMeta.hasCustomModelData()) clickedMeta.customModelData else null
                 // 디버깅 메시지 출력 (비교 값 확인)
 
                 if (itemCMD == clickedCMD) {
