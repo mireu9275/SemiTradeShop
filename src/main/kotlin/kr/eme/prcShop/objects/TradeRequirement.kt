@@ -6,8 +6,8 @@ import org.bukkit.Material
 data class TradeRequirement(
     val material: Material,
     val amount: Int,
-    val customModelData: Int = 0,  // 0이면 무시
-    val itemName: String
+    val customModelData: Int? = null,
+    val displayName: String? = null
 ) {
     /**
      * PRCItem을 기반으로 TradeRequirement를 생성하는 보조 생성자.
@@ -16,6 +16,6 @@ data class TradeRequirement(
         material = item.material,
         amount = amount,
         customModelData = item.customModelData,
-        itemName = item.displayName
+        displayName = item.displayName
     )
 }

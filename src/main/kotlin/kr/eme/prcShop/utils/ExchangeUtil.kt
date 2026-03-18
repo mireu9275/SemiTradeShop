@@ -60,6 +60,7 @@ object ExchangeUtil {
             amount = 1
             itemMeta = itemMeta?.apply {
                 setDisplayName(shopItem.name)
+                setItemName(shopItem.name)
                 shopItem.customModelData?.let { setCustomModelData(it) }
             }
         }
@@ -71,7 +72,7 @@ object ExchangeUtil {
 
     fun tryTrade(player: Player, shopName: String, page: Int, itemDisplayName: String): TradeResult {
         val shopItem = ShopItems.getShopItems(shopName, page)
-            .find { ItemStackUtil.cutColorCodes(it.name) == ItemStackUtil.cutColorCodes(itemDisplayName) }
+            .find { ItemStackUtil.cutColorCodes(it.name ?: return@find false) == ItemStackUtil.cutColorCodes(itemDisplayName) }
             ?: return TradeResult.NotTradeItem
 
         if (shopItem.tradeRequirements.isEmpty()) return TradeResult.NotTradeItem

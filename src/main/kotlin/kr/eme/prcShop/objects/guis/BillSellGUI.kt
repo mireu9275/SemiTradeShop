@@ -175,12 +175,12 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
         val soldItemNameClean = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
 
         val isMineralItem = ShopItems.getShopItems("MineralShop").any { shopItem ->
-            val shopItemNameClean = ItemStackUtil.cutColorCodes(shopItem.name)
+            val shopItemNameClean = shopItem.name?.let { ItemStackUtil.cutColorCodes(it) }
             shopItemNameClean == soldItemNameClean
         }
 
         val isFarmingShop = ShopItems.getShopItems("FarmingShop").any { shopItem ->
-            val shopItemNameClean = ItemStackUtil.cutColorCodes(shopItem.name)
+            val shopItemNameClean = shopItem.name?.let { ItemStackUtil.cutColorCodes(it) }
             shopItemNameClean == soldItemNameClean
         }
 

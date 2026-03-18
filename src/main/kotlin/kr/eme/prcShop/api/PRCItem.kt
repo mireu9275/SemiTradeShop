@@ -3,6 +3,7 @@ package kr.eme.prcShop.api
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import net.kyori.adventure.text.Component
+import org.bukkit.inventory.meta.ItemMeta
 
 /**
  * 커스텀 아이템 정의 클래스.
@@ -15,11 +16,12 @@ import net.kyori.adventure.text.Component
  * ```
  */
 class PRCItem internal constructor(
-    val displayName: String,
+    val displayName: String?,
     val material: Material,
-    val customModelData: Int,
+    val customModelData: Int = 0,
     val description: String = "",
-    val eatable: Boolean = false
+    val eatable: Boolean = false,
+    val metaModifier: ((ItemMeta) -> Unit)? = null
 ) {
     /**
      * 이 아이템 정의를 기반으로 ItemStack을 생성합니다.
@@ -28,11 +30,12 @@ class PRCItem internal constructor(
         val item = ItemStack(material, amount)
         val meta = item.itemMeta ?: return item
         meta.setDisplayName(displayName)
-        meta.itemName(Component.text(displayName))
+        meta.itemName(displayName?.let { Component.text(it) })
         meta.setCustomModelData(customModelData)
         if (description.isNotBlank()) {
             meta.lore = description.split(",").map { it.trim() }
         }
+        metaModifier?.invoke(meta)
         item.itemMeta = meta
         return item
     }
