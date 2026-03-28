@@ -36,7 +36,7 @@ java {
 tasks.jar {
     archiveFileName = "${project.name}-${project.version}.jar"
     // 네트워크 경로 지정 시 백슬래시(\)를 두 번씩 쓰거나, Raw String(""")을 사용해야 합니다.
-    destinationDirectory = file("C:\\Users\\mireu\\Desktop")
+//    destinationDirectory = file("C:\\Users\\mireu\\Desktop")
     manifest {
         attributes["Main-Class" ] = "kr.eme.prcShop.PRCShop"
     }

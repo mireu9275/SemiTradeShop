@@ -1,6 +1,15 @@
+@file:Suppress("UnstableApiUsage")
+
 package kr.eme.prcShop.api
 
+import kr.eme.prcShop.main
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.attribute.Attribute
+import org.bukkit.attribute.AttributeModifier
+import org.bukkit.inventory.EquipmentSlotGroup
+import org.bukkit.inventory.ItemFlag
+import org.bukkit.inventory.meta.ItemMeta
 
 /**
  * PRCShop 커스텀 아이템 레지스트리.
@@ -18,12 +27,13 @@ object PRCItems {
     private val _registry = mutableListOf<PRCItem>()
 
     private fun item(
-        displayName: String,
+        itemName: String? = null,
         material: Material,
         customModelData: Int,
         description: String = "",
-        eatable: Boolean = false
-    ): PRCItem = PRCItem(displayName, material, customModelData, description, eatable)
+        eatable: Boolean = false,
+        metaModifier: ((ItemMeta) -> Unit)? = null
+    ): PRCItem = PRCItem(itemName, material, customModelData, description, eatable, metaModifier)
         .also { _registry.add(it) }
 
     // ═══════════════════════════════════════════
@@ -112,97 +122,97 @@ object PRCItems {
     //  작물 - 씨앗
     // ═══════════════════════════════════════════
     /** 감자 씨앗 */
-    val POTATO_SEED    = item("§f감자 씨앗", Material.BLACK_DYE, 31, "§f봄 작물, §f수확일 3일")
+    val POTATO_SEED    = item("§f감자 씨앗", Material.BLACK_DYE, 31, "§f수확일 3일")
     /** 양배추 씨앗 */
-    val CABBAGE_SEED   = item("§f양배추 씨앗", Material.BLACK_DYE, 32, "§f봄 작물, §f수확일 7일")
+    val CABBAGE_SEED   = item("§f양배추 씨앗", Material.BLACK_DYE, 32, "§f수확일 7일")
     /** 오이 씨앗 */
-    val CUCUMBER_SEED  = item("§f오이 씨앗", Material.BLACK_DYE, 33, "§f봄 작물, §f수확일 5일")
+    val CUCUMBER_SEED  = item("§f오이 씨앗", Material.BLACK_DYE, 33, "§f수확일 5일")
     /** 커피콩 */
-    val COFFEE_BEAN_SEED = item("§f커피콩", Material.BLACK_DYE, 34, "§f봄/여름 작물, §f수확일 10일")
+    val COFFEE_BEAN_SEED = item("§f커피콩", Material.BLACK_DYE, 34, "§f수확일 10일")
     /** 토마토 씨앗 */
-    val TOMATO_SEED    = item("§f토마토 씨앗", Material.BLACK_DYE, 35, "§f여름 작물, §f수확일 3일")
+    val TOMATO_SEED    = item("§f토마토 씨앗", Material.BLACK_DYE, 35, "§f수확일 3일")
     /** 옥수수 씨앗 */
-    val CORN_SEED      = item("§f옥수수 씨앗", Material.BLACK_DYE, 36, "§f여름 작물, §f수확일 5일")
+    val CORN_SEED      = item("§f옥수수 씨앗", Material.BLACK_DYE, 36, "§f수확일 5일")
     /** 밀 씨앗 */
-    val WHEAT_SEED     = item("§f밀 씨앗", Material.BLACK_DYE, 37, "§f여름/가을 작물, §f수확일 9일")
+    val WHEAT_SEED     = item("§f밀 씨앗", Material.BLACK_DYE, 37, "§f수확일 9일")
     /** 크랜베리 씨앗 */
-    val CRANBERRY_SEED = item("§f크랜베리 씨앗", Material.BLACK_DYE, 38, "§f가을 작물, §f수확일 3일")
+    val CRANBERRY_SEED = item("§f크랜베리 씨앗", Material.BLACK_DYE, 38, "§f수확일 3일")
     /** 비트 씨앗 */
-    val BEET_SEED      = item("§f비트 씨앗", Material.BLACK_DYE, 39, "§f가을 작물, §f수확일 3일")
+    val BEET_SEED      = item("§f비트 씨앗", Material.BLACK_DYE, 39, "§f수확일 3일")
     /** 호박 씨앗 */
-    val PUMPKIN_SEED   = item("§f호박 씨앗", Material.BLACK_DYE, 40, "§f가을 작물, §f수확일 8일")
+    val PUMPKIN_SEED   = item("§f호박 씨앗", Material.BLACK_DYE, 40, "§f수확일 8일")
 
     // ═══════════════════════════════════════════
     //  작물 - 수확물 (은 등급 ★)
     // ═══════════════════════════════════════════
     /** 감자 (★) */
-    val POTATO_G1    = item("§f감자", Material.BLACK_DYE, 1, "§f봄 작물, §f수확일 3일", eatable = true)
+    val POTATO_G1    = item("§f감자", Material.BLACK_DYE, 1, "§f수확일 3일", eatable = true)
     /** 양배추 (★) */
-    val CABBAGE_G1   = item("§f양배추", Material.BLACK_DYE, 2, "§f봄 작물, §f수확일 7일", eatable = true)
+    val CABBAGE_G1   = item("§f양배추", Material.BLACK_DYE, 2, "§f수확일 7일", eatable = true)
     /** 오이 (★) */
-    val CUCUMBER_G1  = item("§f오이", Material.BLACK_DYE, 3, "§f봄 작물, §f수확일 5일", eatable = true)
+    val CUCUMBER_G1  = item("§f오이", Material.BLACK_DYE, 3, "§f수확일 5일", eatable = true)
     /** 커피콩 (★) */
-    val COFFEE_BEAN_G1 = item("§f커피콩", Material.BLACK_DYE, 4, "§f봄/여름 작물, §f수확일 10일", eatable = true)
+    val COFFEE_BEAN_G1 = item("§f커피콩", Material.BLACK_DYE, 4, "§f수확일 10일", eatable = true)
     /** 토마토 (★) */
-    val TOMATO_G1    = item("§f토마토", Material.BLACK_DYE, 5, "§f여름 작물, §f수확일 3일", eatable = true)
+    val TOMATO_G1    = item("§f토마토", Material.BLACK_DYE, 5, "§f수확일 3일", eatable = true)
     /** 옥수수 (★) */
-    val CORN_G1      = item("§f옥수수", Material.BLACK_DYE, 6, "§f여름 작물, §f수확일 5일", eatable = true)
+    val CORN_G1      = item("§f옥수수", Material.BLACK_DYE, 6, "§f수확일 5일", eatable = true)
     /** 밀 (★) */
-    val WHEAT_G1     = item("§f밀", Material.BLACK_DYE, 7, "§f여름/가을 작물, §f수확일 9일", eatable = true)
+    val WHEAT_G1     = item("§f밀", Material.BLACK_DYE, 7, "§f수확일 9일", eatable = true)
     /** 크랜베리 (★) */
-    val CRANBERRY_G1 = item("§f크랜베리", Material.BLACK_DYE, 8, "§f가을 작물, §f수확일 3일", eatable = true)
+    val CRANBERRY_G1 = item("§f크랜베리", Material.BLACK_DYE, 8, "§f수확일 3일", eatable = true)
     /** 비트 (★) */
-    val BEET_G1      = item("§f비트", Material.BLACK_DYE, 9, "§f가을 작물, §f수확일 3일", eatable = true)
+    val BEET_G1      = item("§f비트", Material.BLACK_DYE, 9, "§f수확일 3일", eatable = true)
     /** 호박 (★) */
-    val PUMPKIN_G1   = item("§f호박", Material.BLACK_DYE, 10, "§f가을 작물, §f수확일 8일", eatable = true)
+    val PUMPKIN_G1   = item("§f호박", Material.BLACK_DYE, 10, "§f수확일 8일", eatable = true)
 
     // ═══════════════════════════════════════════
     //  작물 - 수확물 (금 등급 ★★)
     // ═══════════════════════════════════════════
     /** 감자 (★★) */
-    val POTATO_G2    = item("§f감자", Material.BLACK_DYE, 11, "§f봄 작물, §f수확일 3일", eatable = true)
+    val POTATO_G2    = item("§f감자", Material.BLACK_DYE, 11, "§f수확일 3일", eatable = true)
     /** 양배추 (★★) */
-    val CABBAGE_G2   = item("§f양배추", Material.BLACK_DYE, 12, "§f봄 작물, §f수확일 7일", eatable = true)
+    val CABBAGE_G2   = item("§f양배추", Material.BLACK_DYE, 12, "§f수확일 7일", eatable = true)
     /** 오이 (★★) */
-    val CUCUMBER_G2  = item("§f오이", Material.BLACK_DYE, 13, "§f봄 작물, §f수확일 5일", eatable = true)
+    val CUCUMBER_G2  = item("§f오이", Material.BLACK_DYE, 13, "§f수확일 5일", eatable = true)
     /** 커피콩 (★★) */
-    val COFFEE_BEAN_G2 = item("§f커피콩", Material.BLACK_DYE, 14, "§f봄/여름 작물, §f수확일 10일", eatable = true)
+    val COFFEE_BEAN_G2 = item("§f커피콩", Material.BLACK_DYE, 14, "§f수확일 10일", eatable = true)
     /** 토마토 (★★) */
-    val TOMATO_G2    = item("§f토마토", Material.BLACK_DYE, 15, "§f여름 작물, §f수확일 3일", eatable = true)
+    val TOMATO_G2    = item("§f토마토", Material.BLACK_DYE, 15, "§f수확일 3일", eatable = true)
     /** 옥수수 (★★) */
-    val CORN_G2      = item("§f옥수수", Material.BLACK_DYE, 16, "§f여름 작물, §f수확일 5일", eatable = true)
+    val CORN_G2      = item("§f옥수수", Material.BLACK_DYE, 16, "§f수확일 5일", eatable = true)
     /** 밀 (★★) */
-    val WHEAT_G2     = item("§f밀", Material.BLACK_DYE, 17, "§f여름/가을 작물, §f수확일 9일", eatable = true)
+    val WHEAT_G2     = item("§f밀", Material.BLACK_DYE, 17, "§f수확일 9일", eatable = true)
     /** 크랜베리 (★★) */
-    val CRANBERRY_G2 = item("§f크랜베리", Material.BLACK_DYE, 18, "§f가을 작물, §f수확일 3일", eatable = true)
+    val CRANBERRY_G2 = item("§f크랜베리", Material.BLACK_DYE, 18, "§f수확일 3일", eatable = true)
     /** 비트 (★★) */
-    val BEET_G2      = item("§f비트", Material.BLACK_DYE, 19, "§f가을 작물, §f수확일 3일", eatable = true)
+    val BEET_G2      = item("§f비트", Material.BLACK_DYE, 19, "§f수확일 3일", eatable = true)
     /** 호박 (★★) */
-    val PUMPKIN_G2   = item("§f호박", Material.BLACK_DYE, 20, "§f가을 작물, §f수확일 8일", eatable = true)
+    val PUMPKIN_G2   = item("§f호박", Material.BLACK_DYE, 20, "§f수확일 8일", eatable = true)
 
     // ═══════════════════════════════════════════
     //  작물 - 수확물 (다이아 등급 ★★★)
     // ═══════════════════════════════════════════
     /** 감자 (★★★) */
-    val POTATO_G3    = item("§f감자", Material.BLACK_DYE, 21, "§f봄 작물, §f수확일 3일", eatable = true)
+    val POTATO_G3    = item("§f감자", Material.BLACK_DYE, 21, "§f수확일 3일", eatable = true)
     /** 양배추 (★★★) */
-    val CABBAGE_G3   = item("§f양배추", Material.BLACK_DYE, 22, "§f봄 작물, §f수확일 7일", eatable = true)
+    val CABBAGE_G3   = item("§f양배추", Material.BLACK_DYE, 22, "§f수확일 7일", eatable = true)
     /** 오이 (★★★) */
-    val CUCUMBER_G3  = item("§f오이", Material.BLACK_DYE, 23, "§f봄 작물, §f수확일 5일", eatable = true)
+    val CUCUMBER_G3  = item("§f오이", Material.BLACK_DYE, 23, "§f수확일 5일", eatable = true)
     /** 커피콩 (★★★) */
-    val COFFEE_BEAN_G3 = item("§f커피콩", Material.BLACK_DYE, 24, "§f봄/여름 작물, §f수확일 10일", eatable = true)
+    val COFFEE_BEAN_G3 = item("§f커피콩", Material.BLACK_DYE, 24, "§f수확일 10일", eatable = true)
     /** 토마토 (★★★) */
-    val TOMATO_G3    = item("§f토마토", Material.BLACK_DYE, 25, "§f여름 작물, §f수확일 3일", eatable = true)
+    val TOMATO_G3    = item("§f토마토", Material.BLACK_DYE, 25, "§f수확일 3일", eatable = true)
     /** 옥수수 (★★★) */
-    val CORN_G3      = item("§f옥수수", Material.BLACK_DYE, 26, "§f여름 작물, §f수확일 5일", eatable = true)
+    val CORN_G3      = item("§f옥수수", Material.BLACK_DYE, 26, "§f수확일 5일", eatable = true)
     /** 밀 (★★★) */
-    val WHEAT_G3     = item("§f밀", Material.BLACK_DYE, 27, "§f여름/가을 작물, §f수확일 9일", eatable = true)
+    val WHEAT_G3     = item("§f밀", Material.BLACK_DYE, 27, "§f수확일 9일", eatable = true)
     /** 크랜베리 (★★★) */
-    val CRANBERRY_G3 = item("§f크랜베리", Material.BLACK_DYE, 28, "§f가을 작물, §f수확일 3일", eatable = true)
+    val CRANBERRY_G3 = item("§f크랜베리", Material.BLACK_DYE, 28, "§f수확일 3일", eatable = true)
     /** 비트 (★★★) */
-    val BEET_G3      = item("§f비트", Material.BLACK_DYE, 29, "§f가을 작물, §f수확일 3일", eatable = true)
+    val BEET_G3      = item("§f비트", Material.BLACK_DYE, 29, "§f수확일 3일", eatable = true)
     /** 호박 (★★★) */
-    val PUMPKIN_G3   = item("§f호박", Material.BLACK_DYE, 30, "§f가을 작물, §f수확일 8일", eatable = true)
+    val PUMPKIN_G3   = item("§f호박", Material.BLACK_DYE, 30, "§f수확일 8일", eatable = true)
 
     // ═══════════════════════════════════════════
     //  기타 - 캡슐 / 도구
@@ -218,6 +228,28 @@ object PRCItems {
     val MUG                = item("§f머그잔", Material.BOWL, 1, "§fJava")
     /** 스패너 */
     val SPANNER            = item("§f스패너", Material.WOODEN_SHOVEL, 13)
+
+    val FOOD_CAPSULE       = item("§f식량 캡슐" ,Material.GOLDEN_CARROT, 0)
+
+//    val UNKNOWN_FLESH = item(material = Material.ROTTEN_FLESH, customModelData = null)
+
+    val CHAINMAIL_HELMET     = item(material = Material.CHAINMAIL_HELMET, customModelData = 0)
+    val CHAINMAIL_CHESTPLATE = item(material = Material.CHAINMAIL_CHESTPLATE, customModelData = 0)
+    val CHAINMAIL_LEGGINGS   = item(material = Material.CHAINMAIL_LEGGINGS, customModelData = 0)
+    val CHAINMAIL_BOOTS      = item(material = Material.CHAINMAIL_BOOTS, customModelData = 0)
+
+    val IRON_HELMET     = item(material = Material.IRON_HELMET, customModelData = 0)
+    val IRON_CHESTPLATE = item(material = Material.IRON_CHESTPLATE, customModelData = 0)
+    val IRON_LEGGINGS   = item(material = Material.IRON_LEGGINGS, customModelData = 0)
+    val IRON_BOOTS      = item(material = Material.IRON_BOOTS, customModelData = 0, metaModifier = { meta ->
+        val modifier = AttributeModifier(
+            NamespacedKey(main, "step_height"),
+            1.0,
+            AttributeModifier.Operation.ADD_NUMBER,
+            EquipmentSlotGroup.FEET
+        )
+        meta.addAttributeModifier(Attribute.STEP_HEIGHT, modifier)
+    })
 
     // ═══════════════════════════════════════════
     //  기타 - 빌드형 모듈
@@ -245,13 +277,13 @@ object PRCItems {
     //  기타 - 설치형 모듈
     // ═══════════════════════════════════════════
     /** 분쇄기 모듈 */
-    val GRINDER_MODULE         = item("§f분쇄기 모듈", Material.IRON_HORSE_ARMOR, 2)
+    val GRINDER_MODULE         = item("§f분쇄기 모듈", Material.IRON_HORSE_ARMOR, 2, metaModifier = ::hideAttribute)
     /** 프린트 모듈 */
-    val PRINTER_MODULE         = item("§f프린트 모듈", Material.IRON_HORSE_ARMOR, 3)
+    val PRINTER_MODULE         = item("§f프린트 모듈", Material.IRON_HORSE_ARMOR, 3, metaModifier = ::hideAttribute)
     /** 커피머신 모듈 */
-    val COFFEE_MACHINE_MODULE  = item("§f커피머신 모듈", Material.IRON_HORSE_ARMOR, 4)
+    val COFFEE_MACHINE_MODULE  = item("§f커피머신 모듈", Material.IRON_HORSE_ARMOR, 4, metaModifier = ::hideAttribute)
     /** 용광로 모듈 */
-    val FURNACE_MODULE         = item("§f용광로 모듈", Material.IRON_HORSE_ARMOR, 7)
+    val FURNACE_MODULE         = item("§f용광로 모듈", Material.IRON_HORSE_ARMOR, 7, metaModifier = ::hideAttribute)
 
     // ═══════════════════════════════════════════
     //  기타 - 업그레이드 / 부품
@@ -315,5 +347,14 @@ object PRCItems {
         val meta = item.itemMeta ?: return null
         if (!meta.hasCustomModelData()) return null
         return _registry.find { it.material == item.type && it.customModelData == meta.customModelData }
+    }
+
+    private fun hideAttribute(meta: ItemMeta) {
+        meta.addAttributeModifier(Attribute.ARMOR, AttributeModifier(
+            NamespacedKey(main, "hide_attribute"),
+            0.0,
+            AttributeModifier.Operation.ADD_NUMBER
+        ))
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
     }
 }

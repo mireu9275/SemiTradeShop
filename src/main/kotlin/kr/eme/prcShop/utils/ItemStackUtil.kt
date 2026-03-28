@@ -31,7 +31,7 @@ object ItemStackUtil {
                 if (shopItem.tradeRequirements.isNotEmpty()) {
                     add("§7[교환]")
                     for (req in shopItem.tradeRequirements) {
-                        add("${req.itemName} x${req.amount}")
+                        add("${req.displayName} x${req.amount}")
                     }
                     add("§8────────────────────") // ← 요게 구분선
                 } else {

@@ -4,7 +4,7 @@ import kr.eme.prcShop.api.PRCItem
 import org.bukkit.Material
 
 data class ShopItem(
-    val name: String,
+    val name: String? = null,
     val buyPrice: Int,
     val sellPrice: Int,
     val description: String,

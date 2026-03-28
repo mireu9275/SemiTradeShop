@@ -134,6 +134,8 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
                 val itemMeta = item.itemMeta
                 val clickedMeta = clickedItem.itemMeta
                 // CustomModelData 같은지 확인
+//                val itemCMD = if (itemMeta != null && itemMeta.hasCustomModelData()) itemMeta.customModelData else null
+//                val clickedCMD = if (clickedMeta != null && clickedMeta.hasCustomModelData()) clickedMeta.customModelData else null
                 val itemCMD = itemMeta?.customModelData ?: -1
                 val clickedCMD = clickedMeta?.customModelData ?: -1
                 // 디버깅 메시지 출력 (비교 값 확인)
@@ -175,12 +177,12 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
         val soldItemNameClean = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
 
         val isMineralItem = ShopItems.getShopItems("MineralShop").any { shopItem ->
-            val shopItemNameClean = ItemStackUtil.cutColorCodes(shopItem.name)
+            val shopItemNameClean = shopItem.name?.let { ItemStackUtil.cutColorCodes(it) }
             shopItemNameClean == soldItemNameClean
         }
 
         val isFarmingShop = ShopItems.getShopItems("FarmingShop").any { shopItem ->
-            val shopItemNameClean = ItemStackUtil.cutColorCodes(shopItem.name)
+            val shopItemNameClean = shopItem.name?.let { ItemStackUtil.cutColorCodes(it) }
             shopItemNameClean == soldItemNameClean
         }
 
