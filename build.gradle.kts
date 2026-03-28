@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "kr.eme.prcShop"
-version = "1.0.14"
+version = "1.0.15"
 
 repositories {
     mavenCentral()
@@ -35,17 +35,12 @@ java {
 
 tasks.jar {
     archiveFileName = "${project.name}-${project.version}.jar"
-    // 네트워크 경로 지정 시 백슬래시(\)를 두 번씩 쓰거나, Raw String(""")을 사용해야 합니다.
-    destinationDirectory = file("C:\\Users\\Home\\Desktop")
     manifest {
-        attributes["Main-Class" ] = "kr.eme.prcShop.PRCShop"
+        attributes["Main-Class"] = "kr.eme.prcShop.PRCShop"
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-        }
-    }
+tasks.register<Copy>("copyToDesktop") {
+    from(tasks.jar)
+    into(File(System.getProperty("user.home"), "Desktop"))
 }
