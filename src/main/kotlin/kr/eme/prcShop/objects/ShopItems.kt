@@ -80,40 +80,40 @@ object ShopItems {
         val PUMPKIN_SEED   = s(PRCItems.PUMPKIN_SEED, buy = 120, sell = 24, page = 1, slot = 22)
 
         // Page 2 - 은 등급 ★
-        val POTATO_G1    = s(PRCItems.POTATO_G1, buy = -1, sell = 10, page = 2, slot = 9)
-        val CABBAGE_G1   = s(PRCItems.CABBAGE_G1, buy = -1, sell = 150, page = 2, slot = 10)
-        val CUCUMBER_G1  = s(PRCItems.CUCUMBER_G1, buy = -1, sell = 25, page = 2, slot = 11)
-        val COFFEE_BEAN_G1 = s(PRCItems.COFFEE_BEAN_G1, buy = -1, sell = 10, page = 2, slot = 12)
-        val TOMATO_G1    = s(PRCItems.TOMATO_G1, buy = -1, sell = 15, page = 2, slot = 13)
-        val CORN_G1      = s(PRCItems.CORN_G1, buy = -1, sell = 30, page = 2, slot = 18)
-        val WHEAT_G1     = s(PRCItems.WHEAT_G1, buy = -1, sell = 60, page = 2, slot = 19)
-        val CRANBERRY_G1 = s(PRCItems.CRANBERRY_G1, buy = -1, sell = 10, page = 2, slot = 20)
-        val BEET_G1      = s(PRCItems.BEET_G1, buy = -1, sell = 100, page = 2, slot = 21)
-        val PUMPKIN_G1   = s(PRCItems.PUMPKIN_G1, buy = -1, sell = 200, page = 2, slot = 22)
+        val POTATO_G1    = s(PRCItems.POTATO_G1, buy = -1, sell = 10 * 3, page = 2, slot = 9)
+        val CABBAGE_G1   = s(PRCItems.CABBAGE_G1, buy = -1, sell = 150 * 3, page = 2, slot = 10)
+        val CUCUMBER_G1  = s(PRCItems.CUCUMBER_G1, buy = -1, sell = 25 * 3, page = 2, slot = 11)
+        val COFFEE_BEAN_G1 = s(PRCItems.COFFEE_BEAN_G1, buy = -1, sell = 10 * 3, page = 2, slot = 12)
+        val TOMATO_G1    = s(PRCItems.TOMATO_G1, buy = -1, sell = 15 * 3, page = 2, slot = 13)
+        val CORN_G1      = s(PRCItems.CORN_G1, buy = -1, sell = 30 * 3, page = 2, slot = 18)
+        val WHEAT_G1     = s(PRCItems.WHEAT_G1, buy = -1, sell = 60 * 3, page = 2, slot = 19)
+        val CRANBERRY_G1 = s(PRCItems.CRANBERRY_G1, buy = -1, sell = 10 * 3, page = 2, slot = 20)
+        val BEET_G1      = s(PRCItems.BEET_G1, buy = -1, sell = 100 * 3, page = 2, slot = 21)
+        val PUMPKIN_G1   = s(PRCItems.PUMPKIN_G1, buy = -1, sell = 200 * 3, page = 2, slot = 22)
 
         // Page 3 - 금 등급 ★★
-        val POTATO_G2    = s(PRCItems.POTATO_G2, buy = -1, sell = 11, page = 3, slot = 9)
-        val CABBAGE_G2   = s(PRCItems.CABBAGE_G2, buy = -1, sell = 165, page = 3, slot = 10)
-        val CUCUMBER_G2  = s(PRCItems.CUCUMBER_G2, buy = -1, sell = 28, page = 3, slot = 11)
-        val COFFEE_BEAN_G2 = s(PRCItems.COFFEE_BEAN_G2, buy = -1, sell = 11, page = 3, slot = 12)
-        val TOMATO_G2    = s(PRCItems.TOMATO_G2, buy = -1, sell = 17, page = 3, slot = 13)
-        val CORN_G2      = s(PRCItems.CORN_G2, buy = -1, sell = 33, page = 3, slot = 18)
-        val WHEAT_G2     = s(PRCItems.WHEAT_G2, buy = -1, sell = 66, page = 3, slot = 19)
-        val CRANBERRY_G2 = s(PRCItems.CRANBERRY_G2, buy = -1, sell = 11, page = 3, slot = 20)
-        val BEET_G2      = s(PRCItems.BEET_G2, buy = -1, sell = 110, page = 3, slot = 21)
-        val PUMPKIN_G2   = s(PRCItems.PUMPKIN_G2, buy = -1, sell = 220, page = 3, slot = 22)
+        val POTATO_G2    = s(PRCItems.POTATO_G2, buy = -1, sell = 11 * 3, page = 3, slot = 9)
+        val CABBAGE_G2   = s(PRCItems.CABBAGE_G2, buy = -1, sell = 165 * 3, page = 3, slot = 10)
+        val CUCUMBER_G2  = s(PRCItems.CUCUMBER_G2, buy = -1, sell = 28 * 3, page = 3, slot = 11)
+        val COFFEE_BEAN_G2 = s(PRCItems.COFFEE_BEAN_G2, buy = -1, sell = 11 * 3, page = 3, slot = 12)
+        val TOMATO_G2    = s(PRCItems.TOMATO_G2, buy = -1, sell = 17 * 3, page = 3, slot = 13)
+        val CORN_G2      = s(PRCItems.CORN_G2, buy = -1, sell = 33 * 3, page = 3, slot = 18)
+        val WHEAT_G2     = s(PRCItems.WHEAT_G2, buy = -1, sell = 66 * 3, page = 3, slot = 19)
+        val CRANBERRY_G2 = s(PRCItems.CRANBERRY_G2, buy = -1, sell = 11 * 3, page = 3, slot = 20)
+        val BEET_G2      = s(PRCItems.BEET_G2, buy = -1, sell = 110 * 3, page = 3, slot = 21)
+        val PUMPKIN_G2   = s(PRCItems.PUMPKIN_G2, buy = -1, sell = 220 * 3, page = 3, slot = 22)
 
         // Page 4 - 다이아 등급 ★★★
-        val POTATO_G3    = s(PRCItems.POTATO_G3, buy = -1, sell = 13, page = 4, slot = 9)
-        val CABBAGE_G3   = s(PRCItems.CABBAGE_G3, buy = -1, sell = 195, page = 4, slot = 10)
-        val CUCUMBER_G3  = s(PRCItems.CUCUMBER_G3, buy = -1, sell = 30, page = 4, slot = 11)
-        val COFFEE_BEAN_G3 = s(PRCItems.COFFEE_BEAN_G3, buy = -1, sell = 13, page = 4, slot = 12)
-        val TOMATO_G3    = s(PRCItems.TOMATO_G3, buy = -1, sell = 18, page = 4, slot = 13)
-        val CORN_G3      = s(PRCItems.CORN_G3, buy = -1, sell = 39, page = 4, slot = 18)
-        val WHEAT_G3     = s(PRCItems.WHEAT_G3, buy = -1, sell = 78, page = 4, slot = 19)
-        val CRANBERRY_G3 = s(PRCItems.CRANBERRY_G3, buy = -1, sell = 13, page = 4, slot = 20)
-        val BEET_G3      = s(PRCItems.BEET_G3, buy = -1, sell = 130, page = 4, slot = 21)
-        val PUMPKIN_G3   = s(PRCItems.PUMPKIN_G3, buy = -1, sell = 260, page = 4, slot = 22)
+        val POTATO_G3    = s(PRCItems.POTATO_G3, buy = -1, sell = 13 * 3, page = 4, slot = 9)
+        val CABBAGE_G3   = s(PRCItems.CABBAGE_G3, buy = -1, sell = 195 * 3, page = 4, slot = 10)
+        val CUCUMBER_G3  = s(PRCItems.CUCUMBER_G3, buy = -1, sell = 30 * 3, page = 4, slot = 11)
+        val COFFEE_BEAN_G3 = s(PRCItems.COFFEE_BEAN_G3, buy = -1, sell = 13 * 3, page = 4, slot = 12)
+        val TOMATO_G3    = s(PRCItems.TOMATO_G3, buy = -1, sell = 18 * 3, page = 4, slot = 13)
+        val CORN_G3      = s(PRCItems.CORN_G3, buy = -1, sell = 39 * 3, page = 4, slot = 18)
+        val WHEAT_G3     = s(PRCItems.WHEAT_G3, buy = -1, sell = 78 * 3, page = 4, slot = 19)
+        val CRANBERRY_G3 = s(PRCItems.CRANBERRY_G3, buy = -1, sell = 13 * 3, page = 4, slot = 20)
+        val BEET_G3      = s(PRCItems.BEET_G3, buy = -1, sell = 130 * 3, page = 4, slot = 21)
+        val PUMPKIN_G3   = s(PRCItems.PUMPKIN_G3, buy = -1, sell = 260 * 3, page = 4, slot = 22)
 
         val all: List<ShopItem> get() = _items.toList()
     }
@@ -128,9 +128,9 @@ object ShopItems {
             ShopItem(prcItem, buy, sell, page, slot, trade).also { _items.add(it) }
 
         // Page 1 - 도구
-        val NUTRITION_CAPSULE  = s(PRCItems.NUTRITION_CAPSULE, buy = 10, sell = 5, page = 1, slot = 9)
-        val GROWTH_CAPSULE     = s(PRCItems.GROWTH_CAPSULE, buy = 7, sell = 5, page = 1, slot = 10)
-        val HERBICIDE_CAPSULE  = s(PRCItems.HERBICIDE_CAPSULE, buy = 50, sell = 25, page = 1, slot = 11)
+        val NUTRITION_CAPSULE  = s(PRCItems.NUTRITION_CAPSULE, buy = 10 * 3, sell = 5, page = 1, slot = 9)
+        val GROWTH_CAPSULE     = s(PRCItems.GROWTH_CAPSULE, buy = 7 * 3, sell = 5, page = 1, slot = 10)
+        val HERBICIDE_CAPSULE  = s(PRCItems.HERBICIDE_CAPSULE, buy = 50 * 3, sell = 25, page = 1, slot = 11)
         val MUG                = s(PRCItems.MUG, buy = 5, sell = -1, page = 1, slot = 12)
         val FOOD_CAPSULE       = s(PRCItems.FOOD_CAPSULE, buy = 50, sell = -1, page = 1, slot = 13)
 
@@ -139,7 +139,7 @@ object ShopItems {
         val CHAINMAIL_LEGGINGS   = s(PRCItems.CHAINMAIL_LEGGINGS, buy = 50, sell = -1, page = 1, slot = 20)
         val CHAINMAIL_BOOTS      = s(PRCItems.CHAINMAIL_BOOTS, buy = 50, sell = -1, page = 1, slot = 21)
 
-        val UNKNOWN_FLESH      = s(PRCItems.UNKNOWN_FLESH, buy = -1, sell = 1, page = 1, slot = 22)
+//        val UNKNOWN_FLESH      = s(PRCItems.UNKNOWN_FLESH, buy = -1, sell = 1, page = 1, slot = 22)
 
         val IRON_HELMET     = s(PRCItems.IRON_HELMET, buy = 100, sell = -1, page = 1, slot = 27)
         val IRON_CHESTPLATE = s(PRCItems.IRON_CHESTPLATE, buy = 100, sell = -1, page = 1, slot = 28)
@@ -180,8 +180,8 @@ object ShopItems {
         val FURNACE_MODULE       = s(PRCItems.FURNACE_MODULE, buy = 1300, sell = -1, page = 3, slot = 13)
         val GRINDER_CAPACITY     = s(PRCItems.GRINDER_CAPACITY_UPGRADE, buy = -1, sell = -1, page = 3, slot = 18,
             trade = listOf(
-                TradeRequirement(PRCItems.IRON_INGOT, 30),
-                TradeRequirement(PRCItems.COPPER_INGOT, 20)))
+                TradeRequirement(PRCItems.IRON_INGOT, 15),
+                TradeRequirement(PRCItems.COPPER_INGOT, 10)))
         val ALLOY_GEAR           = s(PRCItems.ALLOY_GEAR_AL_CU, buy = -1, sell = -1, page = 3, slot = 19,
             trade = listOf(
                 TradeRequirement(PRCItems.AL_CU_ALLOY_INGOT, 25),
@@ -193,8 +193,8 @@ object ShopItems {
                 TradeRequirement(PRCItems.COPPER, 10)))
         val FURNACE_SLOT         = s(PRCItems.FURNACE_SLOT_UPGRADE, buy = -1, sell = -1, page = 3, slot = 21,
             trade = listOf(
-                TradeRequirement(PRCItems.IRON_INGOT, 10),
-                TradeRequirement(PRCItems.COPPER_INGOT, 10)))
+                TradeRequirement(PRCItems.IRON_INGOT, 5),
+                TradeRequirement(PRCItems.COPPER_INGOT, 5)))
         val ALLOY_MOLD           = s(PRCItems.ALLOY_COOLING_MOLD_CU_AU, buy = -1, sell = -1, page = 3, slot = 22,
             trade = listOf(TradeRequirement(PRCItems.CU_AU_ALLOY_INGOT, 20)))
         val ALLOY_TORCH          = s(PRCItems.ALLOY_TORCH_NI_FE, buy = -1, sell = -1, page = 3, slot = 27,

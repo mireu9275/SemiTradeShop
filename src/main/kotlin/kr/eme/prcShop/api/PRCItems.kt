@@ -29,7 +29,7 @@ object PRCItems {
     private fun item(
         itemName: String? = null,
         material: Material,
-        customModelData: Int? = null,
+        customModelData: Int,
         description: String = "",
         eatable: Boolean = false,
         metaModifier: ((ItemMeta) -> Unit)? = null
@@ -231,7 +231,7 @@ object PRCItems {
 
     val FOOD_CAPSULE       = item("§f식량 캡슐" ,Material.GOLDEN_CARROT, 0)
 
-    val UNKNOWN_FLESH = item(material = Material.ROTTEN_FLESH, customModelData = null)
+//    val UNKNOWN_FLESH = item(material = Material.ROTTEN_FLESH, customModelData = null)
 
     val CHAINMAIL_HELMET     = item(material = Material.CHAINMAIL_HELMET, customModelData = 0)
     val CHAINMAIL_CHESTPLATE = item(material = Material.CHAINMAIL_CHESTPLATE, customModelData = 0)

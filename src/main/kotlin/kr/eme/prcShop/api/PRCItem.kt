@@ -18,7 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta
 class PRCItem internal constructor(
     val displayName: String?,
     val material: Material,
-    val customModelData: Int? = null,
+    val customModelData: Int = 0,
     val description: String = "",
     val eatable: Boolean = false,
     val metaModifier: ((ItemMeta) -> Unit)? = null
@@ -31,7 +31,7 @@ class PRCItem internal constructor(
         val meta = item.itemMeta ?: return item
         meta.setDisplayName(displayName)
         meta.itemName(displayName?.let { Component.text(it) })
-        if (customModelData != null) meta.setCustomModelData(customModelData)
+        meta.setCustomModelData(customModelData)
         if (description.isNotBlank()) {
             meta.lore = description.split(",").map { it.trim() }
         }
@@ -46,12 +46,9 @@ class PRCItem internal constructor(
     fun matches(item: ItemStack?): Boolean {
         if (item == null) return false
         val meta = item.itemMeta ?: return false
-        if (item.type != material) return false
-        return if (customModelData != null) {
-            meta.hasCustomModelData() && meta.customModelData == customModelData
-        } else {
-            !meta.hasCustomModelData()
-        }
+        return item.type == material
+                && meta.hasCustomModelData()
+                && meta.customModelData == customModelData
     }
 
     override fun toString(): String = "PRCItem($displayName, $material, cmd=$customModelData)"
