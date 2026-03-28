@@ -106,9 +106,9 @@ object PRCItems {
     //  합금 주괴
     // ═══════════════════════════════════════════
     /** 합금 주괴 (Al-Cu) */
-    val AL_CU_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 28, "§fAl-Cu 합금 주괴")
+    val AL_CU_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 29, "§fAl-Cu 합금 주괴")
     /** 합금 주괴 (Al-Mg) */
-    val AL_MG_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 29, "§fAl-Mg 합금 주괴")
+    val AL_MG_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 28, "§fAl-Mg 합금 주괴")
     /** 합금 주괴 (Al-Li) */
     val AL_LI_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 30, "§fAl-Li 합금 주괴")
     /** 합금 주괴 (Cu-Au) */
@@ -232,6 +232,7 @@ object PRCItems {
     val FOOD_CAPSULE       = item("§f식량 캡슐" ,Material.GOLDEN_CARROT, 0)
 
 //    val UNKNOWN_FLESH = item(material = Material.ROTTEN_FLESH, customModelData = null)
+    val ROTTEN_FLESH         = item(material = Material.ROTTEN_FLESH, customModelData = 0)
 
     val CHAINMAIL_HELMET     = item(material = Material.CHAINMAIL_HELMET, customModelData = 0)
     val CHAINMAIL_CHESTPLATE = item(material = Material.CHAINMAIL_CHESTPLATE, customModelData = 0)
@@ -323,9 +324,9 @@ object PRCItems {
     /** 티타늄 주괴 레시피 */
     val RECIPE_TITANIUM_INGOT   = item("§f티타늄 주괴 레시피", Material.SADDLE, 31)
     /** Al-Cu 합금 레시피 */
-    val RECIPE_AL_CU_ALLOY      = item("§fAl-Cu 합금 레시피", Material.SADDLE, 32, "§f알루미늄 + 구리")
+    val RECIPE_AL_CU_ALLOY      = item("§fAl-Cu 합금 레시피", Material.SADDLE, 33, "§f알루미늄 + 구리")
     /** Al-Mg 합금 레시피 */
-    val RECIPE_AL_MG_ALLOY      = item("§fAl-Mg 합금 레시피", Material.SADDLE, 33, "§f알루미늄 + 마그네슘")
+    val RECIPE_AL_MG_ALLOY      = item("§fAl-Mg 합금 레시피", Material.SADDLE, 32, "§f알루미늄 + 마그네슘")
     /** Al-Li 합금 레시피 */
     val RECIPE_AL_LI_ALLOY      = item("§fAl-Li 합금 레시피", Material.SADDLE, 34, "§f알루미늄 + 리튬")
     /** Cu-Au 합금 레시피 */
