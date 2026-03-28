@@ -56,7 +56,13 @@ object ShopItemManager {
         }
 
         // 아이템 판매
-        player.inventory.removeItem(itemStack)
+        var remaining = quantity
+        while (remaining > 0) {
+            val removeAmount = minOf(remaining, 64)
+            val removeStack = item.toBukkitItemWithoutPrice().apply { amount = removeAmount }
+            player.inventory.removeItem(removeStack)
+            remaining -= removeAmount
+        }
         MoneyManager.addMoney(item.sellPrice * quantity)
         player.sendMessage("정상적으로 ${item.name}§f을/를 판매하였습니다. (판매금액: ${item.sellPrice * quantity} EP)")
 
