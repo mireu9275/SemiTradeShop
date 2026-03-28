@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "kr.eme.prcShop"
-version = "1.0.16"
+version = "1.1.0"
 
 repositories {
     mavenCentral()
@@ -43,4 +43,12 @@ tasks.jar {
 tasks.register<Copy>("copyToDesktop") {
     from(tasks.jar)
     into(File(System.getProperty("user.home"), "Desktop"))
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
 }
