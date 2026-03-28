@@ -191,6 +191,9 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
             Bukkit.getPluginManager().callEvent(
                 MissionEvent(player, MissionVersion.V1, "TRADE", "trade_crop_module", 1)
             )
+            Bukkit.getPluginManager().callEvent(
+                MissionEvent(player, MissionVersion.V2, "TRADE", "trade_crop_module", totalSellQty)
+            )
         }
 
         return true
