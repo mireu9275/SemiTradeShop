@@ -72,12 +72,13 @@ object ShopItemManager {
         player.sendMessage("§e[DEBUG] ShopItemManager - 상점 이름: $shopName")
 
         if (shopName == "MineralShop") {
-//            player.sendMessage("§e[DEBUG] MineralShop 조건 만족! 미션 이벤트 발생.")
             Bukkit.getPluginManager().callEvent(
                 MissionEvent(player, MissionVersion.V1, "TRADE", "trade_module", 1)
             )
-        } else {
-//            player.sendMessage("§e[DEBUG] MineralShop이 아님 ($shopName). 이벤트 패스.")
+        } else if (shopName == "CropShop") {
+            Bukkit.getPluginManager().callEvent(
+                MissionEvent(player, MissionVersion.V1, "TRADE", "trade_crop_module", 1)
+            )
         }
         // =========================================================================
 
