@@ -163,7 +163,7 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
                 remainingToRemove = 0
             } else {
                 remainingToRemove -= item.amount
-                playerInventory.remove(item)
+                item.amount = 0
             }
         }
 
@@ -186,9 +186,13 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
             shopItemNameClean == soldItemNameClean
         }
 
-        if (isMineralItem || isFarmingShop) {
+        if (isMineralItem) {
             Bukkit.getPluginManager().callEvent(
                 MissionEvent(player, MissionVersion.V1, "TRADE", "trade_module", 1)
+            )
+        } else if (isFarmingShop) {
+            Bukkit.getPluginManager().callEvent(
+                MissionEvent(player, MissionVersion.V1, "TRADE", "trade_crop_module", 1)
             )
         }
 
