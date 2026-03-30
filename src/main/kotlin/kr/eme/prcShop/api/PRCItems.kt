@@ -229,7 +229,7 @@ object PRCItems {
     /** 스패너 */
     val SPANNER            = item("§f스패너", Material.WOODEN_SHOVEL, 13)
 
-    val CHEQUE             = item("§f수표", Material.SADDLE, 38)
+    val CHEQUE             = item("§f토큰", Material.SADDLE, 38)
     val FOOD_CAPSULE       = item("§f식량 캡슐" ,Material.GOLDEN_CARROT, 0)
 
 //    val UNKNOWN_FLESH = item(material = Material.ROTTEN_FLESH, customModelData = null)
