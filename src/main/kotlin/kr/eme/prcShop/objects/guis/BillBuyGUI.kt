@@ -74,24 +74,24 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
                 totalBuyQty = maxOf(1, totalBuyQty - 1)
                 SoundUtil.click(player)
             }
-            "§f32개 빼기" -> {
-                totalBuyQty = maxOf(1, totalBuyQty - 32)
+            "§f5개 빼기" -> {
+                totalBuyQty = maxOf(1, totalBuyQty - 5)
                 SoundUtil.click(player)
             }
-            "§f64개 빼기" -> {
-                totalBuyQty = maxOf(1, totalBuyQty - 64)
+            "§f32개 빼기" -> {
+                totalBuyQty = maxOf(1, totalBuyQty - 32)
                 SoundUtil.click(player)
             }
             "§f1개 추가" -> {
                 totalBuyQty = minOf(99, totalBuyQty + 1)
                 SoundUtil.click(player)
             }
-            "§f32개 추가" -> {
-                totalBuyQty = minOf(99, totalBuyQty + 32)
+            "§f5개 추가" -> {
+                totalBuyQty = minOf(99, totalBuyQty + 5)
                 SoundUtil.click(player)
             }
-            "§f64개 추가" -> {
-                totalBuyQty = minOf(99, totalBuyQty + 64)
+            "§f32개 추가" -> {
+                totalBuyQty = minOf(99, totalBuyQty + 32)
                 SoundUtil.click(player)
             }
         }

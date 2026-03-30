@@ -231,12 +231,12 @@ object ShopItems {
         private fun g(name: String, slot: Int, cmd: Int) =
             ShopItem(name, 0, 0, "", org.bukkit.Material.BROWN_DYE, 1, slot, cmd).also { _items.add(it) }
 
-        val SUB_64   = g("§f64개 빼기", 19, 16)
-        val SUB_32   = g("§f32개 빼기", 20, 15)
+        val SUB_32   = g("§f32개 빼기", 19, 16)
+        val SUB_5    = g("§f5개 빼기", 20, 15)
         val SUB_1    = g("§f1개 빼기", 21, 14)
         val ADD_1    = g("§f1개 추가", 23, 17)
-        val ADD_32   = g("§f32개 추가", 24, 18)
-        val ADD_64   = g("§f64개 추가", 25, 19)
+        val ADD_5    = g("§f5개 추가", 24, 18)
+        val ADD_32   = g("§f32개 추가", 25, 19)
         val QTY_1    = g("§f현재 선택 수량: 1 개", 36, 10)
         val QTY_2    = g("§f현재 선택 수량: 1 개", 37, 11)
         val PRICE_1  = g("§f총 구매가: 100 EP", 38, 12)
@@ -252,12 +252,12 @@ object ShopItems {
         private fun g(name: String, slot: Int, cmd: Int) =
             ShopItem(name, 0, 0, "", org.bukkit.Material.BROWN_DYE, 1, slot, cmd).also { _items.add(it) }
 
-        val SUB_64   = g("§f64개 빼기", 19, 16)
-        val SUB_32   = g("§f32개 빼기", 20, 15)
+        val SUB_32   = g("§f32개 빼기", 19, 16)
+        val SUB_5    = g("§f5개 빼기", 20, 15)
         val SUB_1    = g("§f1개 빼기", 21, 14)
         val ADD_1    = g("§f1개 추가", 23, 17)
-        val ADD_32   = g("§f32개 추가", 24, 18)
-        val ADD_64   = g("§f64개 추가", 25, 19)
+        val ADD_5    = g("§f5개 추가", 24, 18)
+        val ADD_32   = g("§f32개 추가", 25, 19)
         val QTY_1    = g("§f현재 선택 수량: 1 개", 36, 10)
         val QTY_2    = g("§f현재 선택 수량: 1 개", 37, 11)
         val PRICE_1  = g("§f총 판매가: 100 EP", 38, 12)
