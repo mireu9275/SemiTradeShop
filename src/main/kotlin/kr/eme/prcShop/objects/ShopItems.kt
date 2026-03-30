@@ -49,12 +49,12 @@ object ShopItems {
         val PLATINUM_INGOT       = s(PRCItems.PLATINUM_INGOT, buy = -1, sell = 1500, page = 3, slot = 19)
         val NICKEL_INGOT         = s(PRCItems.NICKEL_INGOT, buy = -1, sell = 1500, page = 3, slot = 20)
         val TITANIUM_INGOT       = s(PRCItems.TITANIUM_INGOT, buy = -1, sell = 2250, page = 3, slot = 21)
-        val AL_MG_ALLOY_INGOT    = s(PRCItems.AL_MG_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 22)
-        val AL_CU_ALLOY_INGOT    = s(PRCItems.AL_CU_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 27)
-        val AL_LI_ALLOY_INGOT    = s(PRCItems.AL_LI_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 28)
-        val CU_AU_ALLOY_INGOT    = s(PRCItems.CU_AU_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 29)
-        val NI_FE_ALLOY_INGOT    = s(PRCItems.NI_FE_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 30)
-        val TI_PT_AU_ALLOY_INGOT = s(PRCItems.TI_PT_AU_ALLOY_INGOT, buy = -1, sell = -1, page = 3, slot = 31)
+        val AL_MG_ALLOY_INGOT    = s(PRCItems.AL_MG_ALLOY_INGOT, buy = -1, sell = 435, page = 3, slot = 22)
+        val AL_CU_ALLOY_INGOT    = s(PRCItems.AL_CU_ALLOY_INGOT, buy = -1, sell = 780, page = 3, slot = 27)
+        val AL_LI_ALLOY_INGOT    = s(PRCItems.AL_LI_ALLOY_INGOT, buy = -1, sell = 1380, page = 3, slot = 28)
+        val CU_AU_ALLOY_INGOT    = s(PRCItems.CU_AU_ALLOY_INGOT, buy = -1, sell = 2400, page = 3, slot = 29)
+        val NI_FE_ALLOY_INGOT    = s(PRCItems.NI_FE_ALLOY_INGOT, buy = -1, sell = 2700, page = 3, slot = 30)
+        val TI_PT_AU_ALLOY_INGOT = s(PRCItems.TI_PT_AU_ALLOY_INGOT, buy = -1, sell = 10000, page = 3, slot = 31)
 
         val all: List<ShopItem> get() = _items.toList()
     }
