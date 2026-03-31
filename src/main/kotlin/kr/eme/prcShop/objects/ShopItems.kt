@@ -124,8 +124,8 @@ object ShopItems {
     object Other {
         private val _items = mutableListOf<ShopItem>()
         private fun s(prcItem: kr.eme.prcShop.api.PRCItem, buy: Int, sell: Int, page: Int, slot: Int,
-                      trade: List<TradeRequirement> = emptyList()) =
-            ShopItem(prcItem, buy, sell, page, slot, trade).also { _items.add(it) }
+                      trade: List<TradeRequirement> = emptyList(), label: String? = null) =
+            ShopItem(prcItem, buy, sell, page, slot, trade).copy(label = label).also { _items.add(it) }
 
         // Page 1 - 도구
         val NUTRITION_CAPSULE  = s(PRCItems.NUTRITION_CAPSULE, buy = 10 * 3, sell = 5, page = 1, slot = 9)
@@ -134,17 +134,17 @@ object ShopItems {
         val MUG                = s(PRCItems.MUG, buy = 5, sell = -1, page = 1, slot = 12)
         val FOOD_CAPSULE       = s(PRCItems.FOOD_CAPSULE, buy = 50, sell = -1, page = 1, slot = 13)
 
-        val CHAINMAIL_HELMET     = s(PRCItems.CHAINMAIL_HELMET, buy = 50, sell = -1, page = 1, slot = 18)
-        val CHAINMAIL_CHESTPLATE = s(PRCItems.CHAINMAIL_CHESTPLATE, buy = 50, sell = -1, page = 1, slot = 19)
-        val CHAINMAIL_LEGGINGS   = s(PRCItems.CHAINMAIL_LEGGINGS, buy = 50, sell = -1, page = 1, slot = 20)
-        val CHAINMAIL_BOOTS      = s(PRCItems.CHAINMAIL_BOOTS, buy = 50, sell = -1, page = 1, slot = 21)
+        val CHAINMAIL_HELMET     = s(PRCItems.CHAINMAIL_HELMET, buy = 50, sell = -1, page = 1, slot = 18, label = "폴리머 우주복")
+        val CHAINMAIL_CHESTPLATE = s(PRCItems.CHAINMAIL_CHESTPLATE, buy = 50, sell = -1, page = 1, slot = 19, label = "폴리머 우주복")
+        val CHAINMAIL_LEGGINGS   = s(PRCItems.CHAINMAIL_LEGGINGS, buy = 50, sell = -1, page = 1, slot = 20, label = "폴리머 우주복")
+        val CHAINMAIL_BOOTS      = s(PRCItems.CHAINMAIL_BOOTS, buy = 50, sell = -1, page = 1, slot = 21, label = "폴리머 우주복")
 
-        val ROTTEN_FLESH    = s(PRCItems.ROTTEN_FLESH, buy = -1, sell = 1, page = 1, slot = 22)
+        val ROTTEN_FLESH    = s(PRCItems.ROTTEN_FLESH, buy = -1, sell = 1, page = 1, slot = 22, label = "알 수 없는 살점")
 
-        val IRON_HELMET     = s(PRCItems.IRON_HELMET, buy = 100, sell = -1, page = 1, slot = 27)
-        val IRON_CHESTPLATE = s(PRCItems.IRON_CHESTPLATE, buy = 100, sell = -1, page = 1, slot = 28)
-        val IRON_LEGGINGS   = s(PRCItems.IRON_LEGGINGS, buy = 100, sell = -1, page = 1, slot = 29)
-        val IRON_BOOTS      = s(PRCItems.IRON_BOOTS, buy = 100, sell = -1, page = 1, slot = 30)
+        val IRON_HELMET     = s(PRCItems.IRON_HELMET, buy = 100, sell = -1, page = 1, slot = 27, label = "합금 섬유 우주복")
+        val IRON_CHESTPLATE = s(PRCItems.IRON_CHESTPLATE, buy = 100, sell = -1, page = 1, slot = 28, label = "합금 섬유 우주복")
+        val IRON_LEGGINGS   = s(PRCItems.IRON_LEGGINGS, buy = 100, sell = -1, page = 1, slot = 29, label = "합금 섬유 우주복")
+        val IRON_BOOTS      = s(PRCItems.IRON_BOOTS, buy = 200, sell = -1, page = 1, slot = 30, label = "합금 섬유 우주복")
 
 
         // Page 2 - 빌드형 모듈

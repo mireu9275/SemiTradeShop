@@ -84,7 +84,8 @@ class FarmingShopPage4GUI(player: Player) : GUI(player, "§f\\u340F\\u3418" ,6){
                 SoundUtil.error(player)
                 return
             }
-            val sellGUI = BillSellGUI(player, clickedItem.clone(), this@FarmingShopPage4GUI)
+            val shopItem = ShopItems.getShopItems("FarmingShop", 4).find { it.slot == slot }
+            val sellGUI = BillSellGUI(player, clickedItem.clone(), this@FarmingShopPage4GUI, shopItem)
             sellGUI.setFirstGUI()
             GUIManager.setGUI(player.uniqueId, sellGUI)
             sellGUI.open()

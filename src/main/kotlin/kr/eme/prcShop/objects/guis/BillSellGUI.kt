@@ -4,6 +4,7 @@ import kr.eme.prcMission.api.events.MissionEvent
 import kr.eme.prcMission.enums.MissionVersion
 import kr.eme.prcMoney.managers.MoneyManager
 import kr.eme.prcShop.managers.GUIManager
+import kr.eme.prcShop.objects.ShopItem
 import kr.eme.prcShop.objects.ShopItems
 import kr.eme.prcShop.utils.ItemStackUtil
 import kr.eme.prcShop.utils.SoundUtil
@@ -14,7 +15,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.inventory.InventoryDragEvent
 import org.bukkit.inventory.ItemStack
 
-class BillSellGUI(player: Player, private val clickedItem: ItemStack, private val returnPage: GUI) : GUI(player, "§f\\u340F\\u3423", 6) {
+class BillSellGUI(player: Player, private val clickedItem: ItemStack, private val returnPage: GUI, private val shopItem: ShopItem? = null) : GUI(player, "§f\\u340F\\u3423", 6) {
 
     private var totalSellQty = 1 // 초기 구매 수량 1
     private var itemPrice = 0 // 아이템 개당 가격
@@ -166,12 +167,12 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
 
         // 돈 지급
         val totalEarnings = sellPrice * totalSellQty
-        MoneyManager.addMoney(totalEarnings, "SHOP_SELL:${ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")}", player.name)
-        val itemName = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")
+        val itemName = shopItem?.label ?: ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")
+        MoneyManager.addMoney(totalEarnings, "SHOP_SELL:$itemName", player.name)
         player.sendMessage("§a${itemName}을(를) $totalSellQty 개 판매하여 $totalEarnings EP를 획득하였습니다.")
         SoundUtil.click(player)
 
-        val soldItemNameClean = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
+        val soldItemNameClean = shopItem?.label ?: ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
 
         val isMineralItem = ShopItems.getShopItems("MineralShop").any { shopItem ->
             val shopItemNameClean = shopItem.name?.let { ItemStackUtil.cutColorCodes(it) }

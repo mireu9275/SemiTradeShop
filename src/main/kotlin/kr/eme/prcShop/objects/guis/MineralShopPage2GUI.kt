@@ -94,7 +94,8 @@ class MineralShopPage2GUI(player: Player) : GUI(player, "§f\\u340F\\u3413", 6) 
                 SoundUtil.error(player)
                 return
             }
-            val sellGUI = BillSellGUI(player, clickedItem.clone(), this@MineralShopPage2GUI)
+            val shopItem = ShopItems.getShopItems("MineralShop", 2).find { it.slot == slot }
+            val sellGUI = BillSellGUI(player, clickedItem.clone(), this@MineralShopPage2GUI, shopItem)
             sellGUI.setFirstGUI()
             GUIManager.setGUI(player.uniqueId, sellGUI)
             sellGUI.open()

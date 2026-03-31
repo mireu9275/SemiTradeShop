@@ -13,7 +13,8 @@ data class ShopItem(
     val slot: Int,
     val customModelData: Int? = null,
     val tradeRequirements: List<TradeRequirement> = emptyList(),
-    val prcItem: PRCItem? = null
+    val prcItem: PRCItem? = null,
+    val label: String? = null
 ) {
     /**
      * PRCItem을 기반으로 ShopItem을 생성하는 보조 생성자.

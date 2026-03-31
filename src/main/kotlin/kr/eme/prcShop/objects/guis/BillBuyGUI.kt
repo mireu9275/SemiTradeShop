@@ -167,11 +167,11 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
             SoundUtil.error(player)
             return false
         }
-        val itemName = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")
+        val itemName = shopItem?.label ?: ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "아이템")
         player.sendMessage("§a${itemName}을(를) $successQty 개 구매했습니다. (총 비용: ${buyPrice - (failedQty * (buyPrice / totalBuyQty))} EP)")
         SoundUtil.click(player)
 
-        val buyItemNameClean = ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
+        val buyItemNameClean = shopItem?.label ?: ItemStackUtil.cutColorCodes(clickedItem.itemMeta?.displayName ?: "")
 
         when (buyItemNameClean) {
             "커피머신 모듈" -> {
