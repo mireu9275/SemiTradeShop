@@ -132,7 +132,7 @@ object ShopItems {
         val GROWTH_CAPSULE     = s(PRCItems.GROWTH_CAPSULE, buy = 7 * 3, sell = 5, page = 1, slot = 10)
         val HERBICIDE_CAPSULE  = s(PRCItems.HERBICIDE_CAPSULE, buy = 50 * 3, sell = 25, page = 1, slot = 11)
         val MUG                = s(PRCItems.MUG, buy = 5, sell = -1, page = 1, slot = 12)
-        val FOOD_CAPSULE       = s(PRCItems.FOOD_CAPSULE, buy = 50, sell = -1, page = 1, slot = 13)
+        val FOOD_CAPSULE       = s(PRCItems.FOOD_CAPSULE, buy = 35, sell = -1, page = 1, slot = 13)
 
         val CHAINMAIL_HELMET     = s(PRCItems.CHAINMAIL_HELMET, buy = 50, sell = -1, page = 1, slot = 18, label = "폴리머 우주복")
         val CHAINMAIL_CHESTPLATE = s(PRCItems.CHAINMAIL_CHESTPLATE, buy = 50, sell = -1, page = 1, slot = 19, label = "폴리머 우주복")
