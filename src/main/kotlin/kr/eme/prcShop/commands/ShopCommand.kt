@@ -7,6 +7,7 @@ import kr.eme.prcMission.objects.const.MissionTypes
 import kr.eme.prcShop.managers.GUIManager
 import kr.eme.prcShop.managers.ShopGUIManager
 import kr.eme.prcShop.managers.ShopManager
+import kr.eme.prcShop.objects.guis.AdminItemGUI
 import kr.eme.prcShop.objects.guis.InitShopGUI
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -50,6 +51,19 @@ object ShopCommand : TabExecutor {
             initShopGUI.setFirstGUI()
             GUIManager.setGUI(player.uniqueId, initShopGUI)
             initShopGUI.open()
+            return true
+        }
+
+        // ✅ 관리자 아이템 GUI
+        if (args[0].equals("admin", ignoreCase = true)) {
+            if (!player.isOp) {
+                player.sendMessage("§c권한이 없습니다.")
+                return true
+            }
+            val adminGui = AdminItemGUI(player)
+            adminGui.setFirstGUI()
+            GUIManager.setGUI(player.uniqueId, adminGui)
+            adminGui.open()
             return true
         }
 
@@ -108,7 +122,7 @@ object ShopCommand : TabExecutor {
         if (sender !is Player || !sender.isOp) return mutableListOf()
 
         if (args.size == 1) {
-            return listOf("debug").filter { it.startsWith(args[0], ignoreCase = true) }.toMutableList()
+            return listOf("debug", "admin").filter { it.startsWith(args[0], ignoreCase = true) }.toMutableList()
         }
 
         if (args[0].equals("debug", ignoreCase = true)) {

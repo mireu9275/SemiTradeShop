@@ -3,12 +3,18 @@
 package kr.eme.prcShop.api
 
 import kr.eme.prcShop.main
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.inventory.EquipmentSlotGroup
 import org.bukkit.inventory.ItemFlag
+import org.bukkit.inventory.meta.CompassMeta
 import org.bukkit.inventory.meta.ItemMeta
 
 /**
@@ -35,6 +41,22 @@ object PRCItems {
         metaModifier: ((ItemMeta) -> Unit)? = null
     ): PRCItem = PRCItem(itemName, material, customModelData, description, eatable, metaModifier)
         .also { _registry.add(it) }
+
+    private fun compass(customModelData: Int, x: Int, y: Int, z: Int): PRCItem =
+        item(null, Material.COMPASS, customModelData, metaModifier = { meta ->
+            meta.displayName(
+                Component.text("신호 추적 레이더")
+                    .color(TextColor.color(0xCFFF70))
+                    .decoration(TextDecoration.ITALIC, false)
+            )
+            if (meta is CompassMeta) {
+                val world = Bukkit.getWorld("world") ?: Bukkit.getWorlds().firstOrNull()
+                if (world != null) {
+                    meta.lodestone = Location(world, x + 0.5, y.toDouble(), z + 0.5)
+                    meta.isLodestoneTracked = false
+                }
+            }
+        })
 
     // ═══════════════════════════════════════════
     //  광물 - 원석
@@ -339,8 +361,25 @@ object PRCItems {
     val RECIPE_TI_PT_AU_ALLOY   = item("§fTi-Pt-Au 합금 레시피", Material.SADDLE, 37, "§f티타늄 + 백금 + 금")
 
     // ═══════════════════════════════════════════
+    //  기타 - 로드스톤 나침반
+    // ═══════════════════════════════════════════
+    /** 신호 추적 레이더 1 */
+    val COMPASS_1 = compass(1, 485, -20, 862)
+    /** 신호 추적 레이더 2 */
+    val COMPASS_2 = compass(2, 128,  89, 816)
+    /** 신호 추적 레이더 3 */
+    val COMPASS_3 = compass(3, 650,  -1, 256)
+    /** 신호 추적 레이더 4 */
+    val COMPASS_4 = compass(4, 232, 141, 494)
+
+    // ═══════════════════════════════════════════
     //  유틸리티 메서드
     // ═══════════════════════════════════════════
+
+    /**
+     * 등록된 모든 PRCItem 의 읽기 전용 목록.
+     */
+    val all: List<PRCItem> get() = _registry.toList()
 
     /**
      * ItemStack에서 매칭되는 PRCItem을 역추적합니다.
