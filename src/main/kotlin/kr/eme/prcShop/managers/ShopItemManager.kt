@@ -69,7 +69,7 @@ object ShopItemManager {
         // =========================================================================
         // [DEBUG & 코드 시작]
         // =========================================================================
-        player.sendMessage("§e[DEBUG] ShopItemManager - 상점 이름: $shopName")
+        //player.sendMessage("§e[DEBUG] ShopItemManager - 상점 이름: $shopName")
 
         if (shopName == "MineralShop") {
             Bukkit.getPluginManager().callEvent(
