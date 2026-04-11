@@ -144,7 +144,7 @@ object ShopItems {
         val IRON_HELMET     = s(PRCItems.IRON_HELMET, buy = 100, sell = -1, page = 1, slot = 27, label = "합금 섬유 우주복")
         val IRON_CHESTPLATE = s(PRCItems.IRON_CHESTPLATE, buy = 100, sell = -1, page = 1, slot = 28, label = "합금 섬유 우주복")
         val IRON_LEGGINGS   = s(PRCItems.IRON_LEGGINGS, buy = 100, sell = -1, page = 1, slot = 29, label = "합금 섬유 우주복")
-        val IRON_BOOTS      = s(PRCItems.IRON_BOOTS, buy = 200, sell = -1, page = 1, slot = 30, label = "합금 섬유 우주복")
+        val IRON_BOOTS      = s(PRCItems.IRON_BOOTS, buy = 220, sell = -1, page = 1, slot = 30, label = "합금 섬유 우주복")
 
 
         // Page 2 - 빌드형 모듈
@@ -184,24 +184,26 @@ object ShopItems {
                 TradeRequirement(PRCItems.COPPER_INGOT, 10)))
         val ALLOY_GEAR           = s(PRCItems.ALLOY_GEAR_AL_CU, buy = -1, sell = -1, page = 3, slot = 19,
             trade = listOf(
-                TradeRequirement(PRCItems.AL_CU_ALLOY_INGOT, 25),
-                TradeRequirement(PRCItems.LITHIUM_INGOT, 10)))
+                TradeRequirement(PRCItems.AL_CU_ALLOY_INGOT, 5),
+                TradeRequirement(PRCItems.LITHIUM_INGOT, 7)))
         val ALLOY_DRILL          = s(PRCItems.ALLOY_DRILL_TI_PT_AU, buy = -1, sell = -1, page = 3, slot = 20,
             trade = listOf(
                 TradeRequirement(PRCItems.TI_PT_AU_ALLOY_INGOT, 15),
-                TradeRequirement(PRCItems.IRON, 10),
-                TradeRequirement(PRCItems.COPPER, 10)))
+                TradeRequirement(PRCItems.PLATINUM_INGOT, 5),
+                TradeRequirement(PRCItems.NICKEL_INGOT, 5)))
         val FURNACE_SLOT         = s(PRCItems.FURNACE_SLOT_UPGRADE, buy = -1, sell = -1, page = 3, slot = 21,
             trade = listOf(
-                TradeRequirement(PRCItems.IRON_INGOT, 5),
-                TradeRequirement(PRCItems.COPPER_INGOT, 5)))
+                TradeRequirement(PRCItems.IRON_INGOT, 10),
+                TradeRequirement(PRCItems.COPPER_INGOT, 10)))
         val ALLOY_MOLD           = s(PRCItems.ALLOY_COOLING_MOLD_CU_AU, buy = -1, sell = -1, page = 3, slot = 22,
-            trade = listOf(TradeRequirement(PRCItems.CU_AU_ALLOY_INGOT, 20)))
+            trade = listOf(
+                TradeRequirement(PRCItems.CU_AU_ALLOY_INGOT, 10),
+                TradeRequirement(PRCItems.PLATINUM_INGOT, 5)))
         val ALLOY_TORCH          = s(PRCItems.ALLOY_TORCH_NI_FE, buy = -1, sell = -1, page = 3, slot = 27,
             trade = listOf(
                 TradeRequirement(PRCItems.NI_FE_ALLOY_INGOT, 10),
                 TradeRequirement(PRCItems.NICKEL_INGOT, 10),
-                TradeRequirement(PRCItems.TITANIUM_INGOT, 10)))
+                TradeRequirement(PRCItems.TITANIUM_INGOT, 5)))
 
         // Page 4 - 레시피
         val RECIPE_MAGNESIUM = s(PRCItems.RECIPE_MAGNESIUM_INGOT, buy = 100, sell = -1, page = 4, slot = 9)

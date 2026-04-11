@@ -24,28 +24,34 @@ object ItemStackUtil {
         return item
     }
     fun createSlotItem(gui: GUI, shopItem: ShopItem) {
-        gui.setItem(shopItem.slot, build(shopItem.material) { meta ->
-            meta.setDisplayName(shopItem.name)
+        val item = if (shopItem.prcItem != null) {
+            shopItem.prcItem.create(1)
+        } else {
+            ItemStack(shopItem.material)
+        }
+        val meta = item.itemMeta ?: return
+        meta.setDisplayName(shopItem.name)
 
-            meta.lore = buildList {
-                if (shopItem.tradeRequirements.isNotEmpty()) {
-                    add("§7[교환]")
-                    for (req in shopItem.tradeRequirements) {
-                        add("${req.displayName} x${req.amount}")
-                    }
-                    add("§8────────────────────") // ← 요게 구분선
-                } else {
-                    add(if (shopItem.buyPrice > 0) "§6구매가: ${shopItem.buyPrice} EP" else "§c구매 불가")
-                    add(if (shopItem.sellPrice > 0) "§3판매가: ${shopItem.sellPrice} EP" else "§c판매 불가")
+        meta.lore = buildList {
+            if (shopItem.tradeRequirements.isNotEmpty()) {
+                add("§7[교환]")
+                for (req in shopItem.tradeRequirements) {
+                    add("${req.displayName} x${req.amount}")
                 }
-
-                if (shopItem.description.isNotBlank()) {
-                    shopItem.description.split(",").forEach { add(it.trim()) }
-                }
+                add("§8────────────────────")
+            } else {
+                add(if (shopItem.buyPrice > 0) "§6구매가: ${shopItem.buyPrice} EP" else "§c구매 불가")
+                add(if (shopItem.sellPrice > 0) "§3판매가: ${shopItem.sellPrice} EP" else "§c판매 불가")
             }
 
-            shopItem.customModelData?.let { meta.setCustomModelData(it) }
-        })
+            if (shopItem.description.isNotBlank()) {
+                shopItem.description.split(",").forEach { add(it.trim()) }
+            }
+        }
+
+        shopItem.customModelData?.let { meta.setCustomModelData(it) }
+        item.itemMeta = meta
+        gui.setItem(shopItem.slot, item)
     }
 
     fun createSlotItemBuyOrSell(gui: GUI, shopItem: ShopItem) {

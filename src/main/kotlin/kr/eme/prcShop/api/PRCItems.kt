@@ -266,14 +266,19 @@ object PRCItems {
     val IRON_HELMET     = item(material = Material.IRON_HELMET, customModelData = 0)
     val IRON_CHESTPLATE = item(material = Material.IRON_CHESTPLATE, customModelData = 0)
     val IRON_LEGGINGS   = item(material = Material.IRON_LEGGINGS, customModelData = 0)
-    val IRON_BOOTS      = item(material = Material.IRON_BOOTS, customModelData = 0, metaModifier = { meta ->
-        val modifier = AttributeModifier(
+    val IRON_BOOTS      = item(material = Material.IRON_BOOTS, customModelData = 0, description = "§7높은 지형을 오르는 걸 용이하게 해줍니다.", metaModifier = { meta ->
+        meta.addAttributeModifier(Attribute.STEP_HEIGHT, AttributeModifier(
             NamespacedKey(main, "step_height"),
             1.0,
             AttributeModifier.Operation.ADD_NUMBER,
             EquipmentSlotGroup.FEET
-        )
-        meta.addAttributeModifier(Attribute.STEP_HEIGHT, modifier)
+        ))
+        meta.addAttributeModifier(Attribute.ARMOR, AttributeModifier(
+            NamespacedKey(main, "iron_boots_armor"),
+            0.0,
+            AttributeModifier.Operation.ADD_NUMBER,
+            EquipmentSlotGroup.FEET
+        ))
     })
 
     // ═══════════════════════════════════════════
@@ -395,7 +400,8 @@ object PRCItems {
         meta.addAttributeModifier(Attribute.ARMOR, AttributeModifier(
             NamespacedKey(main, "hide_attribute"),
             0.0,
-            AttributeModifier.Operation.ADD_NUMBER
+            AttributeModifier.Operation.ADD_NUMBER,
+            EquipmentSlotGroup.ANY
         ))
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES)
     }
