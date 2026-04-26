@@ -146,6 +146,8 @@ object ShopItems {
         val IRON_LEGGINGS   = s(PRCItems.IRON_LEGGINGS, buy = 100, sell = -1, page = 1, slot = 29, label = "합금 섬유 우주복")
         val IRON_BOOTS      = s(PRCItems.IRON_BOOTS, buy = 220, sell = -1, page = 1, slot = 30, label = "합금 섬유 우주복")
 
+        val OLD_DOG_TAG     = s(PRCItems.OLD_DOG_TAG, buy = -1, sell = 1300, page = 1, slot = 31, label = "낡은 인식표")
+
 
         // Page 2 - 빌드형 모듈
         val BASIC_TOOL_MODULE     = s(PRCItems.BASIC_TOOL_MODULE, buy = -1, sell = -1, page = 2, slot = 9,
@@ -170,7 +172,9 @@ object ShopItems {
                 TradeRequirement(PRCItems.LITHIUM_INGOT, 10),
                 TradeRequirement(PRCItems.TITANIUM_INGOT, 5)))
         val GATE_MODULE           = s(PRCItems.GATE_MODULE, buy = -1, sell = -1, page = 2, slot = 21,
-            trade = listOf(TradeRequirement(PRCItems.IRON_INGOT, 40)))
+            trade = listOf(
+                TradeRequirement(PRCItems.IRON_INGOT, 20),
+                TradeRequirement(PRCItems.GOLD_INGOT, 10)))
 
         // Page 3 - 설치형 모듈 & 부품
         val SPANNER              = s(PRCItems.SPANNER, buy = 130, sell = -1, page = 3, slot = 9)
@@ -208,19 +212,19 @@ object ShopItems {
         // Page 4 - 레시피
         val RECIPE_MAGNESIUM = s(PRCItems.RECIPE_MAGNESIUM_INGOT, buy = 100, sell = -1, page = 4, slot = 9)
         val RECIPE_ALUMINUM  = s(PRCItems.RECIPE_ALUMINUM_INGOT, buy = 100, sell = -1, page = 4, slot = 10)
-        val RECIPE_IRON      = s(PRCItems.RECIPE_IRON_INGOT, buy = 100, sell = -1, page = 4, slot = 11)
+        val RECIPE_IRON      = s(PRCItems.RECIPE_IRON_INGOT, buy = 200, sell = -1, page = 4, slot = 11)
         val RECIPE_COPPER    = s(PRCItems.RECIPE_COPPER_INGOT, buy = 300, sell = -1, page = 4, slot = 12)
         val RECIPE_LITHIUM   = s(PRCItems.RECIPE_LITHIUM_INGOT, buy = 300, sell = -1, page = 4, slot = 13)
-        val RECIPE_GOLD      = s(PRCItems.RECIPE_GOLD_INGOT, buy = 300, sell = -1, page = 4, slot = 18)
-        val RECIPE_PLATINUM  = s(PRCItems.RECIPE_PLATINUM_INGOT, buy = 500, sell = -1, page = 4, slot = 19)
-        val RECIPE_NICKEL    = s(PRCItems.RECIPE_NICKEL_INGOT, buy = 500, sell = -1, page = 4, slot = 20)
-        val RECIPE_TITANIUM  = s(PRCItems.RECIPE_TITANIUM_INGOT, buy = 500, sell = -1, page = 4, slot = 21)
-        val RECIPE_AL_MG     = s(PRCItems.RECIPE_AL_MG_ALLOY, buy = 400, sell = -1, page = 4, slot = 22)
-        val RECIPE_AL_CU     = s(PRCItems.RECIPE_AL_CU_ALLOY, buy = 400, sell = -1, page = 4, slot = 27)
-        val RECIPE_AL_LI     = s(PRCItems.RECIPE_AL_LI_ALLOY, buy = 400, sell = -1, page = 4, slot = 28)
-        val RECIPE_CU_AU     = s(PRCItems.RECIPE_CU_AU_ALLOY, buy = 700, sell = -1, page = 4, slot = 29)
-        val RECIPE_NI_FE     = s(PRCItems.RECIPE_NI_FE_ALLOY, buy = 700, sell = -1, page = 4, slot = 30)
-        val RECIPE_TI_PT_AU  = s(PRCItems.RECIPE_TI_PT_AU_ALLOY, buy = 1500, sell = -1, page = 4, slot = 31)
+        val RECIPE_GOLD      = s(PRCItems.RECIPE_GOLD_INGOT, buy = 500, sell = -1, page = 4, slot = 18)
+        val RECIPE_PLATINUM  = s(PRCItems.RECIPE_PLATINUM_INGOT, buy = 650, sell = -1, page = 4, slot = 19)
+        val RECIPE_NICKEL    = s(PRCItems.RECIPE_NICKEL_INGOT, buy = 700, sell = -1, page = 4, slot = 20)
+        val RECIPE_TITANIUM  = s(PRCItems.RECIPE_TITANIUM_INGOT, buy = 800, sell = -1, page = 4, slot = 21)
+        val RECIPE_AL_MG     = s(PRCItems.RECIPE_AL_MG_ALLOY, buy = 750, sell = -1, page = 4, slot = 22)
+        val RECIPE_AL_CU     = s(PRCItems.RECIPE_AL_CU_ALLOY, buy = 750, sell = -1, page = 4, slot = 27)
+        val RECIPE_AL_LI     = s(PRCItems.RECIPE_AL_LI_ALLOY, buy = 850, sell = -1, page = 4, slot = 28)
+        val RECIPE_CU_AU     = s(PRCItems.RECIPE_CU_AU_ALLOY, buy = 1000, sell = -1, page = 4, slot = 29)
+        val RECIPE_NI_FE     = s(PRCItems.RECIPE_NI_FE_ALLOY, buy = 2000, sell = -1, page = 4, slot = 30)
+        val RECIPE_TI_PT_AU  = s(PRCItems.RECIPE_TI_PT_AU_ALLOY, buy = 3000, sell = -1, page = 4, slot = 31)
 
         val all: List<ShopItem> get() = _items.toList()
     }

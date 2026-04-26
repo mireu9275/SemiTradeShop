@@ -257,6 +257,7 @@ object PRCItems {
 
 //    val UNKNOWN_FLESH = item(material = Material.ROTTEN_FLESH, customModelData = null)
     val ROTTEN_FLESH         = item(material = Material.ROTTEN_FLESH, customModelData = 0)
+    val OLD_DOG_TAG          = item(material = Material.IRON_INGOT, customModelData = 0)
 
     val CHAINMAIL_HELMET     = item(material = Material.CHAINMAIL_HELMET, customModelData = 0)
     val CHAINMAIL_CHESTPLATE = item(material = Material.CHAINMAIL_CHESTPLATE, customModelData = 0)
