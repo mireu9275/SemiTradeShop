@@ -1,5 +1,6 @@
 package kr.eme.prcShop.commands
 
+import kr.eme.prcMission.api.MissionAPI
 import kr.eme.prcMission.api.events.MissionEvent
 import kr.eme.prcMission.enums.MissionVersion
 import kr.eme.prcMission.objects.const.MissionTargets
@@ -67,6 +68,50 @@ object ShopCommand : TabExecutor {
             return true
         }
 
+        // ✅ MissionAPI 디버그 (현재 미션 조회 / 시작)
+        if (args[0].equals("debugapi", ignoreCase = true)) {
+            if (args.size < 2) {
+                player.sendMessage("§c사용법: /shop debugapi <current|start> [v1|v2]")
+                return true
+            }
+
+            when (args[1].lowercase()) {
+                "current" -> {
+                    val active = MissionAPI.getActiveMission()
+                    if (active == null) {
+                        player.sendMessage("§7[API] 활성 미션 없음 (모두 완료 또는 미수락)")
+                    } else {
+                        player.sendMessage("§a[API] 활성 미션: ${active.first.name} #${active.second}")
+                    }
+                    for (v in MissionVersion.entries) {
+                        val num = MissionAPI.getCurrentMissionNumber(v)
+                        val status = when (num) {
+                            0 -> "미수락"
+                            -1 -> "완료"
+                            else -> "미션 #$num 진행 중"
+                        }
+                        player.sendMessage("§7  ${v.name}: $status")
+                    }
+                }
+                "start" -> {
+                    val versionArg = args.getOrNull(2)?.uppercase() ?: "V1"
+                    val missionVersion = runCatching { MissionVersion.valueOf(versionArg) }.getOrNull()
+                    if (missionVersion == null) {
+                        player.sendMessage("§c잘못된 버전: $versionArg (V1 또는 V2)")
+                        return true
+                    }
+                    val started = MissionAPI.startMission(missionVersion)
+                    if (started) {
+                        player.sendMessage("§a[API] ${missionVersion.name} 첫 미션 시작됨")
+                    } else {
+                        player.sendMessage("§c[API] ${missionVersion.name} 시작 실패 (이미 시작됐거나 이전 버전 미클리어)")
+                    }
+                }
+                else -> player.sendMessage("§c사용법: /shop debugapi <current|start> [v1|v2]")
+            }
+            return true
+        }
+
         // ✅ 디버그 명령어
         if (args[0].equals("debug", ignoreCase = true)) {
             if (args.size < 4) {
@@ -122,7 +167,17 @@ object ShopCommand : TabExecutor {
         if (sender !is Player || !sender.isOp) return mutableListOf()
 
         if (args.size == 1) {
-            return listOf("debug", "admin").filter { it.startsWith(args[0], ignoreCase = true) }.toMutableList()
+            return listOf("debug", "debugapi", "admin").filter { it.startsWith(args[0], ignoreCase = true) }.toMutableList()
+        }
+
+        if (args[0].equals("debugapi", ignoreCase = true)) {
+            return when (args.size) {
+                2 -> listOf("current", "start").filter { it.startsWith(args[1], ignoreCase = true) }.toMutableList()
+                3 -> if (args[1].equals("start", ignoreCase = true))
+                    listOf("v1", "v2").filter { it.startsWith(args[2], ignoreCase = true) }.toMutableList()
+                else mutableListOf()
+                else -> mutableListOf()
+            }
         }
 
         if (args[0].equals("debug", ignoreCase = true)) {
