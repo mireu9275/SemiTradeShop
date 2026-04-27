@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "kr.eme.prcShop"
-version = "1.1.1"
+version = "1.1.2"
 
 repositories {
     mavenCentral()
