@@ -59,7 +59,7 @@ class MineralShopPage2GUI(player: Player) : GUI(player, "§f\\u340F\\u3413", 6) 
                 SoundUtil.click(player)
                 return
             }
-            "§f메인으로 이동" -> {
+            "§f이전 페이지로 이동" -> {
                 val shopGUI = ShopGUI(player)
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)
