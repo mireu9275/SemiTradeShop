@@ -42,7 +42,7 @@ class OtherShopPage4GUI(player: Player) : GUI(player, "§f\\u340F\\u3422", 6) {
         }
 
         when (itemDisplayName) {
-            "§f메인으로 이동" -> {
+            "§f이전 페이지로 이동" -> {
                 val shopGUI = ShopGUI(player)
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)

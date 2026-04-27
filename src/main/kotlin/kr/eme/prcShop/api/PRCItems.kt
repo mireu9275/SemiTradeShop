@@ -128,17 +128,17 @@ object PRCItems {
     //  합금 주괴
     // ═══════════════════════════════════════════
     /** 합금 주괴 (Al-Cu) */
-    val AL_CU_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 29, "§fAl-Cu 합금 주괴")
+    val AL_CU_ALLOY_INGOT     = item("§fAl-Cu 합금 주괴", Material.RED_DYE, 29)
     /** 합금 주괴 (Al-Mg) */
-    val AL_MG_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 28, "§fAl-Mg 합금 주괴")
+    val AL_MG_ALLOY_INGOT     = item("§fAl-Mg 합금 주괴", Material.RED_DYE, 28)
     /** 합금 주괴 (Al-Li) */
-    val AL_LI_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 30, "§fAl-Li 합금 주괴")
+    val AL_LI_ALLOY_INGOT     = item("§fAl-Li 합금 주괴", Material.RED_DYE, 30)
     /** 합금 주괴 (Cu-Au) */
-    val CU_AU_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 31, "§fCu-Au 합금 주괴")
+    val CU_AU_ALLOY_INGOT     = item("§fCu-Au 합금 주괴", Material.RED_DYE, 31)
     /** 합금 주괴 (Ni-Fe) */
-    val NI_FE_ALLOY_INGOT     = item("§f합금 주괴", Material.RED_DYE, 32, "§fNi-Fe 합금 주괴")
+    val NI_FE_ALLOY_INGOT     = item("§fNi-Fe 합금 주괴", Material.RED_DYE, 32)
     /** 합금 주괴 (Ti-Pt-Au) */
-    val TI_PT_AU_ALLOY_INGOT  = item("§f합금 주괴", Material.RED_DYE, 33, "§fTi-Pt-Au 합금 주괴")
+    val TI_PT_AU_ALLOY_INGOT  = item("§fTi-Pt-Au 합금 주괴", Material.RED_DYE, 33)
 
     // ═══════════════════════════════════════════
     //  작물 - 씨앗
@@ -146,7 +146,7 @@ object PRCItems {
     /** 감자 씨앗 */
     val POTATO_SEED    = item("§f감자 씨앗", Material.BLACK_DYE, 31, "§f수확일 3일")
     /** 양배추 씨앗 */
-    val CABBAGE_SEED   = item("§f양배추 씨앗", Material.BLACK_DYE, 32, "§f수확일 6일")
+    val CABBAGE_SEED   = item("§f양배추 씨앗", Material.BLACK_DYE, 32, "§f수확일 4일")
     /** 오이 씨앗 */
     val CUCUMBER_SEED  = item("§f오이 씨앗", Material.BLACK_DYE, 33, "§f수확일 4일")
     /** 커피콩 */
@@ -154,15 +154,15 @@ object PRCItems {
     /** 토마토 씨앗 */
     val TOMATO_SEED    = item("§f토마토 씨앗", Material.BLACK_DYE, 35, "§f수확일 3일")
     /** 옥수수 씨앗 */
-    val CORN_SEED      = item("§f옥수수 씨앗", Material.BLACK_DYE, 36, "§f수확일 6일")
+    val CORN_SEED      = item("§f옥수수 씨앗", Material.BLACK_DYE, 36, "§f수확일 4일")
     /** 밀 씨앗 */
-    val WHEAT_SEED     = item("§f밀 씨앗", Material.BLACK_DYE, 37, "§f수확일 7일")
+    val WHEAT_SEED     = item("§f밀 씨앗", Material.BLACK_DYE, 37, "§f수확일 5일")
     /** 크랜베리 씨앗 */
     val CRANBERRY_SEED = item("§f크랜베리 씨앗", Material.BLACK_DYE, 38, "§f수확일 3일")
     /** 비트 씨앗 */
     val BEET_SEED      = item("§f비트 씨앗", Material.BLACK_DYE, 39, "§f수확일 4일")
     /** 호박 씨앗 */
-    val PUMPKIN_SEED   = item("§f호박 씨앗", Material.BLACK_DYE, 40, "§f수확일 7일")
+    val PUMPKIN_SEED   = item("§f호박 씨앗", Material.BLACK_DYE, 40, "§f수확일 5일")
 
     // ═══════════════════════════════════════════
     //  작물 - 수확물 (은 등급 ★)
@@ -170,7 +170,7 @@ object PRCItems {
     /** 감자 (★) */
     val POTATO_G1    = item("§f감자", Material.BLACK_DYE, 1, "§f수확일 3일", eatable = true)
     /** 양배추 (★) */
-    val CABBAGE_G1   = item("§f양배추", Material.BLACK_DYE, 2, "§f수확일 6일", eatable = true)
+    val CABBAGE_G1   = item("§f양배추", Material.BLACK_DYE, 2, "§f수확일 4일", eatable = true)
     /** 오이 (★) */
     val CUCUMBER_G1  = item("§f오이", Material.BLACK_DYE, 3, "§f수확일 4일", eatable = true)
     /** 커피콩 (★) */
@@ -178,15 +178,15 @@ object PRCItems {
     /** 토마토 (★) */
     val TOMATO_G1    = item("§f토마토", Material.BLACK_DYE, 5, "§f수확일 3일", eatable = true)
     /** 옥수수 (★) */
-    val CORN_G1      = item("§f옥수수", Material.BLACK_DYE, 6, "§f수확일 6일", eatable = true)
+    val CORN_G1      = item("§f옥수수", Material.BLACK_DYE, 6, "§f수확일 4일", eatable = true)
     /** 밀 (★) */
-    val WHEAT_G1     = item("§f밀", Material.BLACK_DYE, 7, "§f수확일 7일", eatable = true)
+    val WHEAT_G1     = item("§f밀", Material.BLACK_DYE, 7, "§f수확일 5일", eatable = true)
     /** 크랜베리 (★) */
     val CRANBERRY_G1 = item("§f크랜베리", Material.BLACK_DYE, 8, "§f수확일 3일", eatable = true)
     /** 비트 (★) */
     val BEET_G1      = item("§f비트", Material.BLACK_DYE, 9, "§f수확일 4일", eatable = true)
     /** 호박 (★) */
-    val PUMPKIN_G1   = item("§f호박", Material.BLACK_DYE, 10, "§f수확일 7일", eatable = true)
+    val PUMPKIN_G1   = item("§f호박", Material.BLACK_DYE, 10, "§f수확일 5일", eatable = true)
 
     // ═══════════════════════════════════════════
     //  작물 - 수확물 (금 등급 ★★)
@@ -194,7 +194,7 @@ object PRCItems {
     /** 감자 (★★) */
     val POTATO_G2    = item("§f감자", Material.BLACK_DYE, 11, "§f수확일 3일", eatable = true)
     /** 양배추 (★★) */
-    val CABBAGE_G2   = item("§f양배추", Material.BLACK_DYE, 12, "§f수확일 6일", eatable = true)
+    val CABBAGE_G2   = item("§f양배추", Material.BLACK_DYE, 12, "§f수확일 4일", eatable = true)
     /** 오이 (★★) */
     val CUCUMBER_G2  = item("§f오이", Material.BLACK_DYE, 13, "§f수확일 4일", eatable = true)
     /** 커피콩 (★★) */
@@ -202,52 +202,52 @@ object PRCItems {
     /** 토마토 (★★) */
     val TOMATO_G2    = item("§f토마토", Material.BLACK_DYE, 15, "§f수확일 3일", eatable = true)
     /** 옥수수 (★★) */
-    val CORN_G2      = item("§f옥수수", Material.BLACK_DYE, 16, "§f수확일 6일", eatable = true)
+    val CORN_G2      = item("§f옥수수", Material.BLACK_DYE, 16, "§f수확일 4일", eatable = true)
     /** 밀 (★★) */
-    val WHEAT_G2     = item("§f밀", Material.BLACK_DYE, 17, "§f수확일 7일", eatable = true)
+    val WHEAT_G2     = item("§f밀", Material.BLACK_DYE, 17, "§f수확일 5일", eatable = true)
     /** 크랜베리 (★★) */
     val CRANBERRY_G2 = item("§f크랜베리", Material.BLACK_DYE, 18, "§f수확일 3일", eatable = true)
     /** 비트 (★★) */
     val BEET_G2      = item("§f비트", Material.BLACK_DYE, 19, "§f수확일 4일", eatable = true)
     /** 호박 (★★) */
-    val PUMPKIN_G2   = item("§f호박", Material.BLACK_DYE, 20, "§f수확일 7일", eatable = true)
+    val PUMPKIN_G2   = item("§f호박", Material.BLACK_DYE, 20, "§f수확일 5일", eatable = true)
 
     // ═══════════════════════════════════════════
     //  작물 - 수확물 (다이아 등급 ★★★)
     // ═══════════════════════════════════════════
     /** 감자 (★★★) */
-    val POTATO_G3    = item("§f감자", Material.BLACK_DYE, 21, "§f수확일 3일", eatable = true)
+    val POTATO_G3    = item("§f감자", Material.BLACK_DYE, 21, "§7수확일 3일", eatable = true)
     /** 양배추 (★★★) */
-    val CABBAGE_G3   = item("§f양배추", Material.BLACK_DYE, 22, "§f수확일 6일", eatable = true)
+    val CABBAGE_G3   = item("§f양배추", Material.BLACK_DYE, 22, "§7수확일 4일", eatable = true)
     /** 오이 (★★★) */
-    val CUCUMBER_G3  = item("§f오이", Material.BLACK_DYE, 23, "§f수확일 4일", eatable = true)
+    val CUCUMBER_G3  = item("§f오이", Material.BLACK_DYE, 23, "§7수확일 4일", eatable = true)
     /** 커피콩 (★★★) */
-    val COFFEE_BEAN_G3 = item("§f커피콩", Material.BLACK_DYE, 24, "§f수확일 3일", eatable = true)
+    val COFFEE_BEAN_G3 = item("§f커피콩", Material.BLACK_DYE, 24, "§7수확일 3일", eatable = true)
     /** 토마토 (★★★) */
-    val TOMATO_G3    = item("§f토마토", Material.BLACK_DYE, 25, "§f수확일 3일", eatable = true)
+    val TOMATO_G3    = item("§f토마토", Material.BLACK_DYE, 25, "§7수확일 3일", eatable = true)
     /** 옥수수 (★★★) */
-    val CORN_G3      = item("§f옥수수", Material.BLACK_DYE, 26, "§f수확일 6일", eatable = true)
+    val CORN_G3      = item("§f옥수수", Material.BLACK_DYE, 26, "§7수확일 4일", eatable = true)
     /** 밀 (★★★) */
-    val WHEAT_G3     = item("§f밀", Material.BLACK_DYE, 27, "§f수확일 7일", eatable = true)
+    val WHEAT_G3     = item("§f밀", Material.BLACK_DYE, 27, "§7수확일 5일", eatable = true)
     /** 크랜베리 (★★★) */
-    val CRANBERRY_G3 = item("§f크랜베리", Material.BLACK_DYE, 28, "§f수확일 3일", eatable = true)
+    val CRANBERRY_G3 = item("§f크랜베리", Material.BLACK_DYE, 28, "§7수확일 3일", eatable = true)
     /** 비트 (★★★) */
-    val BEET_G3      = item("§f비트", Material.BLACK_DYE, 29, "§f수확일 4일", eatable = true)
+    val BEET_G3      = item("§f비트", Material.BLACK_DYE, 29, "§7수확일 4일", eatable = true)
     /** 호박 (★★★) */
-    val PUMPKIN_G3   = item("§f호박", Material.BLACK_DYE, 30, "§f수확일 7일", eatable = true)
+    val PUMPKIN_G3   = item("§f호박", Material.BLACK_DYE, 30, "§7수확일 5일", eatable = true)
 
     // ═══════════════════════════════════════════
     //  기타 - 캡슐 / 도구
     // ═══════════════════════════════════════════
     /** 성장 캡슐 */
-    val GROWTH_CAPSULE     = item("§f성장 캡슐", Material.ORANGE_DYE, 3, "§f작물의 수확일을 줄여줍니다.")
+    val GROWTH_CAPSULE     = item("§f성장 캡슐", Material.ORANGE_DYE, 3, "§7작물의 수확일을 줄여줍니다")
     /** 영양 캡슐 */
-    val NUTRITION_CAPSULE  = item("§f영양 캡슐", Material.ORANGE_DYE, 4, "§f더 높은 등급의 작물이 나올 확률이 증가합니다.")
+    val NUTRITION_CAPSULE  = item("§f영양 캡슐", Material.ORANGE_DYE, 4, "§7더 높은 등급의 작물이 나올 확률이 증가합니다")
     /** 제초 캡슐 */
-    val HERBICIDE_CAPSULE  = item("§f제초 캡슐", Material.ORANGE_DYE, 2, "§f잡초를 제거합니다.")
+    val HERBICIDE_CAPSULE  = item("§f제초 캡슐", Material.ORANGE_DYE, 2, "§7잡초를 제거합니다")
     
     /** 머그잔 */
-    val MUG                = item("§f머그잔", Material.BOWL, 1, "§fJava")
+    val MUG                = item("§f머그잔", Material.BOWL, 1, "§7Java")
     /** 스패너 */
     val SPANNER            = item("§f스패너", Material.WOODEN_SHOVEL, 13)
 
@@ -267,7 +267,7 @@ object PRCItems {
     val IRON_HELMET     = item(material = Material.IRON_HELMET, customModelData = 0)
     val IRON_CHESTPLATE = item(material = Material.IRON_CHESTPLATE, customModelData = 0)
     val IRON_LEGGINGS   = item(material = Material.IRON_LEGGINGS, customModelData = 0)
-    val IRON_BOOTS      = item(material = Material.IRON_BOOTS, customModelData = 0, description = "§7높은 지형을 오르는 걸 용이하게 해줍니다.", metaModifier = { meta ->
+    val IRON_BOOTS      = item(material = Material.IRON_BOOTS, customModelData = 0, description = "§7높은 지형을 오르는 걸 용이하게 해줍니다", metaModifier = { meta ->
         meta.addAttributeModifier(Attribute.STEP_HEIGHT, AttributeModifier(
             NamespacedKey(main, "step_height"),
             1.0,
@@ -286,51 +286,51 @@ object PRCItems {
     //  기타 - 빌드형 모듈
     // ═══════════════════════════════════════════
     /** 기본 연장 모듈 */
-    val BASIC_TOOL_MODULE      = item("§f기본 연장 모듈", Material.SADDLE, 1)
+    val BASIC_TOOL_MODULE      = item("§f기본 연장 모듈", Material.SADDLE, 1, "§7직선 복도 형태의 모듈")
     /** T 연장 모듈 */
-    val T_TOOL_MODULE          = item("§fT 연장 모듈", Material.SADDLE, 2)
+    val T_TOOL_MODULE          = item("§fT 연장 모듈", Material.SADDLE, 2, "§7T자 복도 형태의 모듈")
     /** 십자 연장 모듈 */
-    val CROSS_TOOL_MODULE      = item("§f십자 연장 모듈", Material.SADDLE, 3)
+    val CROSS_TOOL_MODULE      = item("§f십자 연장 모듈", Material.SADDLE, 3, "§7십자 복도 형태의 모듈")
     /** 스토리지 모듈 [중] */
-    val STORAGE_MODULE_MEDIUM  = item("§f스토리지 모듈 [중]", Material.SADDLE, 4)
+    val STORAGE_MODULE_MEDIUM  = item("§f스토리지 모듈 [중]", Material.SADDLE, 4, "§7설치형 모듈 배치와 자원 보관이 가능한 [중형] 모듈")
     /** 스토리지 모듈 [대] */
-    val STORAGE_MODULE_LARGE   = item("§f스토리지 모듈 [대]", Material.SADDLE, 5)
+    val STORAGE_MODULE_LARGE   = item("§f스토리지 모듈 [대]", Material.SADDLE, 5, "§7설치형 모듈 배치와 자원 보관이 가능한 [대형] 모듈")
     /** 광산 모듈 */
-    val MINE_MODULE            = item("§f광산 모듈", Material.SADDLE, 6)
+    val MINE_MODULE            = item("§f광산 모듈", Material.SADDLE, 6, "§7광산 지하층으로 진입이 가능한 모듈")
     /** 농사 모듈 [중] */
-    val FARM_MODULE_MEDIUM     = item("§f농사 모듈 [중]", Material.SADDLE, 7)
+    val FARM_MODULE_MEDIUM     = item("§f농사 모듈 [중]", Material.SADDLE, 7, "§7작물 농사가 가능한 [중형] 모듈")
     /** 농사 모듈 [대] */
-    val FARM_MODULE_LARGE      = item("§f농사 모듈 [대]", Material.SADDLE, 8)
+    val FARM_MODULE_LARGE      = item("§f농사 모듈 [대]", Material.SADDLE, 8, "§7작물 농사가 가능한 [대형] 모듈")
     /** 출입 모듈 */
-    val GATE_MODULE            = item("§f출입 모듈", Material.SADDLE, 9)
+    val GATE_MODULE            = item("§f출입 모듈", Material.SADDLE, 9, "§7모듈 내부의 압력을 조절해 외부 출입이 가능한 모듈")
 
     // ═══════════════════════════════════════════
     //  기타 - 설치형 모듈
     // ═══════════════════════════════════════════
     /** 분쇄기 모듈 */
-    val GRINDER_MODULE         = item("§f분쇄기 모듈", Material.IRON_HORSE_ARMOR, 2, metaModifier = ::hideAttribute)
+    val GRINDER_MODULE         = item("§f분쇄기 모듈", Material.IRON_HORSE_ARMOR, 2, "§7광석을 분쇄해 파우더를 제작합니다", metaModifier = ::hideAttribute)
     /** 프린트 모듈 */
-    val PRINTER_MODULE         = item("§f프린트 모듈", Material.IRON_HORSE_ARMOR, 3, metaModifier = ::hideAttribute)
+    val PRINTER_MODULE         = item("§f프린트 모듈", Material.IRON_HORSE_ARMOR, 3, "§7도구를 제작/업그레이드 합니다", metaModifier = ::hideAttribute)
     /** 커피머신 모듈 */
-    val COFFEE_MACHINE_MODULE  = item("§f커피머신 모듈", Material.IRON_HORSE_ARMOR, 4, metaModifier = ::hideAttribute)
+    val COFFEE_MACHINE_MODULE  = item("§f커피머신 모듈", Material.IRON_HORSE_ARMOR, 4, "§7작업 효율을 늘려주는 커피를 제작합니다", metaModifier = ::hideAttribute)
     /** 용광로 모듈 */
-    val FURNACE_MODULE         = item("§f용광로 모듈", Material.IRON_HORSE_ARMOR, 7, metaModifier = ::hideAttribute)
+    val FURNACE_MODULE         = item("§f용광로 모듈", Material.IRON_HORSE_ARMOR, 7, "§7광물 파우더를 용해해 주괴/합금을 제작합니다", metaModifier = ::hideAttribute)
 
     // ═══════════════════════════════════════════
     //  기타 - 업그레이드 / 부품
     // ═══════════════════════════════════════════
     /** 용광로 용해 슬롯 확장 */
-    val FURNACE_SLOT_UPGRADE         = item("§f용광로 용해 슬롯 확장", Material.SADDLE, 17)
+    val FURNACE_SLOT_UPGRADE         = item("§f용광로 용해 슬롯 확장", Material.SADDLE, 17, "§7용해 슬롯이 확장되어, 합금 주괴 제작이 가능합니다")
     /** 합금 냉각 몰드 */
-    val ALLOY_COOLING_MOLD_CU_AU     = item("§f합금 냉각 몰드", Material.SADDLE, 18, "§fCu-Au")
+    val ALLOY_COOLING_MOLD_CU_AU     = item("§fCu-Au 합금 냉각 몰드", Material.SADDLE, 18, "§7용해 슬롯이 추가로 확장되어, 더 많은 합금 주괴 제작이 가능합니다")
     /** 합금 토치 */
-    val ALLOY_TORCH_NI_FE            = item("§f합금 토치", Material.SADDLE, 19, "§fNi-Fe")
+    val ALLOY_TORCH_NI_FE            = item("§fNi-Fe 합금 토치", Material.SADDLE, 19, "§7용해 소요 시간이 대폭 단축됩니다")
     /** 분쇄기 용량 확장 */
-    val GRINDER_CAPACITY_UPGRADE     = item("§f분쇄기 용량 확장", Material.SADDLE, 20)
+    val GRINDER_CAPACITY_UPGRADE     = item("§f분쇄기 용량 확장", Material.SADDLE, 20, "§7분쇄 슬롯이 확장되며, 광물 용량이 늘어납니다")
     /** 합금 기어 */
-    val ALLOY_GEAR_AL_CU             = item("§f합금 기어", Material.SADDLE, 21, "§fAl-Cu")
+    val ALLOY_GEAR_AL_CU             = item("§fAl-Cu 합금 기어", Material.SADDLE, 21, "§7상위 광물 분쇄가 가능하며, 광물 용량이 추가로 늘어납니다")
     /** 합금 드릴 */
-    val ALLOY_DRILL_TI_PT_AU         = item("§f합금 드릴", Material.SADDLE, 22, "§fTi-Pt-Au")
+    val ALLOY_DRILL_TI_PT_AU         = item("§fTi-Pt-Au 합금 드릴", Material.SADDLE, 22, "§7분쇄 소요 시간이 대폭 단축되며, 광물 용량이 추가로 늘어납니다")
 
     // ═══════════════════════════════════════════
     //  기타 - 레시피
@@ -354,17 +354,17 @@ object PRCItems {
     /** 티타늄 주괴 레시피 */
     val RECIPE_TITANIUM_INGOT   = item("§f티타늄 주괴 레시피", Material.SADDLE, 31)
     /** Al-Cu 합금 레시피 */
-    val RECIPE_AL_CU_ALLOY      = item("§fAl-Cu 합금 레시피", Material.SADDLE, 33, "§f알루미늄 + 구리")
+    val RECIPE_AL_CU_ALLOY      = item("§fAl-Cu 합금 레시피", Material.SADDLE, 33, "§7알루미늄 + 구리")
     /** Al-Mg 합금 레시피 */
-    val RECIPE_AL_MG_ALLOY      = item("§fAl-Mg 합금 레시피", Material.SADDLE, 32, "§f알루미늄 + 마그네슘")
+    val RECIPE_AL_MG_ALLOY      = item("§fAl-Mg 합금 레시피", Material.SADDLE, 32, "§7알루미늄 + 마그네슘")
     /** Al-Li 합금 레시피 */
-    val RECIPE_AL_LI_ALLOY      = item("§fAl-Li 합금 레시피", Material.SADDLE, 34, "§f알루미늄 + 리튬")
+    val RECIPE_AL_LI_ALLOY      = item("§fAl-Li 합금 레시피", Material.SADDLE, 34, "§7알루미늄 + 리튬")
     /** Cu-Au 합금 레시피 */
-    val RECIPE_CU_AU_ALLOY      = item("§fCu-Au 합금 레시피", Material.SADDLE, 35, "§f구리 + 금")
+    val RECIPE_CU_AU_ALLOY      = item("§fCu-Au 합금 레시피", Material.SADDLE, 35, "§7구리 + 금")
     /** Ni-Fe 합금 레시피 */
-    val RECIPE_NI_FE_ALLOY      = item("§fNi-Fe 합금 레시피", Material.SADDLE, 36, "§f니켈 + 철")
+    val RECIPE_NI_FE_ALLOY      = item("§fNi-Fe 합금 레시피", Material.SADDLE, 36, "§7니켈 + 철")
     /** Ti-Pt-Au 합금 레시피 */
-    val RECIPE_TI_PT_AU_ALLOY   = item("§fTi-Pt-Au 합금 레시피", Material.SADDLE, 37, "§f티타늄 + 백금 + 금")
+    val RECIPE_TI_PT_AU_ALLOY   = item("§fTi-Pt-Au 합금 레시피", Material.SADDLE, 37, "§7티타늄 + 백금 + 금")
 
     // ═══════════════════════════════════════════
     //  기타 - 로드스톤 나침반
