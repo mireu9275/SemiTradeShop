@@ -17,14 +17,14 @@ class InitShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3410", 6) {
             val rowStart = row * 9
             for (slot in rowStart  until rowStart + 4) {
                 setItem(slot, ItemStackUtil.build(Material.GLASS_PANE) { meta ->
-                    meta.setDisplayName("§aSHOP 이동")
+                    meta.setDisplayName("§6SHOP 이동")
                     meta.setCustomModelData(1)
                 })
             }
 
             for  (slot in rowStart + 5 until rowStart + 9) {
                 setItem(slot, ItemStackUtil.build(Material.GLASS_PANE) { meta ->
-                    meta.setDisplayName("§6MISSION 이동")
+                    meta.setDisplayName("§bMISSION 이동")
                     meta.setCustomModelData(1)
                 })
             }
@@ -45,14 +45,14 @@ class InitShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3410", 6) {
         }
 
         when (itemDisplayName) {
-            "§aSHOP 이동" -> {
+            "§6SHOP 이동" -> {
                 val shopGUI = ShopGUI(player)
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)
                 shopGUI.open()
                 SoundUtil.click(player)
             }
-            "§6MISSION 이동" -> {
+            "§bMISSION 이동" -> {
                 MissionInitGUI(player).apply {
                     setFirstGUI()
                     open()
