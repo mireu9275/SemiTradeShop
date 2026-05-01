@@ -188,7 +188,7 @@ object ShopItems {
                 TradeRequirement(PRCItems.COPPER_INGOT, 10)))
         val ALLOY_GEAR           = s(PRCItems.ALLOY_GEAR_AL_CU, buy = -1, sell = -1, page = 3, slot = 19,
             trade = listOf(
-                TradeRequirement(PRCItems.AL_CU_ALLOY_INGOT, 5),
+                TradeRequirement(PRCItems.AL_CU_ALLOY_INGOT, 15),
                 TradeRequirement(PRCItems.LITHIUM_INGOT, 7)))
         val ALLOY_DRILL          = s(PRCItems.ALLOY_DRILL_TI_PT_AU, buy = -1, sell = -1, page = 3, slot = 20,
             trade = listOf(

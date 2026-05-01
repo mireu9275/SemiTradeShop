@@ -327,8 +327,8 @@ object PRCItems {
     val ALLOY_TORCH_NI_FE            = item("§fNi-Fe 합금 토치", Material.SADDLE, 19, "§7용해 소요 시간이 대폭 단축됩니다")
     /** 분쇄기 용량 확장 */
     val GRINDER_CAPACITY_UPGRADE     = item("§f분쇄기 용량 확장", Material.SADDLE, 20, "§7분쇄 슬롯이 확장되며, 광물 용량이 늘어납니다")
-    /** 합금 기어 */
-    val ALLOY_GEAR_AL_CU             = item("§fAl-Cu 합금 기어", Material.SADDLE, 21, "§7상위 광물 분쇄가 가능하며, 광물 용량이 추가로 늘어납니다")
+    /** Al-Cu 합금 드릴 (변수명은 외부 호환을 위해 _GEAR_ 유지) */
+    val ALLOY_GEAR_AL_CU             = item("§fAl-Cu 합금 드릴", Material.SADDLE, 21, "§7상위 광물 분쇄가 가능하며, 광물 용량이 추가로 늘어납니다")
     /** 합금 드릴 */
     val ALLOY_DRILL_TI_PT_AU         = item("§fTi-Pt-Au 합금 드릴", Material.SADDLE, 22, "§7분쇄 소요 시간이 대폭 단축되며, 광물 용량이 추가로 늘어납니다")
 
