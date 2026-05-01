@@ -50,7 +50,7 @@ class BillSellGUI(player: Player, private val clickedItem: ItemStack, private va
         }
 
         when (itemDisplayName) {
-            "§f메인으로 이동" -> {
+            "§f이전 페이지로 이동" -> {
                 val shopGUI = ShopGUI(player)
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)

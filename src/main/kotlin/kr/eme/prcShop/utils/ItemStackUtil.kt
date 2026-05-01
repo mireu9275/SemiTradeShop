@@ -105,7 +105,7 @@ object ItemStackUtil {
     }
     fun createMainButton(gui: GUI) {
         gui.setItem(49, build(Material.GLASS_PANE) { meta ->
-            meta.setDisplayName("§f메인으로 이동")
+            meta.setDisplayName("§f이전 페이지로 이동")
             meta.setCustomModelData(1)
         })
     }

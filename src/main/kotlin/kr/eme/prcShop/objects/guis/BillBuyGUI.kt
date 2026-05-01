@@ -54,7 +54,7 @@ class BillBuyGUI(player: Player, private val clickedItem: ItemStack, private val
         val totalPrice = totalBuyQty * itemPrice
 
         when (itemDisplayName) {
-            "§f메인으로 이동" -> {
+            "§f이전 페이지로 이동" -> {
                 val shopGUI = ShopGUI(player)
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)

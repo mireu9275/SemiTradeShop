@@ -36,7 +36,7 @@ class ShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3411", 6) {
             }
 
             setItem(49, ItemStackUtil.build(Material.GLASS_PANE) { meta ->
-                meta.setDisplayName("§f메인으로 이동")
+                meta.setDisplayName("§f이전 페이지로 이동")
                 meta.setCustomModelData(1)
             })
         }
@@ -83,7 +83,7 @@ class ShopGUI(player: Player) : GUI(player, "§f\\u340F\\u3411", 6) {
                 return
             }
 
-            "§f메인으로 이동" -> {
+            "§f이전 페이지로 이동" -> {
                 val initShopGUI = InitShopGUI(player)
                 initShopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, initShopGUI)
