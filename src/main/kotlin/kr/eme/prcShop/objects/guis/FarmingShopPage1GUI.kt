@@ -38,7 +38,7 @@ class FarmingShopPage1GUI(player: Player) : GUI(player, "§f\\u340F\\u3415" ,6){
         }
         val lore = itemMeta.lore
 
-        // "오른쪽으로 이동", "메인으로 이동" 등의 고정된 이름 처리
+        // "오른쪽으로 이동", "이전 페이지로 이동" 등의 고정된 이름 처리
         when (itemDisplayName) {
             "§f왼쪽으로 이동" -> {
                 val farmingShopPage1GUI = FarmingShopPage1GUI(player)
@@ -56,7 +56,7 @@ class FarmingShopPage1GUI(player: Player) : GUI(player, "§f\\u340F\\u3415" ,6){
                 SoundUtil.click(player)
                 return
             }
-            "§f메인으로 이동" -> {
+            "§f이전 페이지로 이동" -> {
                 val shopGUI = ShopGUI(player)
                 shopGUI.setFirstGUI()
                 GUIManager.setGUI(player.uniqueId, shopGUI)
